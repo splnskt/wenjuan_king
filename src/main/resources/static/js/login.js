@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         // 根据后端返回的结果处理登录逻辑
                         if (response.data.msg==='ok') {
                             // 登录成功，可以进行跳转或其他操作
-                            window.location.href = '/mainpage'; // 示例：跳转到首页
+                            window.location.href = '../pages/mainpage'; // 示例：跳转到首页
                         } else {
                             // 登录失败，显示错误消息
                             this.errorMessage = response.data.message;
