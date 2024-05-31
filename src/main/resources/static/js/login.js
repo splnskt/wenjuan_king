@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 formData.append('username', this.username);
                 formData.append('password', this.password);
                 console.log('用户名：', this.username);
-                console.log('密码：', this.password);
+                console.log('密码：', this.password);//ll
              
                 // 发送登录请求到后端
                 axios.post('/user/login', formData)
