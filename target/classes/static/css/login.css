@@ -1,0 +1,100 @@
+body{
+    background-image: url(../wallhaven-1p18w3.jpg);
+  
+    justify-content: center;
+    align-items:center;
+    
+   
+
+  
+
+}
+h1{ 
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #333;
+   
+
+}
+h2{ 
+    font-family:'Times New Roman', Times, serif;
+    font-size: 2.5em;
+    font-weight: bold;
+    color:rgb(0, 0, 0);
+
+    
+}
+h1,h2{
+    display:inline-block;
+    transition: opacity 1s ease;
+    opacity:0;
+   
+    -webkit-font-smoothing: antialiased; /* 适用于WebKit浏览器 */
+    -moz-osx-font-smoothing: grayscale; /* 适用于Firefox和Safari */
+    text-rendering: optimizeLegibility; /* 优化字体渲染 */
+   
+}
+.Container{
+  text-align: center;
+   margin-top: 150px;
+ 
+
+
+
+}
+.show{
+    opacity:1;
+}
+.LoginContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    width:25%;
+    margin: 50px auto; /* 上下外边距为 50px，左右外边距为 auto */
+    max-width: 300px; /* 可以根据需要调整最大宽度 */
+   
+}
+
+.loginInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.loginButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loginButton:hover {
+    background-color: #45a049;
+}
+.Container, .LoginContainer {
+    text-align: center;
+    margin-top: 50px; /* 调整上边距，让两个容器之间有一定距离 */
+   display:block;
+}
+.registerLink {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.registerLink a {
+    color: #333;
+    text-decoration: none;
+}
+
+.registerLink a:hover {
+    text-decoration: underline;
+}

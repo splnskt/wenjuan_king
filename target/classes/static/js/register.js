@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded",function(event){
             formData.append('password',this.password);
             console.log('用户名：', this.username);
             console.log('密码：', this.password);
-           axios.post('/user/register',formData)
+         /*   axios.post('/user/register',formData)
             .then(response=>{
                 if(response.data.code==='0')
                     window.location.href = '../pages/login.html';
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded",function(event){
                 }
 
             })
-            
+            */
 
         }
 
