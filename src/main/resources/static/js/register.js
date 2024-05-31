@@ -107,5 +107,5 @@ function checkPasswordStrength() {
     // 设置强度级别及对应的颜色和描述
     strengthBadge.style.display = "block";
     strengthBadge.innerText = strength[strengthLevel];
-    strengthBadge.className = "strength-" + strengthLevel;//7758258
+    strengthBadge.className = "strength-" + strengthLevel;
 }
