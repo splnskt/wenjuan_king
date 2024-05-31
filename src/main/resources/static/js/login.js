@@ -31,13 +31,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 formData.append('password', this.password);
                 console.log('用户名：', this.username);
                 console.log('密码：', this.password);
-                if(this.username==='ppp'&&this.password=='123456')
-                 {  alert("登录成功！");
-                   window.location.href='../pages/mainpage.html';
-            }
-                else alert("用户名/密码错误！");
+             
                 // 发送登录请求到后端
-                /*axios.post('/user/login', formData)
+                axios.post('/user/login', formData)
                     .then(response => {
                         // 根据后端返回的结果处理登录逻辑
                         if (response.data.msg==='ok') {
@@ -52,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         console.error('Error logging in:', error);
                         this.errorMessage = 'An error occurred while logging in.';
                     });
-                    */
+                    
                     
             }
         }

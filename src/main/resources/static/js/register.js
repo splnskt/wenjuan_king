@@ -47,7 +47,7 @@ function checkPasswordStrength() {
 
 function validateForm() {
     var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementsByName("confirm_password")[0].value;
+    var confirmPassword = document.getElementsById("confirm_password")[0].value;
 
     if (password != confirmPassword) {
         alert("密码和确认密码不匹配！");
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded",function(event){
                     window.location.href = '../pages/login.html';
                 else{
                     alert("用户名被占用!尝试其他用户名！");
-                }
+                }0
 
             })
             
