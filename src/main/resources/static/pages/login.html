@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="Container">
+    <h1 id="hello"  >Hello,</h1>
+    <h2 id="welcome">欢迎使用问卷王！</h2>
+</div>
+<div class="LoginContainer" id="app">
+    <h3>登录</h3>
+    <form @submit.prevent="login" >
+        <input class="loginInput" type="text" v-model="username" placeholder="用户名" required>
+        <input class="loginInput" type="password" v-model="password" placeholder="密码" required>
+        <button class="loginButton" type="submit">登录</button>
+    </form>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+    <div class="registerLink">
+        <a href="../pages/register.html">注册</a>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="../js/login.js"></script>
+</html>
