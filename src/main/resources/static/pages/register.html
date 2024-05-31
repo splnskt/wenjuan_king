@@ -10,13 +10,12 @@
     <div class="container" id="register">
         <h2>注册账号</h2>
     
-        <form @submit.prevent="register">
+        <form @submit.prevent="validateAndRegister">
             <input type="text" id="username" v-model="username" placeholder="用户名" required>
               
-            <input type="password" id="password" v-model="password" p
-            laceholder="密码" required @keyup="checkPasswordStrength">
+            <input type="password" id="password" v-model="password" placeholder="密码" required @keyup="checkPasswordStrength">
             <span id="password-strength">{{ passwordStrength }}</span>
-            <input type="password" id="confirm_password" placeholder="确认密码" v-model="confirmPassword" required>
+            <input type="password" id="confirm_password" v-model="confirmPassword" placeholder="确认密码" required>
         
             <input type="submit" value="注册">
         </form>
