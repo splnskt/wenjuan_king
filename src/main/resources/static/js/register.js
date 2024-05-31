@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded",function(event){
             console.log('密码：', this.password);
            axios.post('/user/register',formData)
             .then(response=>{
-                if(response.data.code==='0')
+                if(response.data.code===0)
                     window.location.href = '../pages/login.html';
                 else{
                     alert("用户名被占用!尝试其他用户名！");
