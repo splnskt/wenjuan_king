@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>查看问卷</title>
     <link rel="stylesheet" href="../css/surveyDisplay.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
+
 <body>
     <header>
-        <!-- 读入数据展示标题 -->
-        <h1>问卷标题</h1>
+        <h1>问卷王O.o</h1>
         <nav>
             <ul>
                 <li><a href="mainpage.html">首页</a></li>
@@ -19,16 +21,38 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="questionnaire">
-            <h2>问卷内容</h2>
+    <div id="app">
+        <main>
+            <div v-if="surveyData">
+                <h1>{{ surveyData.data.title }}</h1>
+                <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
+                <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
+                <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
+                <div v-for="(question, index) in surveyData.questions" :key="index">
+                    <h3>{{question.questionTitle}}</h3>
+                    <ul>
+                        <li v-for="(option, optionIndex) in question.questionOption" :key="index">
+                            {{option}}
+                        </li>
+                    </ul>
+                </div>
 
-            <!-- 这里可以插入问卷内容 -->
-            
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 查看问卷</p>
-    </footer>
+            </div>
+            <div v-else>
+                <!-- <form @submit.prevent="view"> -->
+                    <input type="text" v-model="pid" required>
+                    <p>点击以查看问卷</p>
+                    <button @click="view">查看问卷</button>
+                <!-- </form> -->
+            </div>
+        </main>
+        <!-- 脚标 -->
+        <footer>
+            <p>&copy; 2024 查看问卷</p>
+        </footer>
+    </div>
+    <script src="../js/surveyDisplay.js"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </html>
