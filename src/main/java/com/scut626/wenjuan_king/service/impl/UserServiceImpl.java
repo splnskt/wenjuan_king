@@ -40,6 +40,8 @@ public class UserServiceImpl implements UserService {
                 .equals(userByName.get(0).getPassword()) )
         {
             //密码正确
+            //将uid返还给user
+            user.setUid(userByName.get(0).getUid());
             return 0;
         }
         else{

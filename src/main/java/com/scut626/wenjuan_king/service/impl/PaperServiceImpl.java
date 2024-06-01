@@ -99,7 +99,7 @@ public class PaperServiceImpl implements PaperService {
         }
     }
     @Override
-    public void updatePaper(UpdateViewPaper paperUpdateInfo) {
+    public void updatePaper(UpdateViewPaper paperUpdateInfo, Integer uid) {
         //获取要修改的问卷id
         Integer pid = paperUpdateInfo.getPid();
         List<Integer> ids = new ArrayList<>();
@@ -108,7 +108,7 @@ public class PaperServiceImpl implements PaperService {
         //删除原先的问卷
         deletePapers(ids);
         //新增一个新的问卷
-        insertPaper(paperUpdateInfo);
+        insertPaper(paperUpdateInfo, uid);
     }
 
     /**
@@ -148,7 +148,7 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public PaperPageView getPaperList(String name, Integer page, Integer pageSize) {
         if(page != null)
-            page--;
+            page = (page-1) * pageSize;
         List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize,null);
         Long paperCount = paperMapper.paperCount(name, page, pageSize,null);
         PaperPageView pageView = new PaperPageView(paperCount, papers);
@@ -158,7 +158,7 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize) {
         if(page != null)
-            page--;
+            page = (page-1) * pageSize;
         List<Paper> papers = paperMapper.selectPaperList(null, page, pageSize,uid);
         Long paperCount = paperMapper.paperCount(null, page, pageSize,uid);
         return new PaperPageView(paperCount, papers);

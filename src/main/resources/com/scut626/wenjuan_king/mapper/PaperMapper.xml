@@ -9,6 +9,9 @@
         <if test="name != null">
             and title like concat('%',#{name},'%')
         </if>
+        <if test="uid != null">
+            and uid = #{uid}
+        </if>
         order by create_time desc
         <if test="page != null and pageSize != null">
             limit #{page}, #{pageSize}
@@ -17,11 +20,13 @@
 
     <select id="paperCount" resultType="java.lang.Long">
         SELECT count(1) from paper
-        <where>
+        WHERE true
             <if test="name != null">
-                title like concat('%',#{name},'%')
+                and title like concat('%',#{name},'%')
             </if>
-        </where>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
         order by create_time desc
     </select>
 </mapper>

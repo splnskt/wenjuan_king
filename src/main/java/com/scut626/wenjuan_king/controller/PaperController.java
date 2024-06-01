@@ -60,7 +60,7 @@ public class PaperController {
         HttpSession session = req.getSession();
         User user =(User)session.getAttribute("user");
         //获取user id
-        Integer uid;
+        Integer uid = user.getUid();
         log.info("正在增加问卷："+paperUpdateInfo.getTitle());
         paperService.insertPaper(paperUpdateInfo, uid);
         return Result.success();
@@ -72,10 +72,15 @@ public class PaperController {
      * @return
      */
     @PutMapping("/update-paper")
-    public Result updatePaper(@RequestBody UpdateViewPaper paperUpdateInfo)
+    public Result updatePaper(@RequestBody UpdateViewPaper paperUpdateInfo, HttpServletRequest req)
     {
+        //获取session
+        HttpSession session = req.getSession();
+        User user =(User)session.getAttribute("user");
+        //获取user id
+        Integer uid = user.getUid();
         log.info("正在修改问卷："+paperUpdateInfo.getTitle());
-        paperService.updatePaper(paperUpdateInfo);
+        paperService.updatePaper(paperUpdateInfo, uid);
         return Result.success();
     }
 

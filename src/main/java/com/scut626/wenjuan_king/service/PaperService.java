@@ -25,7 +25,7 @@ public interface PaperService {
 
     UpdateViewPaper viewPaper(Integer pid);
 
-    void updatePaper(UpdateViewPaper paperUpdateInfo);
+    void updatePaper(UpdateViewPaper paperUpdateInfo, Integer uid);
 
     PaperPageView getPaperList(String name, Integer page, Integer pageSize);
 
