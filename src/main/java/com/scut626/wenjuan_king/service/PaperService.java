@@ -28,4 +28,6 @@ public interface PaperService {
     void updatePaper(UpdateViewPaper paperUpdateInfo);
 
     PaperPageView getPaperList(String name, Integer page, Integer pageSize);
+
+    PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize);
 }

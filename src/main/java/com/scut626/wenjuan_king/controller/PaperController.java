@@ -1,10 +1,13 @@
 package com.scut626.wenjuan_king.controller;
 
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.User;
 import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.service.PaperService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -92,12 +95,32 @@ public class PaperController {
         }
     }
 
-    @RequestMapping("/paper-lists")
+    @RequestMapping("/my-papers")
     public Result viewPaperList(String name, Integer page, Integer pageSize)
     {
         log.info("查找问卷...");
         PaperPageView paperPageView = paperService.getPaperList(name, page, pageSize);
         return Result.success(paperPageView);
+    }
+    @RequestMapping("/paper-lists")
+    public Result myPaperList(HttpServletRequest req, Integer page, Integer pageSize)
+    {
+        log.info("查找我的问卷...");
+        //获取session
+        HttpSession session = req.getSession();
+        User user =(User)session.getAttribute("user");
+        //获取user id
+        Integer uid;
+        if(user != null)
+        {
+            uid = user.getUid();
+            PaperPageView paperPageView = paperService.myPaperList(uid, page, pageSize);
+            return Result.success(paperPageView);
+        }
+        else
+        {
+            return Result.error("no login");
+        }
     }
 
 }
