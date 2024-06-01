@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         params: {
                             name: this.name,
                             page: page,
-                            pagesize: this.pageSize
+                            pageSize: this.pageSize
                         }
                     });
                     var listData = response.data;
