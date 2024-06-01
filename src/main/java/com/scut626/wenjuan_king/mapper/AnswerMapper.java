@@ -15,7 +15,7 @@ public interface AnswerMapper {
     @Select("select * from answer")
     public List<Answer> selectAllAnswers();
 
-    @Insert("insert into answer(pid, qid, create_time, question_type, answer_content) VALUES " +
-            "                    (#{pid},#{qid},#{createTime},#{questionType},#{answerContent})")
+    @Insert("insert into answer(pid, qid, uid, create_time, question_type, answer_content) VALUES " +
+            "                    (#{pid},#{qid},#{uid},#{createTime},#{questionType},#{answerContent})")
     public int insertAnswer(Answer answer);
 }

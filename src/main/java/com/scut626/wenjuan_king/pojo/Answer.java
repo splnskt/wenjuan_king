@@ -13,6 +13,7 @@ public class Answer {
     private Integer aid;
     private Integer pid;
     private Integer qid;
+    private Integer uid;
     private LocalDateTime createTime;
     private Integer questionType;
     private String answerContent;

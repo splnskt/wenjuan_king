@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @SpringBootTest
@@ -25,6 +26,9 @@ class WenjuanKingApplicationTests {
     QuestionMapper questionMapper;
     @Autowired
     AnswerMapper answerMapper;
+
+
+    //region TestMappers
     @Test
     void testUserMapper() {
         User user = new User();
@@ -45,8 +49,8 @@ class WenjuanKingApplicationTests {
         paper.setTitle("testPaper");
         paper.setStatus(1);
         paper.setCreateTime(LocalDateTime.now());
-        paper.setStartTime(LocalDateTime.now());
-        paper.setEndTime(LocalDateTime.now().plusDays(7));
+        paper.setStartTime(LocalDate.now());
+        paper.setEndTime(LocalDate.now().plusDays(7));
 
         paperMapper.insertPaper(paper);
         for (Paper p : paperMapper.selectAllPapers()) {
@@ -74,6 +78,7 @@ class WenjuanKingApplicationTests {
                 null,
                 1,
                 1,
+                1,
                 LocalDateTime.now(),
                 1,
                 "[\"option2\"]");
@@ -82,5 +87,7 @@ class WenjuanKingApplicationTests {
             System.out.println(a);
         }
     }
+    //endregion
+
 
 }
