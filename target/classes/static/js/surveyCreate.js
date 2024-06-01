@@ -1,19 +1,19 @@
-document.addEventListener("DOMContentLoaded", function(event){
+document.addEventListener("DOMContentLoaded", function (event) {
     var app = new Vue({
         el: '#app',
         data: {
-            title:'',
-            startTime:'',
-            endTime:'',
-            status:0,
+            title: '',
+            startTime: '',
+            endTime: '',
+            status: 0,
             questions: [] //问题数组
         },
         methods: {
             //加问题
             addQuestion() {
                 this.questions.push({
-                    questionType:1,
-                    questionTitle:'',
+                    questionType: 1,
+                    questionTitle: '',
                     questionOption: []
                 }); // 添加一个新问题
             },
@@ -21,14 +21,12 @@ document.addEventListener("DOMContentLoaded", function(event){
             updateOptions(index) {
                 // 根据问题类型重置问题对象的属性
                 switch (this.questions[index].questionType) {
-                    case 1: // 单选
-                        this.questions[index].questionOption = []; // 初始化一个空选项
+                    case "1": // 单选
                         break;
-                    case 2: // 多选
-                        this.questions[index].questionOption = []; // 初始化一个空选项
+                    case "2": // 多选
                         break;
-                    case 3: // 填空
-                        var newOption=[{content:''}];
+                    case "3": // 填空
+                        var newOption = [{ content: '' }];
                         this.questions[index].questionOption = newOption; // 清空选项
                         break;
                     default:
@@ -41,28 +39,28 @@ document.addEventListener("DOMContentLoaded", function(event){
             },
             //加选项
             addOption(questionIndex) {
-                this.questions[questionIndex].questionOption.push({content:''});
+                this.questions[questionIndex].questionOption.push({ content: '' });
             },
             //删选项
             removeOption(questionIndex, optionIndex) {
                 this.questions[questionIndex].questionOption.splice(optionIndex, 1);
             },
-            submit:function() {
+            submit: function () {
 
                 // 遍历问题数组，提取每个问题对象的 questionOptions 属性的 content 值，并存储到新的字符串数组中
                 this.questions.forEach(question => {
-                    var newQuestionOptions = [];
-                    question.questionOption.forEach(option => {
-                        newQuestionOptions.push(option.content);
-                    });
-                    question.questionOption=newQuestionOptions;
+                        var newQuestionOptions = [];
+                        question.questionOption.forEach(option => {
+                            newQuestionOptions.push(option.content);
+                        });
+                    question.questionOption = newQuestionOptions;
                 });
-       
+
                 var formData = {
                     title: this.title,
                     startTime: this.startTime,
                     endTime: this.endTime,
-                    status:this.status,
+                    status: this.status,
                     questions: this.questions
                 };
 
@@ -72,21 +70,25 @@ document.addEventListener("DOMContentLoaded", function(event){
                 console.log('状态:', this.status);
                 console.log('问卷内容:', this.questions);
 
-               // 发送 POST 请求
-            axios.post('/paper/update-paper', formData)
-            .then(response => {
-                // 处理后端返回的响应
-                var data = response.data;
-                console.log('code:', data.code);
-                console.log('msg:', data.msg);
-                console.log('data:', data.data);
+                // 发送 POST 请求
+                axios.post('/paper/update-paper', formData)
+                    .then(response => {
+                        // 处理后端返回的响应
+                        var getData = response.data;
+                        console.log('code:', data.code);
+                        console.log('msg:', data.msg);
+                        console.log('data:', data.data);
 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                        //成功后跳转，首页
+                        if(getData.data===0){
+                        window.location.href = '../pages/mainpage.html';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         }
     });
-    
+
 });

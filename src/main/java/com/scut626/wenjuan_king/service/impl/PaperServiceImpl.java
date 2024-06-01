@@ -112,6 +112,11 @@ public class PaperServiceImpl implements PaperService {
         insertPaper(paperUpdateInfo);
     }
 
+    @Override
+    public List<Paper> getPaperList(String name, Integer page, Integer pageSize) {
+        return null;
+    }
+
     /**
      * 查看问卷
      * @param pid
