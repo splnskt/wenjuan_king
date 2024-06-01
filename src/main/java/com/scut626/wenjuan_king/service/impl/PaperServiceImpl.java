@@ -151,9 +151,18 @@ public class PaperServiceImpl implements PaperService {
     public PaperPageView getPaperList(String name, Integer page, Integer pageSize) {
         if(page != null)
             page--;
-        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize);
-        Long paperCount = paperMapper.paperCount(name, page, pageSize);
+        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize,null);
+        Long paperCount = paperMapper.paperCount(name, page, pageSize,null);
         PaperPageView pageView = new PaperPageView(paperCount, papers);
         return pageView;
+    }
+
+    @Override
+    public PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize) {
+        if(page != null)
+            page--;
+        List<Paper> papers = paperMapper.selectPaperList(null, page, pageSize,uid);
+        Long paperCount = paperMapper.paperCount(null, page, pageSize,uid);
+        return new PaperPageView(paperCount, papers);
     }
 }

@@ -24,9 +24,10 @@ public interface PaperMapper {
     @Select("select * from paper where pid = #{pid}")
     List<Paper> selectPapersByPid(Integer pid);
 
-    List<Paper> selectPaperList(String name, Integer page, Integer pageSize);
+    List<Paper> selectPaperList(String name, Integer page, Integer pageSize, Integer uid);
 
-    Long paperCount(String name, Integer page, Integer pageSize);
+    Long paperCount(String name, Integer page, Integer pageSize, Integer uid);
+
 }
 
 
