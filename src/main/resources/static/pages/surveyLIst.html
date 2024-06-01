@@ -28,7 +28,7 @@
         <button @click="search">查询</button>
 
         <ul>
-            <li v-for="(paper,index) in papers" ,key="paper.pid">{{paper.title}}</li>
+            <li v-for="paper in papers" ,key="paper.pid">{{paper.title}}</li>
         </ul>
         <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
         <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
