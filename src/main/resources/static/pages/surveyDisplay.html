@@ -30,9 +30,12 @@
                 <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
                 <div v-for="(question, index) in surveyData.data.questions" :key="index">
                     <h3><span>问题{{index+1}}</span>{{question.questionTitle}}</h3>
-                    <ul>
+                    <span v-if="question.questionType==1">(单选)</span>
+                    <span v-if="question.questionType==2">(多选)</span>
+                    <span v-if="question.questionType==3">(填空)</span>
+                    <ul v-if="question.questionType==1||question.questionType==2">
                         <li v-for="(option, optionIndex) in question.questionOption" :key="index">
-                            <h4><span>选项{{optionIndex+1}}</span>{{option}}</h4>
+                            <h4><span>选项{{optionIndex+1}}: </span>{{option}}</h4>
                         </li>
                     </ul>
                 </div>
