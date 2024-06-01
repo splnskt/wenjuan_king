@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private LoginCheckInterceptor loginCheckInterceptor;
 
-    @Override
+    /*@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginCheckInterceptor)
                 .addPathPatterns("/**")
@@ -24,5 +24,5 @@ public class WebConfig implements WebMvcConfigurer {
                         "/*",
                         "/css/**",
                         "/js/**");
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.scut626.wenjuan_king.controller;
 
+import com.scut626.wenjuan_king.pojo.Paper;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.service.PaperService;
@@ -89,4 +90,12 @@ public class PaperController {
             return Result.success(paperView);
         }
     }
+
+/*    @RequestMapping("/paper/paper-lists")
+    public Result viewPaperList(String name, Integer page, Integer pageSize)
+    {
+        log.info("查找问卷...");
+        List<Paper> papers = paperService.getPaperList(name, page, pageSize);
+    }*/
+
 }
