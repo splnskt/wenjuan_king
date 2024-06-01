@@ -1,5 +1,7 @@
 package com.scut626.wenjuan_king.service;
 
+import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
+
 import java.util.List;
 
 public interface PaperService {
@@ -12,4 +14,14 @@ public interface PaperService {
      *              2： 删除失败，问卷ID非法（无此问卷）
      */
     int deletePapers(List<Integer> pidList);
+
+    /**
+     * 增加一个新问卷
+     * @param paperUpdateInfo 传入的问卷信息
+     */
+    void insertPaper(UpdateViewPaper paperUpdateInfo);
+
+    UpdateViewPaper viewPaper(Integer pid);
+
+    void updatePaper(UpdateViewPaper paperUpdateInfo);
 }

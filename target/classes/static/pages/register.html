@@ -9,14 +9,14 @@
 <body>
     <div class="container" id="register">
         <h2>注册账号</h2>
-        <form action="#" method="post" onsubmit="return validateForm()">
-            <input type="text" v-model="username" placeholder="用户名" required>
+    
+        <form @submit.prevent="register">
+            <input type="text" id="username" v-model="username" placeholder="用户名" required>
               
-            <input type="password" id="password" v-model="password" placeholder="密码" required onkeyup="checkPasswordStrength()">
-            <span id="password-strength"></span>
-            <input type="password" name="confirm_password" placeholder="确认密码" required>
+            <input type="password" id="password" v-model="password" placeholder="密码" required @keyup="checkPasswordStrength">
+            <span id="password-strength">{{ passwordStrength }}</span>
+            <input type="password" id="confirm_password" placeholder="确认密码" v-model="confirmPassword" required>
         
-           
             <input type="submit" value="注册">
         </form>
         <p style="text-align: center;">点击注册，即表示您同意我们的<a href="#">用户协议</a>和<a href="#">隐私政策</a></p>

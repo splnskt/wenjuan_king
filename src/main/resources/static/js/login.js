@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var formData = new FormData();
                 formData.append('username', this.username);
                 formData.append('password', this.password);
+
+                // 检查是否被获取
                 console.log('用户名：', this.username);
                 console.log('密码：', this.password);//ll
              
@@ -38,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         // 根据后端返回的结果处理登录逻辑
                         if (response.data.msg==='ok') {
                             // 登录成功，可以进行跳转或其他操作
-                            window.location.href = '../pages/mainpage'; // 示例：跳转到首页
+                            alert("welcome!");
+                            window.location.href = '../pages/mainpage.html'; // 示例：跳转到首页
                         } else {
                             // 登录失败，显示错误消息
                             this.errorMessage = response.data.message;
