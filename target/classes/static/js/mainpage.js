@@ -15,3 +15,6 @@ create.onclick=function(){
 myquestionary.onclick=function(){
     window.location.href="https://www.4399.com";
 }
+viewSurvey.onclick=function(){
+    window.location.href="../pages/surveyDisplay.html";
+}
