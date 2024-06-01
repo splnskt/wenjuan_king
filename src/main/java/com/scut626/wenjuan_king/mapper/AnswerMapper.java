@@ -15,7 +15,13 @@ public interface AnswerMapper {
     @Select("select * from answer")
     public List<Answer> selectAllAnswers();
 
+    @Select("SELECT * FROM answer WHERE pid = #{pid}")
+    List<Answer> selectAnswersByPid(int pid);
+
     @Insert("insert into answer(pid, qid, uid, create_time, question_type, answer_content) VALUES " +
             "                    (#{pid},#{qid},#{uid},#{createTime},#{questionType},#{answerContent})")
     public int insertAnswer(Answer answer);
 }
+
+
+

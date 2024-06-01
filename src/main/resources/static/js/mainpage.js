@@ -10,7 +10,7 @@ tutorial.onclick=function(){
     window.location.href="https://www.jd.com";
 }
 create.onclick=function(){
-    window.location.href="https://www.taobao.com";
+    window.location.href="../pages/surveyCreate.html";
 }
 myquestionary.onclick=function(){
     window.location.href="https://www.4399.com";
