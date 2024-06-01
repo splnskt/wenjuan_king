@@ -54,10 +54,15 @@ public class PaperController {
      * @param paperUpdateInfo 传入的问卷信息
      */
     @PostMapping("/update-paper")
-    public Result insertPaper(@RequestBody UpdateViewPaper paperUpdateInfo)
+    public Result insertPaper(@RequestBody UpdateViewPaper paperUpdateInfo, HttpServletRequest req)
     {
+        //获取session
+        HttpSession session = req.getSession();
+        User user =(User)session.getAttribute("user");
+        //获取user id
+        Integer uid;
         log.info("正在增加问卷："+paperUpdateInfo.getTitle());
-        paperService.insertPaper(paperUpdateInfo);
+        paperService.insertPaper(paperUpdateInfo, uid);
         return Result.success();
     }
 
@@ -95,14 +100,14 @@ public class PaperController {
         }
     }
 
-    @RequestMapping("/my-papers")
+    @RequestMapping("/paper-lists")
     public Result viewPaperList(String name, Integer page, Integer pageSize)
     {
         log.info("查找问卷...");
         PaperPageView paperPageView = paperService.getPaperList(name, page, pageSize);
         return Result.success(paperPageView);
     }
-    @RequestMapping("/paper-lists")
+    @RequestMapping("/my-papers")
     public Result myPaperList(HttpServletRequest req, Integer page, Integer pageSize)
     {
         log.info("查找我的问卷...");

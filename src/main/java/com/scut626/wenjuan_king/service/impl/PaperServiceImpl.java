@@ -59,7 +59,7 @@ public class PaperServiceImpl implements PaperService {
      * @param paperUpdateInfo 传入的问卷信息
      */
     @Override
-    public void insertPaper(UpdateViewPaper paperUpdateInfo){
+    public void insertPaper(UpdateViewPaper paperUpdateInfo, Integer uid){
         //在数据库中插入问卷
         // 获取到问卷信息
         Paper paper = new Paper();
@@ -70,8 +70,6 @@ public class PaperServiceImpl implements PaperService {
         //设置问卷的创建时间
         paper.setCreateTime(LocalDateTime.now());
         //设置问卷的创建用户
-            //还没写
-        int uid = 15;
         paper.setUid(uid);
         //存入数据库
         paperMapper.insertPaper(paper);

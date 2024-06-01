@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷列表</title>
+    <link rel="stylesheet" href="../css/surveyList.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>问卷列表</h1>
+        <nav>
+            <ul>
+                <li><a href="mainpage.html">首页</a></li>
+                <!-- 关于 和 联系我们 暂时未做页面 -->
+                <li><a href="#">关于</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="app">
+        <label>搜索问卷：</label>
+
+        <input type="text" v-model="name" placeholder="问卷关键词">
+        <button @click="search">查询</button>
+
+        <ul>
+            <li v-for="paper in papers" :key="paper.pid">{{paper.title}}</li>
+        </ul>
+        <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+        <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+
+    </div>
+
+    <script src="../js/surveyList.js"></script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</html>

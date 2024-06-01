@@ -21,7 +21,7 @@ public interface PaperService {
      * 增加一个新问卷
      * @param paperUpdateInfo 传入的问卷信息
      */
-    void insertPaper(UpdateViewPaper paperUpdateInfo);
+    void insertPaper(UpdateViewPaper paperUpdateInfo, Integer uid);
 
     UpdateViewPaper viewPaper(Integer pid);
 
