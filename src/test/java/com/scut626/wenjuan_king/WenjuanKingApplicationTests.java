@@ -25,6 +25,9 @@ class WenjuanKingApplicationTests {
     QuestionMapper questionMapper;
     @Autowired
     AnswerMapper answerMapper;
+
+
+    //region TestMappers
     @Test
     void testUserMapper() {
         User user = new User();
@@ -74,6 +77,7 @@ class WenjuanKingApplicationTests {
                 null,
                 1,
                 1,
+                1,
                 LocalDateTime.now(),
                 1,
                 "[\"option2\"]");
@@ -82,5 +86,7 @@ class WenjuanKingApplicationTests {
             System.out.println(a);
         }
     }
+    //endregion
+
 
 }

@@ -3,11 +3,13 @@ package com.scut626.wenjuan_king.controller;
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.pojo.User;
 import com.scut626.wenjuan_king.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class UserController {
 
@@ -16,6 +18,9 @@ public class UserController {
     @RequestMapping("/user/register")
     public Result register(User user)
     {
+        //输出日志
+        log.info("正在注册用户" + user);
+        //
         boolean flag = userService.register(user);
         /*if(flag)
         {
@@ -32,10 +37,16 @@ public class UserController {
     @RequestMapping("/user/login")
     public Result login(User user)
     {
+        //输出日志
+        log.info("用户" + user + "正在登录");
+        //
         int rst = userService.login(user);
         if(rst == 0)
         {
             //登录成功
+            //输出日志
+            log.info("用户" + user + "登录成功");
+            //
             return Result.success();
         }
         else if(rst == 1)
