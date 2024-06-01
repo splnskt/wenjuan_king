@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var formData = new FormData();
                 formData.append('username', this.username);
                 formData.append('password', this.password);
+
+                // 检查是否被获取
                 console.log('用户名：', this.username);
                 console.log('密码：', this.password);//ll
              
