@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,7 +79,7 @@ public class PaperServiceImpl implements PaperService {
         //在数据库中插入所有的问题
         //获取所有的问题
         for (UpdateViewQuestion questionView : paperUpdateInfo.getQuestions()) {
-            Question q = new Question();
+            Question q = new Question(questionView);/*
             //将questionView中的信息传入q
             q.setQuestionType(questionView.getQuestionType());
             q.setQuestionTitle(questionView.getQuestionTitle());
@@ -90,7 +91,7 @@ public class PaperServiceImpl implements PaperService {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-            q.setQuestionOption(optionsJson);
+            q.setQuestionOption(optionsJson);*/
             //设置问题对应的问卷id以及创建时间
             q.setPid(pid);
             q.setCreateTime(LocalDateTime.now());
@@ -98,4 +99,36 @@ public class PaperServiceImpl implements PaperService {
             questionMapper.insertQuestion(q);
         }
     }
+    @Override
+    public void updatePaper(UpdateViewPaper paperUpdateInfo) {
+
+    }
+
+    /**
+     * 查看问卷
+     * @param pid
+     * @return 问卷信息，如果没找到问卷则返回null
+     */
+    @Override
+    public UpdateViewPaper viewPaper(Integer pid) {
+        //根据pid找到问卷
+        List<Paper> papersByPid = paperMapper.selectPapersByPid(pid);
+        if(papersByPid == null || papersByPid.isEmpty())
+        {
+            //没找到该id
+            return null;
+        }
+        UpdateViewPaper paperView = new UpdateViewPaper(papersByPid.get(0));
+        //根据pid找到问题
+        List<Question> questionsByPid = questionMapper.selectQuestionsByPid(pid);
+        List<UpdateViewQuestion> questionViews = new ArrayList<>();
+        for (Question question : questionsByPid) {
+            //把问题封装进view
+            UpdateViewQuestion questionView = new UpdateViewQuestion();
+            questionViews.add(questionView);
+        }
+        paperView.setQuestions(questionViews);
+        return paperView;
+    }
+
 }

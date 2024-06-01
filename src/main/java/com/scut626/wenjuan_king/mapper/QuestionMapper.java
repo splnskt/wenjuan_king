@@ -20,4 +20,7 @@ public interface QuestionMapper {
     @Insert("insert into question(pid, create_time, question_type, question_title, question_option) VALUES " +
             "                    (#{pid},#{createTime},#{questionType},#{questionTitle},#{questionOption})")
     public int insertQuestion(Question question);
+
+    @Select("select * from question where pid = #{pid}")
+    List<Question> selectQuestionsByPid(Integer pid);
 }

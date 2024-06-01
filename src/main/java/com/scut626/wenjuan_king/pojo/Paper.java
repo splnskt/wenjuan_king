@@ -1,5 +1,6 @@
 package com.scut626.wenjuan_king.pojo;
 
+import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Paper {
+    public Paper(UpdateViewPaper paperView)
+    {
+        this.pid = paperView.getPid();
+        this.title = paperView.getTitle();
+        this.status = paperView.getStatus();
+        this.startTime = paperView.getStartTime();
+        this.endTime = paperView.getEndTime();
+        this.createTime = paperView.getCreateTime();
+    }
+
     private Integer pid;
     private Integer uid;
     private String title;

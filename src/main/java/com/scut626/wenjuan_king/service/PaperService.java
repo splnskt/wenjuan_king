@@ -20,4 +20,8 @@ public interface PaperService {
      * @param paperUpdateInfo 传入的问卷信息
      */
     void insertPaper(UpdateViewPaper paperUpdateInfo);
+
+    UpdateViewPaper viewPaper(Integer pid);
+
+    void updatePaper(UpdateViewPaper paperUpdateInfo);
 }

@@ -20,6 +20,9 @@ public interface PaperMapper {
 
     @Delete("delete from paper where pid = #{pid}")
     public int deletePaperById(int pid);
+
+    @Select("select * from paper where pid = #{pid}")
+    List<Paper> selectPapersByPid(Integer pid);
 }
 
 
