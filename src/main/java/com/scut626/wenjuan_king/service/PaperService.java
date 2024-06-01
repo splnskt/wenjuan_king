@@ -1,6 +1,7 @@
 package com.scut626.wenjuan_king.service;
 
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 
 import java.util.List;
@@ -26,5 +27,5 @@ public interface PaperService {
 
     void updatePaper(UpdateViewPaper paperUpdateInfo);
 
-    List<Paper> getPaperList(String name, Integer page, Integer pageSize);
+    PaperPageView getPaperList(String name, Integer page, Integer pageSize);
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scut626.wenjuan_king.mapper.PaperMapper;
 import com.scut626.wenjuan_king.mapper.QuestionMapper;
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import com.scut626.wenjuan_king.pojo.Question;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewQuestion;
@@ -112,11 +113,6 @@ public class PaperServiceImpl implements PaperService {
         insertPaper(paperUpdateInfo);
     }
 
-    @Override
-    public List<Paper> getPaperList(String name, Integer page, Integer pageSize) {
-        return null;
-    }
-
     /**
      * 查看问卷
      * @param pid
@@ -144,4 +140,20 @@ public class PaperServiceImpl implements PaperService {
         return paperView;
     }
 
+    /**
+     * 查询问卷
+     * @param name 根据名字查询
+     * @param page 第几页
+     * @param pageSize 一页有多少问卷
+     * @return 返回问卷列表
+     */
+    @Override
+    public PaperPageView getPaperList(String name, Integer page, Integer pageSize) {
+        if(page != null)
+            page--;
+        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize);
+        Long paperCount = paperMapper.paperCount(name, page, pageSize);
+        PaperPageView pageView = new PaperPageView(paperCount, papers);
+        return pageView;
+    }
 }
