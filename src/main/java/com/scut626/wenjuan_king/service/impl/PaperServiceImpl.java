@@ -101,7 +101,15 @@ public class PaperServiceImpl implements PaperService {
     }
     @Override
     public void updatePaper(UpdateViewPaper paperUpdateInfo) {
+        //获取要修改的问卷id
+        Integer pid = paperUpdateInfo.getPid();
+        List<Integer> ids = new ArrayList<>();
+        ids.add(pid);
 
+        //删除原先的问卷
+        deletePapers(ids);
+        //新增一个新的问卷
+        insertPaper(paperUpdateInfo);
     }
 
     /**
@@ -124,7 +132,7 @@ public class PaperServiceImpl implements PaperService {
         List<UpdateViewQuestion> questionViews = new ArrayList<>();
         for (Question question : questionsByPid) {
             //把问题封装进view
-            UpdateViewQuestion questionView = new UpdateViewQuestion();
+            UpdateViewQuestion questionView = new UpdateViewQuestion(question);
             questionViews.add(questionView);
         }
         paperView.setQuestions(questionViews);
