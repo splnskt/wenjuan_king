@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>创建问卷</title>
-    <link rel="stylesheet" href="../css/test.css">
+    <link rel="stylesheet" href="../css/surveyCreate.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 
@@ -29,7 +29,7 @@
                 <label>问题{{ index + 1 }}:</label>
                 <input type="text" v-model="question.questionTitle" required>
                 <!-- 问题类型 -->
-                <select v-model="question.questionType" @input="updateOptions(index)">
+                <select v-model="question.questionType" @change="updateOptions(index)">
                     <option value="1">单选</option>
                     <option value="2">多选</option>
                     <option value="3">填空</option>
@@ -56,7 +56,7 @@
 
     </div>
 
-    <script src="../js/test.js"></script>
+    <script src="../js/surveyCreate.js"></script>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
