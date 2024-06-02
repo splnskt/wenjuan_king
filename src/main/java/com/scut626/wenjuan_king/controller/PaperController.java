@@ -36,9 +36,9 @@ public class PaperController {
      * @return 操作结果
      */
     @PostMapping("/delete-paper")
-    public Result deletePaper(@RequestBody Map<String, Object> request) {
+    public Result deletePaper(List<Integer> request) {
         // 获取请求体中的问卷ID列表
-        List<Integer> pidList = (List<Integer>) request.get("pidList");
+        List<Integer> pidList = request;
         if (pidList == null || pidList.isEmpty()) {
             return Result.error("删除问卷失败，缺少问卷ID参数"); // 检查ID列表是否为空
         }
