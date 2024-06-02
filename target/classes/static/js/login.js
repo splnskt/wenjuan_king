@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     })
                     .catch(error => {
                         console.error('Error logging in:', error);
-                        this.errorMessage = 'An error occurred while logging in.';
+                        this.errorMessage = '登录出错！';
                     });
                     
                     
@@ -57,3 +57,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     });
 });
+document.addEventListener('mousemove',function(event){
+    var posX = event.clientX/window.innerWidth;
+    var tempx=document.body.style.backgroundPositionX;
+    document.body.style.backgroundPositionX =(posX*50-200)+'px';
+})

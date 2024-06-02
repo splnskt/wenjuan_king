@@ -36,7 +36,7 @@ public class PaperController {
      * @return 操作结果
      */
     @PostMapping("/delete-paper")
-    public Result deletePaper(List<Integer> request) {
+    public Result deletePaper(@RequestParam List<Integer> request) {
         // 获取请求体中的问卷ID列表
         List<Integer> pidList = request;
         if (pidList == null || pidList.isEmpty()) {
@@ -105,7 +105,7 @@ public class PaperController {
      * @param pid 问卷ID
      * @return 操作结果
      */
-    @PostMapping("/view-paper")
+    @RequestMapping("/view-paper")
     public Result adminViewPaper(Integer pid) {
         // 输出日志信息
         log.info("正在获取问卷编号为：" + pid);
