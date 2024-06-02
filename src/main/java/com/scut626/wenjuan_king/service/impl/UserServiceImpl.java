@@ -1,5 +1,6 @@
 package com.scut626.wenjuan_king.service.impl;
 
+// 导入必要的类和接口
 import com.scut626.wenjuan_king.mapper.UserMapper;
 import com.scut626.wenjuan_king.pojo.User;
 import com.scut626.wenjuan_king.service.UserService;
@@ -10,42 +11,49 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// 表示这是一个服务类，实现了 UserService 接口
 @Service
 public class UserServiceImpl implements UserService {
+
+    // 自动注入 UserMapper
     @Autowired
     UserMapper userMapper;
+
+    // 用户注册方法
     @Override
     public boolean register(User user) {
-        //更新user注册时间
+        // 更新用户注册时间和最后登录时间为当前时间
         user.setCreateTime(LocalDateTime.now());
         user.setLastLoginTime(LocalDateTime.now());
-        //对用户密码进行MD5加密
+
+        // 对用户密码进行 MD5 加密
         user.setPassword(MD5Util.md5(user.getPassword()));
-        //插入数据库
+
+        // 将用户信息插入数据库
         int rows = userMapper.insertUser(user);
+
+        // 返回插入结果，非零表示插入成功
         return rows != 0;
     }
 
+    // 用户登录方法
     @Override
     public int login(User user) {
-        //根据用户名获取用户信息
+        // 根据用户名获取用户信息
         List<User> userByName = userMapper.selectUserByName(user.getUsername());
-        if(userByName == null || userByName.size() == 0)
-        {
-            //该用户不存在
+
+        // 如果用户不存在，返回 1
+        if (userByName == null || userByName.size() == 0) {
             return 1;
         }
-        //将要登录的用户密码加密，并与获取到的用户的密码比对
-        if( MD5Util.md5(user.getPassword())
-                .equals(userByName.get(0).getPassword()) )
-        {
-            //密码正确
-            //将uid返还给user
+
+        // 将要登录的用户密码加密，并与数据库中的用户密码比对
+        if (MD5Util.md5(user.getPassword()).equals(userByName.get(0).getPassword())) {
+            // 密码正确，设置用户的 UID 并返回 0
             user.setUid(userByName.get(0).getUid());
             return 0;
-        }
-        else{
-            //密码错误
+        } else {
+            // 密码错误，返回 2
             return 2;
         }
     }
