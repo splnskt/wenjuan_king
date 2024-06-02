@@ -1,6 +1,8 @@
 package com.scut626.wenjuan_king.service;
 
 import com.scut626.wenjuan_king.pojo.Answer;
+import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +20,6 @@ public interface AnswerService {
      * @return  分组后的答案映射
      */
     Map<Integer, List<Answer>> groupAnswersByQuestion(List<Answer> answers);
+
+    int commitPaper(AnswerPageView answerPageView, Integer uid);
 }
