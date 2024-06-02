@@ -55,7 +55,7 @@ flex:0 0 auto;
  
   transition: all 0.3s ease;
   background-color: rgba(190, 238, 243, 0.902);
-  border: 5px solid #ffffff; /* 边框样式为实线，宽度为 2px，颜色为灰色 */
+  border: 3px solid black; /* 边框样式为实线，宽度为 2px，颜色为灰色 */
   border-radius: 10px; /* 圆角边框 */
   padding: 5px; /* 内边距 */
   text-shadow: -1px -1px 0 #fff,  
@@ -68,12 +68,12 @@ flex:0 0 auto;
   cursor: pointer;
 }
 .options {
-
+  color: black;
   top: calc(100% + 10px);
   left: 0;
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  
+  border: 1px solid black;
   border-radius: 5px;
   display: none; /* 默认显示状态改为 display: block; */
 }
@@ -83,8 +83,11 @@ flex:0 0 auto;
 }
 
 .option {
+  border: 1px solid black ;
+  color: black;
   padding: 10px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  background-color: bisque;
 }
 
 .option:hover {
@@ -146,4 +149,32 @@ flex:0 0 auto;
 .swiper-pagination-bullet-active {
   background-color: #f00; /* 当前轮播图片对应的指示器颜色 */
 }
+.Login:hover,.register:hover{
+  background-color: rgb(39, 220, 205);
+  width:60px;
+  height: 30px;
+  cursor: pointer;
 
+
+}
+.Login{
+ background-color:#bbd74c; 
+ position: absolute;
+ margin-left: 1400px;
+ width:50px; 
+ margin-top: 0px;
+ border-radius:5px ;
+
+}
+
+.register{
+  background-color:#ffffff; 
+  position: absolute;
+  margin-left: 1460px; 
+  width:50px;
+  margin-top: 0px;
+  border-radius:5px ;
+}
+.buttons{
+  position: absolute;
+}

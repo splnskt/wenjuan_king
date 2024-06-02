@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <div class="navbar">
+        <div class="navItem" v-for="(Item, index) in navItems" :key="index" @click="Jump(index)">
+          {{ Item.text }}
+        </div>
+      </div>
+      <div class="rightnavbar">
+        <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" style="color: brown;">
+          Menu
+          
+          <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index" @mouseover="highlightOption(index)" @click="Jump(index)">
+            {{ option.text }}
+          </div>
+        </div>
+      </div>
     <div id="app">
         <h1>创建问卷</h1>
         <form @submit.prevent="submit">
@@ -56,8 +70,10 @@
 
     </div>
 
-    <script src="../js/surveyCreate.js"></script>
+    
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/surveyCreate.js"></script>
 </html>

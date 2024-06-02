@@ -15,7 +15,7 @@
   <div class="container">
     <div class="carousel-container">
       <h1 class="title">看看大家在问什么？</h1>
-      <div class="swiper-container"@click="GotoRecomandation">
+      <div class="swiper-container"@click="GotoRecomandation"><!-- 需要获取填写最多的三个问卷的标题-->
         <div class="swiper-wrapper" >
           <div class="swiper-slide"><img src="../wallhaven-1p18w3.jpg" alt="Slide 1"></div>
           <div class="swiper-slide"><img src="../wallhaven-xlp3zz.jpg" alt="Slide 2"></div>
@@ -35,12 +35,15 @@
         {{ Item.text }}
       </div>
     </div>
-  
+    <div class="buttons">
+      <button class="Login" ><a href="../pages/login.html">登录 </a></button>
+      <button class="register" ><a href="../pages/register.html">注册</a></button>
+    </div>
     <div class="rightnavbar">
-      <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" >
-        操作向导
+      <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" style="color: brown;">
+        Menu
         
-        <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index" @mouseover="highlightOption(index)" @click="Jump(index,$event)">
+        <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index" @mouseover="highlightOption(index)" @click="Jump(index)">
           {{ option.text }}
         </div>
       </div>
