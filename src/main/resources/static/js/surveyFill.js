@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
-                this.surveyData.data.questions.forEach(() => {
+                this.surveyData.data.questions.forEach((question) => {
                     this.answers.push({
                         qid: question.qid,
                         questionType: question.questionType,
@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         // 处理后端返回的响应
                         var getData = response.data;
-                        console.log('code:', data.code);
-                        console.log('msg:', data.msg);
+                        console.log('code:', getData.code);
+                        console.log('msg:', getData.msg);
 
                         //成功后跳转，首页
                         if(getData.code===0){
