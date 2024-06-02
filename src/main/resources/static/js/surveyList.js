@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             fillPaper(id) {
                 // 跳转到填写问卷页面，并传递问卷ID
-                window.location.href = 'surveyFill.html' + id;
+                window.location.href = '../pages/surveyFill.html/' + id;
               }
         },
         mounted() {
