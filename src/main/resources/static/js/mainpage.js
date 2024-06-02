@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded",function(event){
         data:{
             showOptions:false,
             options:[
-                {text:'我的问卷',link:'../pages/Mysurveys.html'},
+                {text:'问卷中心',link:'../pages/surveyList.html'},
                 {text:'创建问卷',link:'../pages/surveyCreate.html'},
                 {text:'数据统计',link:'../pages/DataAnalyze.html'},
                 {text:'个人中心',link:'../pages/Zone.html'},
