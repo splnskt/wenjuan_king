@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded",function(event){
         data:{
             showOptions:false,
             options:[
-                {text:'我的问卷',link:'../pages/mainpage.html'},
-                {text:'创建问卷',link:'../pages/mainpage.html'},
-                {text:'数据统计',link:'../pages/mainpage.html'},
-                {text:'个人中心',link:'../pages/mainpage.html'},
+                {text:'我的问卷',link:'../pages/Mysurveys.html'},
+                {text:'创建问卷',link:'../pages/surveyCreate.html'},
+                {text:'数据统计',link:'../pages/DataAnalyze.html'},
+                {text:'个人中心',link:'../pages/Zone.html'},
 
                 ]
 
@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded",function(event){
                 // 处理选项悬停时的特效
                 // 这里可以添加处理选项悬停时的特效的代码
               },
-              hideOptions() {
+            hideOptions() {
                 this.showOptions = false;
               },
         
-            jump(index)
+                Jump(index)
             {
               window.location.href=this.options[index].link;
               event.stopPropagation();
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded",function(event){
         el:'.swiper-container',
         methods:
         {
-            GotoRecomandation()
+            GotoRecomandation:function()
             {
                 window.location.href='../pages/login.html';
             }
@@ -90,10 +90,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     mySwiper.autoplay.start();
   });
 
+})
+
  
 
    
 
-});
 
 

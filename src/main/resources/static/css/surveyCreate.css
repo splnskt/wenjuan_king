@@ -1,18 +1,26 @@
 /* questionnaire.css */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    overflow: auto;
+
+  background-image: url(../Kirby_video_games_retro_games_simple_background_blue_background_minimalism_smoke_jet_fighter-2308856.jpg!d);
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+ 
+    
 }
 
 #app {
     max-width: 600px;
-    margin: 0 auto;
+    margin-top:100px;
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left:25%;
+    width:50%;
+    margin-right:25%;
 }
 
 h1 {
@@ -68,3 +76,98 @@ button + button {
     font-size: 14px;
     margin-top: 10px;
 }
+.navbar {
+    position: fixed;
+    top:0;
+    left:0%;
+    right:20%;
+    z-index: 1000;
+    max-width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* Set navbar background color */
+    margin:0 10px;
+    flex:1;
+    padding:5px;
+    color: orange;
+
+   
+  }
+  .navItem{
+    font-family:sans-serif;
+    font-size: 35px;
+    transition: all 0.3s ease;
+  
+  
+  }
+  .navItem:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 
+    -1px -1px 0 #000000,  
+    1px -1px 0 #040404,
+    -1px 1px 0 #000000,
+    1px 1px 0 #000000;
+    font-size: 50px;
+    cursor: pointer;
+  }
+  .personalZone{
+    
+  
+    max-width: 10%;
+    position:fixed;
+    font-size:30px;
+    top: 5px;
+    right: 5px;
+    transition: all 0.3s ease;
+    background-color: rgba(190, 238, 243, 0.902);
+    border: 3px solid black; /* 边框样式为实线，宽度为 2px，颜色为灰色 */
+    border-radius: 10px; /* 圆角边框 */
+    padding: 5px; /* 内边距 */
+    text-shadow: -1px -1px 0 #fff,  
+                  1px -1px 0 #fff,
+                 -1px  1px 0 #fff,
+                  1px  1px 0 #fff;
+   
+  }
+  .personalZone:hover{
+    cursor: pointer;
+  }
+  .options {
+    color: black;
+    top: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+    
+    border: 1px solid black;
+    border-radius: 5px;
+    display: none; /* 默认显示状态改为 display: block; */
+  }
+  
+  .options.hidden {
+    display: none; /* 当 showOptions 为 false 时隐藏选项 */
+  }
+  
+  .option {
+    border: 1px solid black ;
+    color: black;
+    padding: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    background-color: bisque;
+  }
+  
+  .option:hover {
+    transform: scale(1.1);
+    cursor:pointer;
+  }
+  .options.show {
+    display: block;
+  }
+  .rightnavbar{
+
+    margin-left:0px;
+    flex:0 0 auto;
+    
+      
+      
+    }
