@@ -4,6 +4,8 @@ package com.scut626.wenjuan_king.controller;
 import com.scut626.wenjuan_king.pojo.Answer;
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.pojo.User;
+import com.scut626.wenjuan_king.pojo.QuestionResult;
+import com.scut626.wenjuan_king.pojo.PaperResult;
 import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
 import com.scut626.wenjuan_king.service.AnswerService;
 import jakarta.servlet.http.HttpServletRequest;
