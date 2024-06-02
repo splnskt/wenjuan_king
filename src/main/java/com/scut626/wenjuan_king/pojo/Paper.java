@@ -20,6 +20,7 @@ public class Paper {
         this.startTime = paperView.getStartTime();
         this.endTime = paperView.getEndTime();
         this.createTime = paperView.getCreateTime();
+        this.accessCount = paperView.getAccessCount();
     }
 
     private Integer pid;
@@ -29,4 +30,5 @@ public class Paper {
     private LocalDateTime createTime;
     private LocalDate startTime;
     private LocalDate endTime;
+    private Integer accessCount;
 }

@@ -1,6 +1,7 @@
 package com.scut626.wenjuan_king.service.impl;
 
 // 导入必要的类和接口
+
 import com.scut626.wenjuan_king.mapper.AnswerMapper;
 import com.scut626.wenjuan_king.mapper.PaperMapper;
 import com.scut626.wenjuan_king.pojo.Answer;
@@ -46,7 +47,7 @@ public class AnswerServiceImpl implements AnswerService {
      * 执行提交问卷的业务逻辑
      *
      * @param answerPageView 传来的答卷数据
-     * @param uid 用户ID
+     * @param uid            用户ID
      * @return 返回提交结果，
      * 0: 提交成功
      * 1: 问卷ID不存在
@@ -71,13 +72,15 @@ public class AnswerServiceImpl implements AnswerService {
             for (AnswerView answerView : answerPageView.getAnswers()) {
                 // 创建Answer对象，并设置相关属性
                 Answer answer = new Answer(answerView);
-                answer.setPid(answerPageView.getPid());
+                answer.setPid(pid);
                 answer.setCreateTime(LocalDateTime.now());
                 answer.setUid(uid);
                 // 插入答案到数据库
                 answerMapper.insertAnswer(answer);
             }
         }
+        // 增加问卷访问次数
+        paperMapper.addPaperAccessCount(pid);
         // 提交成功，返回0
         return 0;
     }

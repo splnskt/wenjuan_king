@@ -24,6 +24,7 @@ public class UpdateViewPaper {
         this.startTime = paper.getStartTime();
         this.endTime = paper.getEndTime();
         this.createTime = paper.getCreateTime();
+        this.accessCount = paper.getAccessCount();
     }
     private Integer pid;
     private String title;
@@ -32,4 +33,5 @@ public class UpdateViewPaper {
     private LocalDate endTime;
     private LocalDateTime createTime;
     private List<UpdateViewQuestion> questions;
+    private Integer accessCount;
 }

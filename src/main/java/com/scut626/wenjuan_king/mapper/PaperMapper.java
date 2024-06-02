@@ -28,6 +28,9 @@ public interface PaperMapper {
 
     Long paperCount(String name, Integer page, Integer pageSize, Integer uid);
 
+    @Update("update paper set access_count=access_count+1 where pid = #{pid}")
+    void addPaperAccessCount(Integer pid);
+
 }
 
 
