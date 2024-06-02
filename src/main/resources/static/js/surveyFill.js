@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         el: '#app',
         data: {
             surveyData: null,
-            pid,
+            pid:'',
             answers: []
         },
         methods: {
