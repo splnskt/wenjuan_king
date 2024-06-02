@@ -75,12 +75,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         // 处理后端返回的响应
                         var getData = response.data;
-                        console.log('code:', data.code);
-                        console.log('msg:', data.msg);
-                        console.log('data:', data.data);
+                        console.log('code:', getData.code);
+                        console.log('msg:', getData.msg);
+                        console.log('data:', getData.data);
 
                         //成功后跳转，首页
                         if(getData.data===0){
+                            alert("创建成功！");
                         window.location.href = '../pages/mainpage.html';
                         }
                     })
