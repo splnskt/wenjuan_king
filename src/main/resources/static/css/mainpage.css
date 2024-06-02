@@ -1,0 +1,148 @@
+body{
+  overflow: auto;
+
+  background-image: url(../Touhou_Shameimaru_Aya_anime_girls_rear_view_clouds_birds_sitting_sky-2275422.jpg!d);
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+}
+.navbar {
+  position: fixed;
+  top:0;
+  left:10%;
+  right:20%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* Set navbar background color */
+  margin:0 10px;
+  flex:1;
+
+}
+.navItem{
+  font-size: 35px;
+  transition: all 0.3s ease;
+
+}
+.navItem:hover{
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 
+  -1px -1px 0 #fff,  
+  1px -1px 0 #fff,
+  -1px 1px 0 #fff,
+  1px 1px 0 #fff;
+  font-size: 50px;
+  cursor: pointer;
+}
+.logo
+{position: fixed;
+  top: 20px; /* 图片距离页面顶部的距离 */
+  left: 20px; /* 图片距离页面左侧的距离 */
+  z-index: 9999; /* 确保图片位于其他元素上方 */
+}
+.rightnavbar{
+margin-left: auto;
+flex:0 0 auto;
+
+  
+  
+}
+.personalZone{
+  position:relative;
+  font-size:30px;
+ 
+  transition: all 0.3s ease;
+  background-color: rgba(190, 238, 243, 0.902);
+  border: 5px solid #ffffff; /* 边框样式为实线，宽度为 2px，颜色为灰色 */
+  border-radius: 10px; /* 圆角边框 */
+  padding: 5px; /* 内边距 */
+  text-shadow: -1px -1px 0 #fff,  
+                1px -1px 0 #fff,
+               -1px  1px 0 #fff,
+                1px  1px 0 #fff;
+ 
+}
+.personalZone:hover{
+  cursor: pointer;
+}
+.options {
+
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: none; /* 默认显示状态改为 display: block; */
+}
+
+.options.hidden {
+  display: none; /* 当 showOptions 为 false 时隐藏选项 */
+}
+
+.option {
+  padding: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.option:hover {
+  transform: scale(1.1);
+  cursor:pointer;
+}
+.options.show {
+  display: block;
+}
+.container{
+  display:flex;
+  max-width: 100%;
+    margin: 0 auto;
+    
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* 根据需要调整最大宽度 */
+  margin-left:200px;
+  overflow: hidden;
+  margin-top: 250px; /* 根据需要调整轮播图与其他内容的间距 */
+}
+
+.swiper-container {
+  
+  width: 100%;
+  height: 400px; /* 根据需要调整轮播图高度 */
+}
+.swiper-container:hover{
+  cursor: pointer;
+}
+
+.swiper-slide img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-pagination {
+  position:absolute;
+  bottom:-20px;/* 调整指示器距离底部的位置 */
+  left: 20%;
+  transform: translateX(-50%);
+ 
+ 
+}
+
+.swiper-pagination-bullet {
+  width: 10px; /* 指示器的宽度 */
+  height: 10px; /* 指示器的高度 */
+  background-color: #fff; /* 指示器的背景颜色 */
+  border-radius: 50%; /* 圆形指示器 */
+  margin: 0 5px; /* 指示器之间的间距 */
+  cursor: pointer; /* 鼠标指针样式 */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #f00; /* 当前轮播图片对应的指示器颜色 */
+}
+
