@@ -27,8 +27,8 @@ public class Paper {
     private Integer uid;
     private String title;
     private Integer status;
+    private Integer accessCount;
     private LocalDateTime createTime;
     private LocalDate startTime;
     private LocalDate endTime;
-    private Integer accessCount;
 }
