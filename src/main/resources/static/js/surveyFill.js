@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         methods: {
             async fetchData() {
                 try {
-                    const response = await axios.get('/paper/view-paper?id=4askfj1093jfi9348oueir932', {
+                    const response = await axios.get('/paper/view-paper', {
                         params: {
                             pid: this.pid,
                         }
