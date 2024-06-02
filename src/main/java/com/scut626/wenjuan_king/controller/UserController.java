@@ -5,11 +5,14 @@ import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.pojo.User;
 import com.scut626.wenjuan_king.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @Slf4j // 自动生成日志记录器
 @RestController // 声明该类是一个 REST 控制器，返回 JSON 或 XML 响应
@@ -71,5 +74,12 @@ public class UserController {
 
         // 其他未知错误
         return Result.error("Unknown Error");
+    }
+    //退出登录
+    @RequestMapping("/user/logout")
+    public Result logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate();
+        resp.sendRedirect("/pages/login.html");
+        return Result.success();
     }
 }

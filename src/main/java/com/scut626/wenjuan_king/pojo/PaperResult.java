@@ -4,18 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class PaperResult {
-    private int pid;
+    private Integer pid;
     private String title;
-    private int status;
-    private long createTime;
-    private String startTime;
-    private String endTime;
-    private int totalCount;
+    private Integer status;
+    private LocalDateTime createTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
+    private Integer totalCount;
     private List<QuestionResult> questions;
 }

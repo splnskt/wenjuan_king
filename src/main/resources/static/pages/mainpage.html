@@ -4,22 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>问卷王—不止问卷之王</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/mainpage.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
 </head>
 
 <body>
-    <h1 class="title">问卷王</h1>
-
-    <div class="features">
-        <!-- 添加功能块 -->
-        <div class="feature" id="home">主页</div>
-        <div class="feature" id="tutorial">使用教程</div>
-        <div class="feature" id="create">创建问卷</div>
-        <div class="feature" id="myquestionary">我的问卷</div>
-        <div class="feature" id="viewSurvey">查看问卷</div>
+  
+   
+  <div class="container">
+    <div class="carousel-container">
+      <h1 class="title">看看大家在问什么？</h1>
+      <div class="swiper-container"@click="GotoRecomandation">
+        <div class="swiper-wrapper" >
+          <div class="swiper-slide"><img src="../wallhaven-1p18w3.jpg" alt="Slide 1"></div>
+          <div class="swiper-slide"><img src="../wallhaven-xlp3zz.jpg" alt="Slide 2"></div>
+          <div class="swiper-slide"><img src="../mengong.png" alt="Slide 3"></div>
+     
+        </div>
       </div>
+    </div>
+    <div class="swiper-pagination"></div> <!-- 指示器 -->
+  
+   
+     
+  
+  
+    <div class="navbar">
+      <div class="navItem" v-for="(Item, index) in navItems" :key="index" @click="Jump(index)">
+        {{ Item.text }}
+      </div>
+    </div>
+  
+    <div class="rightnavbar">
+      <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" >
+        操作向导
+        
+        <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index" @mouseover="highlightOption(index)" @click="Jump(index,$event)">
+          {{ option.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="../logo.png" class="logo" >
+  
+      
+  
 </body>
 <script src="../js/mainpage.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </html>
