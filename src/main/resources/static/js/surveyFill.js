@@ -22,13 +22,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     this.answers.push({
                         qid: question.qid,
                         questionType: question.questionType,
-                        answerContent: null
+                        answerContent: []
                     });
                 });
             },
-            electOption(index, option) {
+            selectOption(index, option) {
                 // 单选题只能选择一个选项，因此每次选择时，先清空答案数组中对应问题的选项
-                this.answers[index].answerContent = option;
+                this.answers[index].answerContent=[];
+                this.answers[index].answerContent.push(option);
             },
             toggleOption(index, option) {
                 // 多选题可以选择多个选项，因此需要判断当前选项是否已经存在于答案数组中
