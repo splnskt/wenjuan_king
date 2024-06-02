@@ -23,4 +23,5 @@ public interface QuestionMapper {
 
     @Select("select * from question where pid = #{pid}")
     List<Question> selectQuestionsByPid(Integer pid);
+
 }

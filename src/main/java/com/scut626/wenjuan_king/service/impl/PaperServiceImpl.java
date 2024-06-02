@@ -172,4 +172,9 @@ public class PaperServiceImpl implements PaperService {
         Long paperCount = paperMapper.paperCount(null, page, pageSize, uid);
         return new PaperPageView(paperCount, papers);
     }
+
+    @Override
+    public List<Question> getQuestionsByPid(Integer pid) {
+        return questionMapper.selectQuestionsByPid(pid);
+    }
 }
