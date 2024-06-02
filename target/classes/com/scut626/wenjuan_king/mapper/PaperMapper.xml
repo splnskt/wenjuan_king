@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut626.wenjuan_king.mapper.PaperMapper">
+    <select id="selectPaperList" resultType="com.scut626.wenjuan_king.pojo.Paper">
+        SELECT * from paper
+        WHERE true
+        <if test="name != null">
+            and title like concat('%',#{name},'%')
+        </if>
+        <if test="uid != null">
+            and uid = #{uid}
+        </if>
+#         根据填写次数排序
+        order by access_count desc
+        <if test="page != null and pageSize != null">
+            limit #{page}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="paperCount" resultType="java.lang.Long">
+        SELECT count(1) from paper
+        WHERE true
+            <if test="name != null">
+                and title like concat('%',#{name},'%')
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+        order by create_time desc
+    </select>
+</mapper>

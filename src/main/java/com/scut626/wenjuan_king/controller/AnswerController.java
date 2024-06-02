@@ -1,8 +1,15 @@
 package com.scut626.wenjuan_king.controller;
 
+// 引入必要的类
 import com.scut626.wenjuan_king.pojo.Answer;
 import com.scut626.wenjuan_king.pojo.Result;
+import com.scut626.wenjuan_king.pojo.User;
+import com.scut626.wenjuan_king.pojo.QuestionResult;
+import com.scut626.wenjuan_king.pojo.PaperResult;
+import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
 import com.scut626.wenjuan_king.service.AnswerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,52 +19,69 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
-@RestController
-@RequestMapping("/answer")
+@Slf4j // 生成日志记录器的注解
+@RestController // 表示这是一个控制器，并且所有方法都返回一个 JSON 或 XML 响应
+@RequestMapping("/answer") // 指定基础 URL 路径
 public class AnswerController {
 
-    @Autowired
+    @Autowired // 自动注入 AnswerService 实例
     private AnswerService answerService;
 
-    @PostMapping("/paper-data")
-    public Result getPaperData(@RequestBody Map<String, Integer> request) {
-        int pid = request.get("pid");
-
-        // 输出日志
-        log.info("正在获取问卷数据，问卷ID：" + pid);
-
-        try {
-            List<Answer> answers = answerService.getAnswersByPid(pid);
-            Map<Integer, List<Answer>> groupedAnswers = answerService.groupAnswersByQuestion(answers);
-
-            // 构建返回数据结构
-            Map<String, Object> data = new HashMap<>();
-            data.put("pid", pid);
-            data.put("title", "Mock Title");  // 这里应该替换成实际的问卷标题
-            data.put("status", 1);  // 这里应该替换成实际的问卷状态
-            data.put("createTime", System.currentTimeMillis());  // 这里应该替换成实际的问卷创建时间
-            data.put("startTime", "2023-01-01");  // 这里应该替换成实际的问卷开始时间
-            data.put("endTime", "2023-12-31");  // 这里应该替换成实际的问卷结束时间
-            data.put("totalCount", answers.size());
-
-            List<Map<String, Object>> questions = groupedAnswers.entrySet().stream().map(entry -> {
-                Map<String, Object> questionData = new HashMap<>();
-                questionData.put("qid", entry.getKey());
-                questionData.put("questionType", entry.getValue().get(0).getQuestionType());
-                questionData.put("questionTitle", "Mock Question Title");  // 这里应该替换成实际的问题标题
-                questionData.put("questionOption", List.of("Option1", "Option2"));  // 这里应该替换成实际的选项
-                questionData.put("answerContent", entry.getValue().stream().map(Answer::getAnswerContent).collect(Collectors.toList()));
-                return questionData;
-            }).collect(Collectors.toList());
-
-            data.put("questions", questions);
-
-            // 返回成功结果
-            return Result.success(data);
-        } catch (Exception e) {
-            log.error("获取问卷数据失败，问卷ID：" + pid, e);
-            return Result.error("Failed to retrieve paper data");
+    /**
+     * 处理填写问卷的请求
+     * @param answerPageView    接受的前端传来的json串信息
+     * @return                  返回一个表示执行是否成功的结果
+     */
+    @PostMapping("/commit-paper")
+    public Result commitPaper(@RequestBody AnswerPageView answerPageView, HttpServletRequest req)
+    {
+        log.info("正在提交问卷:{}的答案...", answerPageView.getPid());
+        //获取session中的uid
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+        {
+            return Result.error("no login");
+        }
+        int uid = user.getUid();
+        int flag = answerService.commitPaper(answerPageView, uid);
+        if(flag == 0){
+            //提交成功
+            return Result.success();
+        }
+        else if(flag == 1){
+            //问卷不存在
+            return Result.error("no such paper");
+        }
+        else{
+            //其他错误
+            return Result.error("unknown error");
         }
     }
+
+//    @PostMapping("/paper-data") // 指定处理 POST 请求的 URL 路径
+//    public Result getPaperData(int pid) {
+//
+//
+//        // 输出日志
+//        log.info("正在获取问卷数据，问卷ID：" + pid);
+//
+//        try {
+//            // 通过问卷 ID 获取所有答案
+//            List<Answer> answers = answerService.getAnswersByPid(pid);
+//            // 将答案按问题 ID 分组
+//            Map<Integer, List<Answer>> groupedAnswers = answerService.groupAnswersByQuestion(answers);
+//
+//
+//
+//            // 返回成功结果
+//            return Result.success(data);
+//        } catch (Exception e) {
+//            // 输出错误日志
+//            log.error("获取问卷数据失败，问卷ID：" + pid, e);
+//            // 返回错误结果
+//            return Result.error("Failed to retrieve paper data");
+//
+//        }
+//    }
 }

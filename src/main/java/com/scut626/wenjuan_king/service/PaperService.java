@@ -1,6 +1,7 @@
 package com.scut626.wenjuan_king.service;
 
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 
 import java.util.List;
@@ -19,12 +20,40 @@ public interface PaperService {
     /**
      * 增加一个新问卷
      * @param paperUpdateInfo 传入的问卷信息
+     * @param uid 用户ID
      */
-    void insertPaper(UpdateViewPaper paperUpdateInfo);
+    void insertPaper(UpdateViewPaper paperUpdateInfo, Integer uid);
 
+    /**
+     * 查看问卷
+     * @param pid 问卷ID
+     * @return 返回问卷详细信息，如果没找到问卷则返回null
+     */
     UpdateViewPaper viewPaper(Integer pid);
 
-    void updatePaper(UpdateViewPaper paperUpdateInfo);
+    /**
+     * 更新问卷
+     * @param paperUpdateInfo 传入的问卷信息
+     * @param uid 用户ID
+     */
+    void updatePaper(UpdateViewPaper paperUpdateInfo, Integer uid);
 
-    List<Paper> getPaperList(String name, Integer page, Integer pageSize);
+    /**
+     * 查询问卷列表
+     * @param name 根据名字查询
+     * @param page 第几页
+     * @param pageSize 每页问卷数量
+     * @return 返回问卷列表的分页视图
+     */
+    PaperPageView getPaperList(String name, Integer page, Integer pageSize);
+
+    /**
+     * 查询用户的问卷列表
+     * @param uid 用户ID
+     * @param page 第几页
+     * @param pageSize 每页问卷数量
+     * @return 返回用户问卷列表的分页视图
+     */
+    PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize);
 }
+

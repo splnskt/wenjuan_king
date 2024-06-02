@@ -29,7 +29,7 @@
                 <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
                 <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
                 <div v-for="(question, index) in surveyData.data.questions" :key="index">
-                    <h3><span>问题{{index+1}}</span>{{question.questionTitle}}</h3>
+                    <h3><span>问题{{index+1}}: </span>{{question.questionTitle}}</h3>
                     <span v-if="question.questionType==1">(单选)</span>
                     <span v-if="question.questionType==2">(多选)</span>
                     <span v-if="question.questionType==3">(填空)</span>

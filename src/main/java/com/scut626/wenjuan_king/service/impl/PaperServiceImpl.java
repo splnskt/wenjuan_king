@@ -1,10 +1,12 @@
 package com.scut626.wenjuan_king.service.impl;
 
+// 导入必要的类和接口
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scut626.wenjuan_king.mapper.PaperMapper;
 import com.scut626.wenjuan_king.mapper.QuestionMapper;
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import com.scut626.wenjuan_king.pojo.Question;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewQuestion;
@@ -16,9 +18,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+// 这是一个服务类，实现了PaperService接口
 @Service
 public class PaperServiceImpl implements PaperService {
 
+    // 使用构造函数注入PaperMapper
     private final PaperMapper paperMapper;
 
     @Autowired
@@ -26,10 +30,13 @@ public class PaperServiceImpl implements PaperService {
         this.paperMapper = paperMapper;
     }
 
+    // 自动注入QuestionMapper
     @Autowired
     private QuestionMapper questionMapper;
 
-
+    /**
+     * 删除一个问卷
+     */
     @Override
     public int deletePapers(List<Integer> pidList) {
         if (pidList == null || pidList.isEmpty()) {
@@ -58,90 +65,111 @@ public class PaperServiceImpl implements PaperService {
      * @param paperUpdateInfo 传入的问卷信息
      */
     @Override
-    public void insertPaper(UpdateViewPaper paperUpdateInfo){
-        //在数据库中插入问卷
-        // 获取到问卷信息
+    public void insertPaper(UpdateViewPaper paperUpdateInfo, Integer uid){
+        // 创建新的问卷对象并设置相关属性
         Paper paper = new Paper();
         paper.setTitle(paperUpdateInfo.getTitle());
         paper.setStatus(paperUpdateInfo.getStatus());
         paper.setStartTime(paperUpdateInfo.getStartTime());
         paper.setEndTime(paperUpdateInfo.getEndTime());
-        //设置问卷的创建时间
-        paper.setCreateTime(LocalDateTime.now());
-        //设置问卷的创建用户
-            //还没写
-        int uid = 15;
-        paper.setUid(uid);
-        //存入数据库
-        paperMapper.insertPaper(paper);
-        //获取插入的问卷的id
+        paper.setCreateTime(LocalDateTime.now()); // 设置问卷创建时间
+        paper.setUid(uid); // 设置问卷创建用户
+        paperMapper.insertPaper(paper); // 存入数据库
+
+        // 获取新插入的问卷的ID
         int pid = paper.getPid();
-        //在数据库中插入所有的问题
-        //获取所有的问题
+
+        // 遍历所有问题并插入到数据库
         for (UpdateViewQuestion questionView : paperUpdateInfo.getQuestions()) {
-            Question q = new Question(questionView);/*
-            //将questionView中的信息传入q
-            q.setQuestionType(questionView.getQuestionType());
-            q.setQuestionTitle(questionView.getQuestionTitle());
-            //将选项集合转为json字符串存入q
-            ObjectMapper objectMapper = new ObjectMapper();
-            String optionsJson = "";
-            try {
-                optionsJson = objectMapper.writeValueAsString(questionView.getQuestionOption());
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-            q.setQuestionOption(optionsJson);*/
-            //设置问题对应的问卷id以及创建时间
+            Question q = new Question(questionView);
             q.setPid(pid);
             q.setCreateTime(LocalDateTime.now());
-            //插入问题数据
             questionMapper.insertQuestion(q);
         }
     }
+
+    /**
+     * 更新问卷
+     * @param paperUpdateInfo 传入的问卷信息
+     * @param uid 用户ID
+     */
     @Override
-    public void updatePaper(UpdateViewPaper paperUpdateInfo) {
-        //获取要修改的问卷id
+    public void updatePaper(UpdateViewPaper paperUpdateInfo, Integer uid) {
+        // 获取要修改的问卷ID
         Integer pid = paperUpdateInfo.getPid();
         List<Integer> ids = new ArrayList<>();
         ids.add(pid);
 
-        //删除原先的问卷
+        // 删除原先的问卷
         deletePapers(ids);
-        //新增一个新的问卷
-        insertPaper(paperUpdateInfo);
-    }
 
-    @Override
-    public List<Paper> getPaperList(String name, Integer page, Integer pageSize) {
-        return null;
+        // 新增一个新的问卷
+        insertPaper(paperUpdateInfo, uid);
     }
 
     /**
      * 查看问卷
-     * @param pid
+     * @param pid 问卷ID
      * @return 问卷信息，如果没找到问卷则返回null
      */
     @Override
     public UpdateViewPaper viewPaper(Integer pid) {
-        //根据pid找到问卷
+        // 根据问卷ID查找问卷
         List<Paper> papersByPid = paperMapper.selectPapersByPid(pid);
-        if(papersByPid == null || papersByPid.isEmpty())
-        {
-            //没找到该id
+        if (papersByPid == null || papersByPid.isEmpty()) {
+            // 如果没有找到对应的问卷ID
             return null;
         }
+
         UpdateViewPaper paperView = new UpdateViewPaper(papersByPid.get(0));
-        //根据pid找到问题
+        // 根据问卷ID查找问题
         List<Question> questionsByPid = questionMapper.selectQuestionsByPid(pid);
         List<UpdateViewQuestion> questionViews = new ArrayList<>();
+
+        // 把问题封装进view对象
         for (Question question : questionsByPid) {
-            //把问题封装进view
             UpdateViewQuestion questionView = new UpdateViewQuestion(question);
             questionViews.add(questionView);
         }
+
         paperView.setQuestions(questionViews);
         return paperView;
     }
 
+    /**
+     * 查询问卷列表
+     * @param name 根据名字查询
+     * @param page 第几页
+     * @param pageSize 一页有多少问卷
+     * @return 返回问卷列表
+     */
+    @Override
+    public PaperPageView getPaperList(String name, Integer page, Integer pageSize) {
+        if (page != null) {
+            page = (page - 1) * pageSize;
+        }
+
+        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize, null);
+        Long paperCount = paperMapper.paperCount(name, page, pageSize, null);
+        PaperPageView pageView = new PaperPageView(paperCount, papers);
+        return pageView;
+    }
+
+    /**
+     * 查询用户的问卷列表
+     * @param uid 用户ID
+     * @param page 第几页
+     * @param pageSize 一页有多少问卷
+     * @return 返回问卷列表
+     */
+    @Override
+    public PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize) {
+        if (page != null) {
+            page = (page - 1) * pageSize;
+        }
+
+        List<Paper> papers = paperMapper.selectPaperList(null, page, pageSize, uid);
+        Long paperCount = paperMapper.paperCount(null, page, pageSize, uid);
+        return new PaperPageView(paperCount, papers);
+    }
 }
