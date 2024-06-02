@@ -75,12 +75,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         // 处理后端返回的响应
                         var getData = response.data;
-                        console.log('code:', data.code);
-                        console.log('msg:', data.msg);
-                        console.log('data:', data.data);
+                        console.log('code:', getData.code);
+                        console.log('msg:', getData.msg);
+                        console.log('data:', getData.data);
 
                         //成功后跳转，首页
                         if(getData.data===0){
+                            alert("创建成功！");
                         window.location.href = '../pages/mainpage.html';
                         }
                     })
@@ -92,3 +93,60 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
 });
+document.addEventListener("DOMContentLoaded",function(event){
+    var Items = new Vue({
+        el:'.navbar',
+        data:{
+            navItems:[
+                {id:1,text:'主页',link:'../pages/mainpage.html'},
+                {id:2,text:'联系我们',link:'../pages/contact.html'},
+                {id:3,text:'使用说明',link:'../pages/help.html'},
+                ]
+
+        },
+        methods:
+        {
+         Jump(index)
+         {
+            window.location.href=this.navItems[index].link;
+         }
+
+
+
+        }
+
+    });
+})
+document.addEventListener("DOMContentLoaded",function(event){
+    var options = new Vue({
+        el:'.personalZone',
+        data:{
+            showOptions:false,
+            options:[
+                {text:'我的问卷',link:'../pages/Mysurveys.html'},
+               
+                {text:'数据统计',link:'../pages/DataAnalyze.html'},
+                {text:'个人中心',link:'../pages/Zone.html'},
+
+                ]
+
+        },
+        methods:
+        {
+            highlightOption(index) {
+                // 处理选项悬停时的特效
+                // 这里可以添加处理选项悬停时的特效的代码
+              },
+            hideOptions() {
+                this.showOptions = false;
+              },
+        
+                Jump(index)
+            {
+              window.location.href=this.options[index].link;
+              event.stopPropagation();
+            }
+        }
+
+    });
+})

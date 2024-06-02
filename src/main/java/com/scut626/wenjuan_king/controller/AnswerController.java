@@ -66,12 +66,6 @@ public class AnswerController {
     @PostMapping("/paper-data") // 指定处理 POST 请求的 URL 路径
     public Result getPaperData(Integer pid, HttpServletRequest req) {
         log.info("正在查看问卷:{}的数据...", pid);
-        //获取session中的uid
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return Result.error("no login");
-        }
 
         try {
             PaperResult data = new PaperResult();

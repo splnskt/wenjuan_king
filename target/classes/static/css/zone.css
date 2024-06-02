@@ -1,0 +1,86 @@
+body{
+    height: 100%;
+    position: relative;
+    width:100%;
+    margin:0;
+    
+
+    
+}
+.user
+{  background-color: brown;
+   display: flex;
+   margin:10px;
+   justify-content: space-around;
+
+
+}
+.menu
+{   position: relative;
+   
+    width:260px;
+    top:0;
+    bottom: 0;
+    left:0;
+    height: 70vh;
+ 
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-size:25px;
+    background: url(../cartoon_artwork-2247396.jpg!d);
+    overflow: hidden;
+    background-size: cover;
+
+   
+
+}
+.menu > * {
+    /* 间距大小 */
+    flex: 0 0 auto; /* 确保每个子块都占据一行 */
+    padding:20px; /* 文字与块的间距 */
+    border:5px solid silver;
+    transition: 0.3s ease-in-out;
+}
+.menu > *:hover {
+    /* 间距大小 */
+    font-size:30px ;
+}
+.mysurveys{
+    background-color: bisque;
+}
+.dataAnalyze{
+    background-color: aquamarine;
+
+}
+.personal{
+    background-color: azure;
+
+}
+.finish{
+   
+    text-align: left;
+    margin-top: 50px;
+
+}
+.read
+{
+    
+    text-align: left;
+}
+.waiting
+{
+    
+    text-align: left;
+}
+.pagename{
+    width: 5%;
+    height: 3%;
+    background-color: rgb(200, 200, 221);
+    position: absolute;
+    top:0;
+    left:15%;
+    text-align: center;
+    padding:5px;
+}
