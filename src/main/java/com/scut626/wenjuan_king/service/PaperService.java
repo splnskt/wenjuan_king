@@ -1,6 +1,7 @@
 package com.scut626.wenjuan_king.service;
 
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.Question;
 import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 
@@ -55,5 +56,12 @@ public interface PaperService {
      * @return 返回用户问卷列表的分页视图
      */
     PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize);
+
+    /**
+     * 由问卷id查询问题
+     * @param pid paperID
+     * @return 返回用户问卷列表的分页视图
+     */
+    List<Question> getQuestionsByPid(Integer pid);
 }
 

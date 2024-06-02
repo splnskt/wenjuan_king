@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查看问卷</title>
-    <link rel="stylesheet" href="../css/surveyDisplay.css">
+    <title>填写问卷</title>
+    <link rel="stylesheet" href="../css/surveyFill.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 
@@ -22,9 +22,8 @@
         </nav>
     </header>
     <div id="app">
-        <main>
-            <div v-if="surveyData">
-                <h1>{{ surveyData.data.title }}</h1>
+        <div v-if="surveyData">
+            <h1>{{ surveyData.data.title }}</h1>
                 <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
                 <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
                 <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
@@ -34,27 +33,30 @@
                     <span v-if="question.questionType==2">(多选)</span>
                     <span v-if="question.questionType==3">(填空)</span>
                     <ul v-if="question.questionType==1||question.questionType==2">
-                        <li v-for="(option, optionIndex) in question.questionOption" :key="index">
-                            <h4><span>选项{{optionIndex+1}}: </span>{{option}}</h4>
+                        <li v-for="(option, optionIndex) in question.questionOption" :key="optionIndex">
+                            <label v-if="question.questionType==1">
+                                <input type="radio" 
+                                       :name="'选项'+index" 
+                                       :value="option"
+                                       @change="selectOption(index, option)">
+                                {{option}}
+                            </label>
+                            <label v-if="question.questionType==2">
+                                <input type="checkbox" 
+                                       :name="'选项'+index" 
+                                       :value="option"
+                                       @change="toggleOption(index, option)">
+                                {{option}}
+                            </label>
                         </li>
                     </ul>
+                    <input v-if="question.questionType==3" type="text" @input="updateAnswer(index, $event.target.value)">
                 </div>
-
-            </div>
-            <div>
-                <!-- <form @submit.prevent="view"> -->
-                <input type="text" v-model="pid" required>
-                <p>点击以查看问卷</p>
-                <button @click="view">查看问卷</button>
-                <!-- </form> -->
-            </div>
-        </main>
-        <!-- 脚标 -->
-        <!-- <footer>
-            <p>&copy; 2024 查看问卷</p>
-        </footer> -->
+                <br><br>
+                <button @click="submit">提交答案</button>
+        </div>
     </div>
-    <script src="../js/surveyDisplay.js"></script>
+    <script src="../js/surveyFill.js"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

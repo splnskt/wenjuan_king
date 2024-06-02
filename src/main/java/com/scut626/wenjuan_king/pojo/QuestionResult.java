@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class QuestionResult {
-    private int qid;
-    private int questionType;
+    private Integer qid;
+    private Integer questionType;
     private String questionTitle;
     private List<String> questionOption;
     private List<Object> answerContent;
