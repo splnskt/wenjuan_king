@@ -50,7 +50,7 @@
                             </label>
                         </li>
                     </ul>
-                    <input v-if="question.questionType==3" type="text" v-model="answers[index].answerContent">
+                    <input v-if="question.questionType==3" type="text" @input="updateAnswer(index, $event.target.value)">
                 </div>
                 <br><br>
                 <button @click="submit">提交答案</button>

@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     this.answers[index].answerContent.push(option);
                 }
             },
+            updateAnswer(index, value) {
+                this.answers[index].answerContent = [value]; // 将输入的字符串转换为单元素数组存储
+            },
             submit() {
                 var formData={
                     pid:this.pid,
