@@ -32,6 +32,6 @@ public class UpdateViewPaper {
     private LocalDate startTime;
     private LocalDate endTime;
     private LocalDateTime createTime;
-    private List<UpdateViewQuestion> questions;
     private Integer accessCount;
+    private List<UpdateViewQuestion> questions;
 }
