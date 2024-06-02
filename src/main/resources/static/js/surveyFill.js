@@ -7,16 +7,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             answers: []
         },
         methods: {
-            addAnswer() {
-            },
-            mounted() {
-                const urlParams = new URLSearchParams(window.location.search);
-                this.pid = urlParams.get('id');
-                if (!this.pid) {
-                    console.error('未提供问卷ID');
-                }
-                this.fetchData();
-            },
             async fetchData() {
                 try {
                     const response = await axios.get('/paper/view-paper?id=4askfj1093jfi9348oueir932', {
@@ -75,6 +65,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.error('Error:', error);
                     });
             }
+        },
+        mounted() {
+            const urlParams = new URLSearchParams(window.location.search);
+            this.pid = urlParams.get('pid');
+            if (!this.pid) {
+                console.error('未提供问卷ID');
+            }
+            this.fetchData();
         }
     })
 });
