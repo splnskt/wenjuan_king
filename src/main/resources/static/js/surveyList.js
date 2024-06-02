@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     this.currentPage++;
                     this.fetchData(this.currentPage);
                 }
-            }
+            },
+            fillPaper(id) {
+                // 跳转到填写问卷页面，并传递问卷ID
+                window.location.href = 'surveyFill.html' + id;
+              }
         },
         mounted() {
             this.fetchData(this.currentPage);
         },
-        fillPaper(id) {
-            // 跳转到填写问卷页面，并传递问卷ID
-            window.location.href = 'surveyFill.html' + id;
-          }
     });
 });
