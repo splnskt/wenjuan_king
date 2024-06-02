@@ -36,7 +36,8 @@ body{
   cursor: pointer;
 }
 .logo
-{position: fixed;
+{max-width: 250px;
+  position: fixed;
   top: 20px; /* 图片距离页面顶部的距离 */
   left: 20px; /* 图片距离页面左侧的距离 */
   z-index: 9999; /* 确保图片位于其他元素上方 */
