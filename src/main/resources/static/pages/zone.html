@@ -52,9 +52,9 @@
         <div class="pagename" v-if="currentComponent">
             <h2>页面内容</h2>
             <!-- 显示我的问卷列表 -->
-            <button @click="changeBatch">批量管理</button>
-            <button @click="deletePapers" v-if="batchProcessing">删除</button>
             <div class="content" v-if="currentComponent === 'myPapers'">
+                <button @click="changeBatch">批量管理</button>
+                <button @click="deletePapers" v-if="batchProcessing">删除</button>
                 <ul>
                     <div v-for="paper in papers" :key="paper.pid">
                         <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
