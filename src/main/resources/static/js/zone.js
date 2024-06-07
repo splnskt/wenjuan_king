@@ -36,6 +36,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 this.fetchMyPapers(this.currentPage);
                 this.currentComponent='myPapers';
             },
+            prevPage() {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.fetchData(this.currentPage);
+                }
+            },
+            nextPage() {
+                if (this.currentPage < this.totalPages) {
+                    this.currentPage++;
+                    this.fetchData(this.currentPage);
+                }
+            },
             fillPaper(pid) {
                 // 跳转到填写问卷页面，并传递问卷ID
                 window.location.href = '../pages/surveyFill.html?pid=' + pid;
