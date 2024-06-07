@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             prevPage() {
                 if (this.currentPage > 1) {
                     this.currentPage--;
-                    this.fetchData(this.currentPage);
+                    this.fetchMyPapers(this.currentPage);
                 }
             },
             nextPage() {
                 if (this.currentPage < this.totalPages) {
                     this.currentPage++;
-                    this.fetchData(this.currentPage);
+                    this.fetchMyPapers(this.currentPage);
                 }
             },
             fillPaper(pid) {
