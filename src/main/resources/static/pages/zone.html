@@ -52,12 +52,16 @@
         <div class="pagename" v-if="currentComponent">
             <h2>页面内容</h2>
             <!-- 显示我的问卷列表 -->
+            <button @click="changeBatch">批量管理</button>
+            <button @click="deletePapers" v-if="batchProcessing">删除</button>
             <div class="content" v-if="currentComponent === 'myPapers'">
                 <ul>
                     <div v-for="paper in papers" :key="paper.pid">
+                        <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
+                        <!-- 可能显示别的信息,例如创建时间 -->
                         <li>{{paper.title}}</li>
-                        <button @click="fillPaper(paper.pid)">填写</button>
-                        <button @click="modifyPaper(paper.pid)">修改</button>
+                        <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
+                        <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
                     </div>
                 </ul>
                 <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
