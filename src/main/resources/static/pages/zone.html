@@ -1,52 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人中心</title>
-    <link rel="stylesheet" href="../css/zone.css">
+    <link rel="stylesheet" href="../css/test.css">
 </head>
+
 <body>
-    <div class="menu">
-           <div class="user">
-               <div class="nickname">昵称
+    <div id="app">
+        <div class="menu">
+            <div class="user">
+                <div class="nickname">昵称
 
-               </div>
-               <div class="head">头像
-
-
-               </div>
+                </div>
+                <div class="head">头像
 
 
-
-
-           </div>
-           <div class="mysurveys">我的问卷
-
-           </div>
-           <div class="dataAnalyze">统计信息
-
-           </div>
-
-           <div class="personal">个人资料
-
-           </div>
-
-           <div class="finish">发布数:
-
-           </div>
-           <div class="read">填写数:
-
-           </div>
-           <div class="waiting">待发布:
-
-           </div>
+                </div>
 
 
 
+
+            </div>
+            <div class="mySurveys">我的问卷
+                <button @click="showPapers">我的问卷</button>
+            </div>
+            <div class="dataAnalyze">统计信息
+                <button @click="showOthers">其他选项</button>
+            </div>
+
+            <div class="personal">个人资料
+
+            </div>
+
+            <div class="finish">发布数:
+
+            </div>
+            <div class="read">填写数:
+
+            </div>
+            <div class="waiting">待发布:
+
+            </div>
+
+
+
+        </div>
+
+        <div class="pagename" v-if="currentComponent">
+            <h2>页面内容</h2>
+            <!-- 显示我的问卷列表 -->
+            <div class="content" v-if="currentComponent === 'myPapers'">
+                <ul>
+                    <div v-for="paper in papers" :key="paper.pid">
+                        <li>{{paper.title}}</li>
+                        <button @click="fillPaper(paper.pid)">填写</button>
+                        <button @click="modifyPaper(paper.pid)">修改</button>
+                    </div>
+                </ul>
+                <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+                <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+            </div>
+
+            <div class="content" v-else-if="currentComponent === 'others'">
+                <h1>其他内容</h1>
+            </div>
+        </div>
     </div>
-    <div class="pagename">pagename
-
-    </div>
+    
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/zone.js"></script>
+
 </html>
