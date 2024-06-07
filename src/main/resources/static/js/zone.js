@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var app = new Vue({
         el: '#app',
         data: {
-            currentComponent: '', //未设置默认界面
+            currentComponent: '', //当前选择的模块,未设置默认界面
             papers:[],
             currentPage: 1,
             totalPages: 1,

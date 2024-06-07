@@ -64,12 +64,13 @@
                 <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
             </div>
 
+            <!-- 显示其他内容，后续其他功能 -->
             <div class="content" v-else-if="currentComponent === 'others'">
                 <h1>其他内容</h1>
             </div>
         </div>
     </div>
-    
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
