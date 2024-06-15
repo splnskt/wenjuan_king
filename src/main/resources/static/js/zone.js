@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 axios.post('/paper/delete-paper', formData)
                     .then(response => {
                         console.log(response.data);
-                        if (response.data.data === 0) {
+                        if (response.data.code === 0) {
                             alert('删除成功！');
                             // 清空选中的问卷数组
                             this.pidList = [];
