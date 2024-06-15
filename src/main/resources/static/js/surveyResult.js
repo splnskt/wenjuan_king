@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data: {
             surveyData: null,
             //id暂未获取
-            pid: ''
+            pid: '',
+       
         },
         methods: {
             fetchData() {
@@ -15,15 +16,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.log(response.data);
                         this.surveyData = response.data;
                         this.surveyData.data.questions.forEach(question => {
-                            question.isShowAnswers = false;  // 初始设置为未展开状态
+                            question.append('isShow',false); // 初始设置为未展开状态
                         });
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
                     });
             },
-            showAnswers(question) {
-                question.isShowAnswers = !question.isShowAnswers;
+            show(question) {
+                question.isShow = !question.isShow;
             },
         },
         mounted() {

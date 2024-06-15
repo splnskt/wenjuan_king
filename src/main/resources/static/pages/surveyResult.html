@@ -48,10 +48,10 @@
                     </li>
                 </ul>
                 <!-- 对于填空题，点击按钮展开显示所有填写的答案 -->
-                <button @click="showAnswers(question)" v-if="question.questionType==3">
-                    {{ question.isShowAnswers ? '收起答案' : '显示答案' }}
+                <button @click="show(question)" v-if="question.questionType==3">
+                    {{ question.isShow ? '收起答案' : '显示答案' }}
                 </button>
-                <ul v-if="question.questionType === 3 && question.isShowAnswers">
+                <ul v-if="question.questionType === 3 && question.isShow">
                     <li v-for="(answer, answerIndex) in question.answerContent" :key="answerIndex">
                         {{ answer }}
                     </li>
@@ -61,6 +61,8 @@
             <br><br>
             
         </div>
+
+
     </div>
     <script src="../js/surveyResult.js"></script>
 </body>
