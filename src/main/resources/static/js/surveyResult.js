@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.log(response.data);
                         this.surveyData = response.data;
                         this.surveyData.data.questions.forEach(question => {
-                            question.append('isShow',false); // 初始设置为未展开状态
+                            question.isShow = false; // 初始设置为未展开状态
                         });
                     })
                     .catch(error => {
