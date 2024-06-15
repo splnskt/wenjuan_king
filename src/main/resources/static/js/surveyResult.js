@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         methods: {
             fetchData() {
                 var pid = this.pid;
-                axios.post('/answer/paper-data', pid)
+                axios.post('/answer/paper-data', this.pid)
                     .then(response => {
                         console.log(response.data);
                         this.surveyData = response.data;
