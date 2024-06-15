@@ -7,22 +7,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
             pid: ''
         },
         methods: {
-            getPid() {
-                return this.pid;
-            },
-            view() {
-                var formData=new FormData();
-                formData.append('pid', this.pid);
-                console.log('问卷id:', this.pid);
-
-                axios.post("/paper/view-paper", formData)
-                    .then(response => {
-                        this.surveyData = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching questionnaire:', error);
+            async fetchData() {
+                try {
+                    const response = await axios.get('模版地址', {
+                        params: {
+                            pid: this.pid,
+                        }
                     });
+                    this.surveyData = response.data;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            },
+            use(pid){
+                window.location.href = '../pages/surveyModify.html?pid=' + pid;
+            },
+        },
+        mounted(){
+            const urlParams = new URLSearchParams(window.location.search);
+            this.pid = urlParams.get('pid');
+            if (!this.pid) {
+                console.error('未提供问卷ID');
             }
+            this.fetchData();
         }
     })
 });

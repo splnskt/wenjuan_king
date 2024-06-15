@@ -22,37 +22,36 @@
         </nav>
     </header>
     <div id="app">
-        <main>
-            <div v-if="surveyData">
-                <h1>{{ surveyData.data.title }}</h1>
-                <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
-                <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
-                <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
-                <div v-for="(question, index) in surveyData.data.questions" :key="index">
-                    <h3><span>问题{{index+1}}: </span>{{question.questionTitle}}</h3>
-                    <span v-if="question.questionType==1">(单选)</span>
-                    <span v-if="question.questionType==2">(多选)</span>
-                    <span v-if="question.questionType==3">(填空)</span>
-                    <ul v-if="question.questionType==1||question.questionType==2">
-                        <li v-for="(option, optionIndex) in question.questionOption" :key="index">
-                            <h4><span>选项{{optionIndex+1}}: </span>{{option}}</h4>
-                        </li>
-                    </ul>
-                </div>
-
+        <div v-if="surveyData">
+            <h1>{{ surveyData.data.title }}</h1>
+            <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
+            <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
+            <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
+            <div v-for="(question, index) in surveyData.data.questions" :key="index">
+                <h3><span>问题{{index+1}}: </span>{{question.questionTitle}}</h3>
+                <span v-if="question.questionType==1">(单选)</span>
+                <span v-if="question.questionType==2">(多选)</span>
+                <span v-if="question.questionType==3">(填空)</span>
+                <ul v-if="question.questionType==1||question.questionType==2">
+                    <li v-for="(option, optionIndex) in question.questionOption" :key="optionIndex">
+                        <label v-if="question.questionType==1">
+                            <!-- 不需要输入 -->
+                            <input type="radio" :name="'选项'+index" :value="option" disabled="disabled">
+                            {{option}}
+                        </label>
+                        <label v-if="question.questionType==2">
+                            <!-- 不需要输入 -->
+                            <input type="checkbox" :name="'选项'+index" :value="option" disabled="disabled">
+                            {{option}}
+                        </label>
+                    </li>
+                </ul>
+                <!-- 不需要输入 -->
+                <input v-if="question.questionType==3" type="text" value="在此输入答案" disabled="disabled">
             </div>
-            <div>
-                <!-- <form @submit.prevent="view"> -->
-                <input type="text" v-model="pid" required>
-                <p>点击以查看问卷</p>
-                <button @click="view">查看问卷</button>
-                <!-- </form> -->
-            </div>
-        </main>
-        <!-- 脚标 -->
-        <!-- <footer>
-            <p>&copy; 2024 查看问卷</p>
-        </footer> -->
+            <br><br>
+            <button @click="use(surveyData.data.pid)">使用模版</button>
+        </div>
     </div>
     <script src="../js/surveyDisplay.js"></script>
 </body>

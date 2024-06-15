@@ -8,6 +8,7 @@ import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewPaper;
 import com.scut626.wenjuan_king.pojo.view.UpdateViewQuestion;
 import com.scut626.wenjuan_king.service.AnswerService;
+import com.scut626.wenjuan_king.service.PaperService;
 import com.scut626.wenjuan_king.service.impl.PaperServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,7 +27,7 @@ public class AnswerController {
     @Autowired // 自动注入 AnswerService 实例
     private AnswerService answerService;
     @Autowired
-    private PaperMapper paperMapper;
+    private PaperService paperService;
 
     /**
      * 处理填写问卷的请求
@@ -70,7 +71,6 @@ public class AnswerController {
         try {
             PaperResult data = new PaperResult();
             data.setPid(pid);
-            PaperServiceImpl paperService = new PaperServiceImpl(paperMapper);
             UpdateViewPaper updateViewPaper = paperService.viewPaper(pid);
             data.setTitle(updateViewPaper.getTitle());
             data.setStatus(updateViewPaper.getStatus());

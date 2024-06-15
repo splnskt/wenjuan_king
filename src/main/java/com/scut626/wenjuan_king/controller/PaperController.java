@@ -32,21 +32,21 @@ public class PaperController {
 
     /**
      * 删除问卷接口
-     * @param request 包含问卷ID列表的请求体
+     * @param pidList 包含问卷ID列表的请求体
      * @return 操作结果
      */
     @PostMapping("/delete-paper")
-    public Result deletePaper(@RequestParam List<Integer> request) {
+    public Result deletePaper(@RequestBody List<Integer> pidList) {
         // 获取请求体中的问卷ID列表
-        List<Integer> pidList = request;
-        if (pidList == null || pidList.isEmpty()) {
+        List<Integer> pidList1 = pidList;
+        if (pidList1 == null || pidList1.isEmpty()) {
             return Result.error("删除问卷失败，缺少问卷ID参数"); // 检查ID列表是否为空
         }
         // 输出日志信息
-        log.info("正在删除id为" + pidList + "的问卷");
+        log.info("正在删除id为" + pidList1 + "的问卷");
 
         // 调用服务层删除问卷方法
-        int resultCode = paperService.deletePapers(pidList);
+        int resultCode = paperService.deletePapers(pidList1);
         // 根据结果代码返回不同的结果
         switch (resultCode) {
             case 0:
