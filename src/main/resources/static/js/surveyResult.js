@@ -8,9 +8,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         },
         methods: {
             fetchData() {
-                var formData = {
-                    pid:this.pid
-                };
+                var formData = new FormData();
+                formData.append('pid', this.pid);
                 axios.post('/answer/paper-data', formData)
                     .then(response => {
                         console.log(response.data);
