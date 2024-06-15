@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                             alert('删除成功！');
                             // 清空选中的问卷数组
                             this.pidList = [];
+                             //恢复批量选择
+                             this.batchProcessing = false;
                             // 重新显示问卷列表
                             this.showPapers();
                         }
