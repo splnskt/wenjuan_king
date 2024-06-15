@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 //修改页面大小
                 this.pageSize = 5;
                 try {
-                    const response = await axios.get('填入模版地址', {
+                    const response = await axios.get('/paper/template-list', {
                         params: {
                             name: this.name,
                             page: page,
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 }
             },
             viewPaper(pid) {
-                // 跳转到查看问卷页面，并传递问卷ID
+                // 跳转到查看模版页面，并传递模版ID
                 window.location.href = '../pages/surveyDisplay.html?pid=' + pid;
               }
         },
