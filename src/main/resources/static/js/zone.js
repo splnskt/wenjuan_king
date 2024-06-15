@@ -69,7 +69,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     alert('请选择要删除的问卷！');
                     return;
                 };
-                var formData = this.pidList;
+                var formData = {
+                    pidList: this.pidList
+                };
                 axios.post('/paper/delete-paper', formData)
                     .then(response => {
                         console.log(response.data);
