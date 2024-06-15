@@ -69,9 +69,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     alert('请选择要删除的问卷！');
                     return;
                 };
-                var formData = {
-                    pidList: this.pidList
-                };
+                var formData = this.pidList;
                 axios.post('/paper/delete-paper', formData)
                     .then(response => {
                         console.log(response.data);
@@ -79,8 +77,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                             alert('删除成功！');
                             // 清空选中的问卷数组
                             this.pidList = [];
-                             //恢复批量选择
-                             this.batchProcessing = false;
+                            //恢复批量选择
+                            this.batchProcessing = false;
                             // 重新显示问卷列表
                             this.showPapers();
                         }
