@@ -55,7 +55,7 @@ HTTP POST
 #### 接口地址
 
 ```
-/paper/template
+/paper/update-template
 ```
 
 #### 请求方式
@@ -67,7 +67,47 @@ HTTP POST
 ```
 {
   "title": "你幸福吗的调查",
-  "template": 1,		//在新增问卷时，这个参数为0
+  "startTime": "2018-09-12",
+  "endTime": "2018-10-01",
+  "status": 0,
+  "questions": [
+      {"questionType":1, "questionTitle": "你的收入是多少？", "questionOption": ["2000以下", "2000-5000", "5000+"]},
+      {"questionType":2, "questionTitle": "你家里有哪些家电？", "questionOption": ["冰箱", "洗衣机", "空调", "麻将机"]},
+      {"questionType":3, "questionTitle": "说一说你觉得最幸福的事", "questionOption": []}
+  ]
+}
+
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+
+# //新增，修改模板与问卷相关的细节完全一样！
+
+### 3.2 修改模板
+#### 接口地址
+
+```
+/paper/update-template
+```
+
+#### 请求方式
+
+HTTP PUT //与新增相比，只有这里不同
+
+#### 请求示例
+
+```
+{
+  "title": "你幸福吗的调查",
   "startTime": "2018-09-12",
   "endTime": "2018-10-01",
   "status": 0,
