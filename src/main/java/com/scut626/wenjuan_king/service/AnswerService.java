@@ -2,6 +2,7 @@ package com.scut626.wenjuan_king.service;
 
 import com.scut626.wenjuan_king.pojo.Answer;
 import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
+import com.scut626.wenjuan_king.pojo.view.PaperDataView;
 
 import java.util.List;
 import java.util.Map;
@@ -31,4 +32,6 @@ public interface AnswerService {
      *              2：其他错误（如空提交）
      */
     int commitPaper(AnswerPageView answerPageView, Integer uid);
+
+    PaperDataView getPaperData(Integer pid);
 }

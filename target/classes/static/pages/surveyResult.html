@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷结果</title>
+    <link rel="stylesheet" href="../css/surveyResult.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>问卷王O.o</h1>
+        <nav>
+            <ul>
+                <li><a href="mainpage.html">首页</a></li>
+                <!-- 关于 和 联系我们 暂时未做页面 -->
+                <li><a href="#">关于</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="app">
+        <div v-if="surveyData">
+            <h1>{{ surveyData.data.title }}</h1>
+            <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
+            <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
+            <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
+            <h4><span>填写次数：</span>{{surveyData.data.totalCount}}</h4>
+            <div v-for="(question, index) in surveyData.data.questions" :key="index">
+                <h3><span>问题{{index+1}}: </span>{{question.questionTitle}}</h3>
+                <span v-if="question.questionType==1">(单选)</span>
+                <span v-if="question.questionType==2">(多选)</span>
+                <span v-if="question.questionType==3">(填空)</span>
+                <ul v-if="question.questionType==1||question.questionType==2">
+                    <li v-for="(option, optionIndex) in question.questionOption" :key="optionIndex">
+                        <label v-if="question.questionType==1">
+                            <!-- 对单选题的每个选项显示选择总数 -->
+                            
+                            {{option}}(选择数: {{ question.answerContent[optionIndex] }})
+                        </label>
+                        <label v-if="question.questionType==2">
+                            <!-- 对多选题的每个选项显示选择总数 -->
+                            
+                            {{option}}(选择数: {{ question.answerContent[optionIndex] }})
+                        </label>
+                    </li>
+                </ul>
+                <!-- 对于填空题，点击按钮展开显示所有填写的答案 -->
+                <button @click="show(question)" v-if="question.questionType==3">
+                    {{ question.isShow ? '收起答案' : '显示答案' }}
+                </button>
+                <ul v-if="question.questionType === 3 && question.isShow">
+                    <li v-for="(answer, answerIndex) in question.answerContent" :key="answerIndex">
+                        {{ answer }}
+                    </li>
+                </ul>
+
+            </div>
+            <br><br>
+            
+        </div>
+
+
+    </div>
+    <script src="../js/surveyResult.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</html>

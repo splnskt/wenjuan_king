@@ -4,15 +4,20 @@ package com.scut626.wenjuan_king.service.impl;
 
 import com.scut626.wenjuan_king.mapper.AnswerMapper;
 import com.scut626.wenjuan_king.mapper.PaperMapper;
+import com.scut626.wenjuan_king.mapper.QuestionMapper;
 import com.scut626.wenjuan_king.pojo.Answer;
 import com.scut626.wenjuan_king.pojo.Paper;
+import com.scut626.wenjuan_king.pojo.Question;
 import com.scut626.wenjuan_king.pojo.view.AnswerPageView;
 import com.scut626.wenjuan_king.pojo.view.AnswerView;
+import com.scut626.wenjuan_king.pojo.view.PaperDataView;
+import com.scut626.wenjuan_king.pojo.view.QuestionDataView;
 import com.scut626.wenjuan_king.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,6 +31,8 @@ public class AnswerServiceImpl implements AnswerService {
     private AnswerMapper answerMapper;
     @Autowired
     private PaperMapper paperMapper;
+    @Autowired
+    private QuestionMapper questionMapper;
 
     // 根据问卷ID获取答案列表
     @Override
@@ -83,5 +90,24 @@ public class AnswerServiceImpl implements AnswerService {
         paperMapper.addPaperAccessCount(pid);
         // 提交成功，返回0
         return 0;
+    }
+
+    @Override
+    public PaperDataView getPaperData(Integer pid) {
+        List<Paper> papers = paperMapper.selectPapersByPid(pid);
+        if(papers == null || papers.isEmpty())
+        {
+            //pid无效
+            return null;
+        }
+        PaperDataView paperDataView = new PaperDataView(papers.get(0));
+        //获取问题数据
+        List<Question> questions = questionMapper.selectQuestionsByPid(pid);
+        //存储问题数据
+        List<QuestionDataView> questionDataViews = new ArrayList<>();
+        for (Question question : questions) {
+            QuestionDataView questionDataView = new QuestionDataView(question);
+
+        }
     }
 }

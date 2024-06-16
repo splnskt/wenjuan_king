@@ -21,6 +21,46 @@
 ## 3.所有 id 类字段一律使用 int 类型
 
 # API
+### 我的模板列表
+
+#### 接口地址
+
+```
+/paper/my-template
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+  "page": 1           //要查找第几页
+  "pageSize": 5       //一页有多少条问卷
+
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 
+  {
+    paperCount: 12 //找到的问卷总数
+    papers:
+    [
+      {"pid": "12345678910","title": "问卷", "status": 0, "createTime": 1536887397173, "startTime": "2018-09-20", "endTime": "2018-10-01"},
+      {"pid": "22345678910","title": "问卷标题", "status": 1, "createTime": 1536887397666, "startTime": "2018-09-10", "endTime": "2018-10-01"},
+      {"pid": "32345678910","title": "问题", "status": 2, "createTime": 1536887397888, "startTime": "2018-09-10", "endTime": "2018-09-12"},
+      {"pid": "42345678910","title": "标题", "status": 0, "createTime": 1536887397173, "startTime": "", "endTime": ""}
+    ]
+  }
+}
+```
 
 ### 3.1 点赞
 
@@ -172,6 +212,8 @@ HTTP POST
 }
 ```
 # 查看具体某一模板的操作与查看某一问卷完全一致
+请求链接为：
+    /paper/view-template
 ### 3.4 上传头像
 
 #### 接口地址
