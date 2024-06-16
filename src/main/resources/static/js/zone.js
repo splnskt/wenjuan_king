@@ -133,6 +133,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 this.currentComponent = 'others';
             }
         },
-
+        mounted() {
+            this.showPapers();
+        },
     })
 })
