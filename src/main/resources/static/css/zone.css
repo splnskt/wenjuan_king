@@ -3,7 +3,9 @@ body{
     position: relative;
     width:100%;
     margin:0;
-    
+    background-image: url(../wallhaven-g73l2l.jpg);   
+    background-size: cover;
+    background-repeat: no-repeat;
 
     
 }
@@ -22,7 +24,7 @@ body{
     top:0;
     bottom: 0;
     left:0;
-    height: 70vh;
+    height: 90vh;
  
     display:flex;
     flex-direction: column;
@@ -47,16 +49,55 @@ body{
     /* 间距大小 */
     font-size:30px ;
 }
-.mysurveys{
-    background-color: bisque;
+.mySurveys button {
+    opacity: 0.8;
+    background-color: #007bff; /* 设置背景颜色为蓝色 */
+    color: white; /* 设置字体颜色为白色 */
+    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
+    padding: 10px 20px; /* 设置内边距 */
+    font-size: 20px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    border-radius: 5px; /* 设置圆角 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
 }
-.dataAnalyze{
-    background-color: aquamarine;
+
+.mySurveys button:hover {
+    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
+    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
+}
+.dataAnalyze button{
+    opacity: 0.8;
+    background-color: #007bff; /* 设置背景颜色为蓝色 */
+    color: white; /* 设置字体颜色为白色 */
+    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
+    padding: 10px 20px; /* 设置内边距 */
+    font-size: 20px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    border-radius: 5px; /* 设置圆角 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
 
 }
-.personal{
-    background-color: azure;
+.dataAnalyze button:hover{
+    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
+    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
+}
+.personal button{
+    opacity: 0.8;
+    background-color: #007bff; /* 设置背景颜色为蓝色 */
+    color: white; /* 设置字体颜色为白色 */
+    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
+    padding: 10px 20px; /* 设置内边距 */
+    font-size: 20px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    border-radius: 5px; /* 设置圆角 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+  
 
+}
+.personal button:hover
+{
+    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
+    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }
 .finish{
    
@@ -83,4 +124,13 @@ body{
     left:15%;
     text-align: center;
     padding:5px;
+}
+.returnButton
+{   position: absolute;
+    top:0;
+    right:1%;
+    background-color: azure;
+    border-radius: 5px;
+    font-size: 25px;
+    opacity: 0.75;
 }
