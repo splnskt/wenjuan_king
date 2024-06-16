@@ -68,6 +68,8 @@ public class PaperServiceImpl implements PaperService {
     public void insertPaper(UpdateViewPaper paperUpdateInfo, Integer uid){
         // 创建新的问卷对象并设置相关属性
         Paper paper = new Paper();
+        //设置为问卷
+        paper.setTemplate(0);
         paper.setTitle(paperUpdateInfo.getTitle());
         paper.setStatus(paperUpdateInfo.getStatus());
         paper.setStartTime(paperUpdateInfo.getStartTime());
@@ -86,6 +88,51 @@ public class PaperServiceImpl implements PaperService {
             q.setCreateTime(LocalDateTime.now());
             questionMapper.insertQuestion(q);
         }
+    }
+
+    @Override
+    public void insertTemplate(UpdateViewPaper paperUpdateInfo, Integer uid) {
+        // 创建新的问卷对象并设置相关属性
+        Paper paper = new Paper();
+        //设置为模板
+        paper.setTemplate(1);
+        paper.setTitle(paperUpdateInfo.getTitle());
+        paper.setStatus(paperUpdateInfo.getStatus());
+        paper.setStartTime(paperUpdateInfo.getStartTime());
+        paper.setEndTime(paperUpdateInfo.getEndTime());
+        paper.setCreateTime(LocalDateTime.now()); // 设置问卷创建时间
+        paper.setUid(uid); // 设置问卷创建用户
+        paperMapper.insertPaper(paper); // 存入数据库
+
+        // 获取新插入的问卷的ID
+        int pid = paper.getPid();
+
+        // 遍历所有问题并插入到数据库
+        for (UpdateViewQuestion questionView : paperUpdateInfo.getQuestions()) {
+            Question q = new Question(questionView);
+            q.setPid(pid);
+            q.setCreateTime(LocalDateTime.now());
+            questionMapper.insertQuestion(q);
+        }
+    }
+
+    @Override
+    public void updateTemplate(UpdateViewPaper paperUpdateInfo, Integer uid) {
+        // 获取要修改的问卷ID
+        Integer pid = paperUpdateInfo.getPid();
+        List<Integer> ids = new ArrayList<>();
+        ids.add(pid);
+
+        // 删除原先的问卷
+        deletePapers(ids);
+
+        // 新增一个新的模板
+        insertTemplate(paperUpdateInfo, uid);
+    }
+
+    @Override
+    public void like(Integer pid) {
+        paperMapper.likePaperByPid(pid);
     }
 
     /**
@@ -144,13 +191,13 @@ public class PaperServiceImpl implements PaperService {
      * @return 返回问卷列表
      */
     @Override
-    public PaperPageView getPaperList(String name, Integer page, Integer pageSize) {
+    public PaperPageView getPaperList(String name, Integer page, Integer pageSize, Integer template) {
         if (page != null) {
             page = (page - 1) * pageSize;
         }
 
-        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize, null);
-        Long paperCount = paperMapper.paperCount(name, page, pageSize, null);
+        List<Paper> papers = paperMapper.selectPaperList(name, page, pageSize, null, template);
+        Long paperCount = paperMapper.paperCount(name, page, pageSize, null, template);
         PaperPageView pageView = new PaperPageView(paperCount, papers);
         return pageView;
     }
@@ -163,13 +210,13 @@ public class PaperServiceImpl implements PaperService {
      * @return 返回问卷列表
      */
     @Override
-    public PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize) {
+    public PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize, Integer template) {
         if (page != null) {
             page = (page - 1) * pageSize;
         }
 
-        List<Paper> papers = paperMapper.selectPaperList(null, page, pageSize, uid);
-        Long paperCount = paperMapper.paperCount(null, page, pageSize, uid);
+        List<Paper> papers = paperMapper.selectPaperList(null, page, pageSize, uid, template);
+        Long paperCount = paperMapper.paperCount(null, page, pageSize, uid, template);
         return new PaperPageView(paperCount, papers);
     }
 
@@ -177,4 +224,5 @@ public class PaperServiceImpl implements PaperService {
     public List<Question> getQuestionsByPid(Integer pid) {
         return questionMapper.selectQuestionsByPid(pid);
     }
+
 }

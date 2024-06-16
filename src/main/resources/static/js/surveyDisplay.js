@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             // 使用模版
             use(pid) {
-                window.location.href = '../pages/useTemplate.html?pid=' + pid;
+                window.location.href = '../pages/templateUse.html?pid=' + pid;
             },
             // 点赞
             like() {
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .catch(error => {
                         console.error('Error deleting papers:', error);
                     });
+                this.fetchData();
             },
         },
         mounted() {

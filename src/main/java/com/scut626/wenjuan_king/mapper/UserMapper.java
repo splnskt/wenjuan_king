@@ -4,6 +4,7 @@ import com.scut626.wenjuan_king.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -36,4 +37,10 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM user WHERE username = #{username}")
     List<User> selectUserByName(String username);
+
+    @Update("UPDATE user set image_uri = #{originalFilename} where uid = #{uid}")
+    void updateImageUriByUid(String originalFilename, Integer uid);
+
+    @Select("select image_uri from user where uid = #{uid}")
+    List<String> selectImageUriByUid(Integer uid);
 }

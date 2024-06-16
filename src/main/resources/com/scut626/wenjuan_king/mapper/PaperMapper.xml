@@ -12,6 +12,9 @@
         <if test="uid != null">
             and uid = #{uid}
         </if>
+        <if test="template != null">
+            and template = #{template}
+        </if>
 #         根据填写次数排序
         order by access_count desc
         <if test="page != null and pageSize != null">
@@ -22,12 +25,15 @@
     <select id="paperCount" resultType="java.lang.Long">
         SELECT count(1) from paper
         WHERE true
-            <if test="name != null">
-                and title like concat('%',#{name},'%')
-            </if>
-            <if test="uid != null">
-                and uid = #{uid}
-            </if>
+        <if test="name != null">
+            and title like concat('%',#{name},'%')
+        </if>
+        <if test="uid != null">
+            and uid = #{uid}
+        </if>
+        <if test="template != null">
+            and template = #{template}
+        </if>
         order by create_time desc
     </select>
 </mapper>

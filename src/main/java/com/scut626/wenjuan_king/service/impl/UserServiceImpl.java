@@ -57,4 +57,22 @@ public class UserServiceImpl implements UserService {
             return 2;
         }
     }
+
+    @Override
+    public void updateImageUriByUid(String originalFilename, Integer uid) {
+        userMapper.updateImageUriByUid(originalFilename, uid);
+    }
+
+    @Override
+    public String selectImageUriByUid(Integer uid) {
+        List<String> uri = userMapper.selectImageUriByUid(uid);
+        if(uri == null || uri.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            return  uri.get(0);
+        }
+    }
 }

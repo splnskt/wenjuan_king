@@ -21,8 +21,11 @@ public class Paper {
         this.endTime = paperView.getEndTime();
         this.createTime = paperView.getCreateTime();
         this.accessCount = paperView.getAccessCount();
+        this.template = paperView.getTemplate();
+        this.like = paperView.getLike();
     }
-
+    private Integer like;
+    private Integer template;
     private Integer pid;
     private Integer uid;
     private String title;
