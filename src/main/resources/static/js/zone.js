@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             
             getAvatar() {
-                axios.post('/user/image',)
+                axios.post('/user/image')
                     .then(response => {
                         console.log(response.data);
                         if (response.data.data != null) {
