@@ -7,23 +7,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
             pid: ''
         },
         methods: {
-            async fetchData() {
-                try {
-                    const response = await axios.get('模版地址', {
-                        params: {
-                            pid: this.pid,
-                        }
+            fetchData() {
+                var formData = new FormData();
+                formData.append('pid', this.pid);
+                axios.post('/paper/view-template', formData)
+                    .then(response => {
+                        console.log(response.data);
+                        this.surveyData = response.data;
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
                     });
-                    this.surveyData = response.data;
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
             },
-            use(pid){
+            // 使用模版
+            use(pid) {
                 window.location.href = '../pages/surveyModify.html?pid=' + pid;
             },
+            // 点赞
+            like() {
+                var formData = new FormData();
+                formData.append('pid', this.pid);
+                axios.post('/paper/like', formData)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
+            },
         },
-        mounted(){
+        mounted() {
             const urlParams = new URLSearchParams(window.location.search);
             this.pid = urlParams.get('pid');
             if (!this.pid) {

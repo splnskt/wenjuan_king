@@ -27,6 +27,8 @@ public interface AnswerMapper {
      */
     @Select("SELECT * FROM answer WHERE pid = #{pid}")
     List<Answer> selectAnswersByPid(int pid);
+    @Select("SELECT * FROM answer WHERE qid = #{qid}")
+    List<Answer> selectAnswersByQid(int qid);
 
     /**
      * 将新回答插入到 'answer' 表中。
