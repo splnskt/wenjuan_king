@@ -107,7 +107,56 @@ public class AnswerServiceImpl implements AnswerService {
         List<QuestionDataView> questionDataViews = new ArrayList<>();
         for (Question question : questions) {
             QuestionDataView questionDataView = new QuestionDataView(question);
-
+            //获取这个问题的所有填写
+            List<Answer> answers = answerMapper.selectAnswersByQid(question.getQid());
+            Integer questionType = questionDataView.getQuestionType();
+            if(questionType == 1 || questionType == 2)
+            {
+                //选择题
+                List<Integer> answerContent = new ArrayList<>();
+                //获取问题的所有选项
+                List<String> questionOption = questionDataView.getQuestionOption();
+                //在answercontent中插入与选项个数相同个0
+                for (int i = 0; i < questionOption.size(); i++) {
+                    answerContent.add(0);
+                }
+                //统计每个选项选择的个数
+                for (Answer answer : answers) {
+                    AnswerView answerView = new AnswerView(answer);
+                    //分别取答案的每个答案进行比对
+                    for (String content : answerView.getAnswerContent()) {
+                        //分别与每个选项检测，是否名字相同
+                        for (int i = 0; i < questionOption.size(); i++) {
+                            if(content.equals(questionOption.get(i)))
+                            {
+                                //名字相同，结果加1
+                                answerContent.set(i, answerContent.get(i) + 1);
+                            }
+                        }
+                    }
+                }
+                //储存answerContent数据
+                questionDataView.setAnswerContent(answerContent);
+            }
+            else if(questionType == 3)
+            {
+                //填空题
+                List<String> answerContent = new ArrayList<>();
+                //统计每个答案
+                for (Answer answer : answers) {
+                    AnswerView answerView = new AnswerView(answer);
+                    List<String> contents = answerView.getAnswerContent();
+                    if(contents != null && !contents.isEmpty())
+                    {
+                        answerContent.add(contents.get(0));
+                    }
+                }
+                //储存answerContent数据
+                questionDataView.setAnswerContent(answerContent);
+            }
+            questionDataViews.add(questionDataView);
         }
+        paperDataView.setQuestions(questionDataViews);
+        return paperDataView;
     }
 }
