@@ -87,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.error('Error deleting papers:', error);
                     });
             },
+            //显示结果
+            viewResult(pid){
+                window.location.href = '../pages/surveyResult.html?pid=' + pid;
+            },
             // 其他选项，待编辑
             showOthers() {
                 this.currentComponent = 'others';

@@ -19,8 +19,284 @@
 ## 3.所有 id 类字段一律使用 int 类型
 
 # API
+### 我的模板列表
 
-编码方式均为 UTF-8
+#### 接口地址
+
+```
+/paper/my-template
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+  "page": 1           //要查找第几页
+  "pageSize": 5       //一页有多少条问卷
+
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 
+  {
+    paperCount: 12 //找到的问卷总数
+    papers:
+    [
+      {"pid": "12345678910","title": "问卷", "status": 0, "createTime": 1536887397173, "startTime": "2018-09-20", "endTime": "2018-10-01"},
+      {"pid": "22345678910","title": "问卷标题", "status": 1, "createTime": 1536887397666, "startTime": "2018-09-10", "endTime": "2018-10-01"},
+      {"pid": "32345678910","title": "问题", "status": 2, "createTime": 1536887397888, "startTime": "2018-09-10", "endTime": "2018-09-12"},
+      {"pid": "42345678910","title": "标题", "status": 0, "createTime": 1536887397173, "startTime": "", "endTime": ""}
+    ]
+  }
+}
+```
+
+### 3.1 点赞
+
+#### 接口地址
+
+```
+/paper/like
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+"pid": 123
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+### 3.2 新增模板
+
+#### 接口地址
+
+```
+/paper/update-template
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+{
+  "title": "你幸福吗的调查",
+  "startTime": "2018-09-12",
+  "endTime": "2018-10-01",
+  "status": 0,
+  "questions": [
+      {"questionType":1, "questionTitle": "你的收入是多少？", "questionOption": ["2000以下", "2000-5000", "5000+"]},
+      {"questionType":2, "questionTitle": "你家里有哪些家电？", "questionOption": ["冰箱", "洗衣机", "空调", "麻将机"]},
+      {"questionType":3, "questionTitle": "说一说你觉得最幸福的事", "questionOption": []}
+  ]
+}
+
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+
+# //新增，修改模板与问卷相关的细节完全一样！
+
+### 3.2 修改模板
+#### 接口地址
+
+```
+/paper/update-template
+```
+
+#### 请求方式
+
+HTTP PUT //与新增相比，只有这里不同
+
+#### 请求示例
+
+```
+{
+  "title": "你幸福吗的调查",
+  "startTime": "2018-09-12",
+  "endTime": "2018-10-01",
+  "status": 0,
+  "questions": [
+      {"questionType":1, "questionTitle": "你的收入是多少？", "questionOption": ["2000以下", "2000-5000", "5000+"]},
+      {"questionType":2, "questionTitle": "你家里有哪些家电？", "questionOption": ["冰箱", "洗衣机", "空调", "麻将机"]},
+      {"questionType":3, "questionTitle": "说一说你觉得最幸福的事", "questionOption": []}
+  ]
+}
+
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+### 3.3 查看所有模板
+
+#### 接口地址
+
+```
+/paper/template-list
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+  "name": "某某问卷"   //根据名字查找问卷
+  "page": 1           //要查找第几页
+  "pageSize": 5       //一页有多少条问卷
+```
+#### 返回参数
+
+返回示例
+
+```
+//成功
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 
+  {
+    paperCount: 12 //找到的问卷总数
+    papers:
+    [
+      {"pid": "12345678910","title": "问卷", "status": 0, "createTime": 1536887397173, "startTime": "2018-09-20", "endTime": "2018-10-01"},
+      {"pid": "22345678910","title": "问卷标题", "status": 1, "createTime": 1536887397666, "startTime": "2018-09-10", "endTime": "2018-10-01"},
+      {"pid": "32345678910","title": "问题", "status": 2, "createTime": 1536887397888, "startTime": "2018-09-10", "endTime": "2018-09-12"},
+      {"pid": "42345678910","title": "标题", "status": 0, "createTime": 1536887397173, "startTime": "", "endTime": ""}
+    ]
+  }
+}
+```
+# 查看具体某一模板的操作与查看某一问卷完全一致
+### 3.4 上传头像
+
+#### 接口地址
+
+```
+/user/upload-image
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+"image": 头像的图片文件
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+### 3.5 获取头像绝对路径
+
+#### 接口地址
+
+```
+user/image
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+无参数
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": "/image/abc.jpg"
+}
+```
+### 3.1 退出登录
+
+#### 接口地址
+
+```
+/logout
+```
+
+#### 请求方式
+
+HTTP POST
+
+#### 请求示例
+
+```
+无参数
+```
+#### 返回参数
+
+返回示例
+
+```
+{
+  "code": 0,
+  "msg": "ok",
+  "data": 0
+}
+```
+
+
+
 
 ## 1.管理员相关
 

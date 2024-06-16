@@ -62,6 +62,7 @@
                         <li>{{paper.title}}</li>
                         <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
                         <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
+                        <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看结果</button>
                     </div>
                 </ul>
                 <button @click="prevPage" :disabled="currentPage === 1">上一页</button>

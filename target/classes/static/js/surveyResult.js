@@ -4,36 +4,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data: {
             surveyData: null,
             //id暂未获取
-            pid: ''
+            pid: '',
+       
         },
         methods: {
             fetchData() {
                 var formData = new FormData();
                 formData.append('pid', this.pid);
-                axios.post('/paper/view-template', formData)
+                axios.post('/answer/paper-data', formData)
                     .then(response => {
                         console.log(response.data);
                         this.surveyData = response.data;
+                        this.surveyData.data.questions.forEach(question => {
+                            question.isShow = false; // 初始设置为未展开状态
+                        });
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
                     });
             },
-            // 使用模版
-            use(pid) {
-                window.location.href = '../pages/useTemplate.html?pid=' + pid;
-            },
-            // 点赞
-            like() {
-                var formData = new FormData();
-                formData.append('pid', this.pid);
-                axios.post('/paper/like', formData)
-                    .then(response => {
-                        console.log(response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error deleting papers:', error);
-                    });
+            show(question) {
+                question.isShow = !question.isShow;
             },
         },
         mounted() {
