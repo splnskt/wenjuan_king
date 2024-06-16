@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             // 使用模版
             use(pid) {
-                window.location.href = '../pages/useTemplate.html?pid=' + pid;
+                window.location.href = '../pages/templateUse.html?pid=' + pid;
             },
             // 修改问卷
             modifyPaper(pid) {
