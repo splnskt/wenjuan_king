@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 this.currentComponent = 'myTemplates';
                 this.batchProcessing = false;
             },
+            // 显示个人资料
+            showUser(){
+                this.currentComponent = 'user';
+            },
+
+            //页面操作
             prevPage() {
                 if (this.currentPage > 1) {
                     this.currentPage--;
