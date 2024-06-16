@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data: {
             navItems: [
                 { id: 1, text: '主页', link: '../pages/mainpage.html' },
-                { id: 2, text: '联系我们', link: '../pages/contact.html' },
+                { id: 2, text: '联系我们', link: '../pages/aboutUs.html' },
                 { id: 3, text: '使用说明', link: '../pages/help.html' },
             ]
 
@@ -170,9 +170,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data: {
             showOptions: false,
             options: [
-                { text: '我的问卷', link: '../pages/Mysurveys.html' },
+                { text: '问卷中心', link: '../pages/surveyList.html' },
 
-                { text: '数据统计', link: '../pages/DataAnalyze.html' },
+                { text: '模版中心', link: '../pages/templateList.html' },
                 { text: '个人中心', link: '../pages/Zone.html' },
 
             ]

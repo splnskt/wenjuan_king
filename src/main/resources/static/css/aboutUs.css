@@ -3,8 +3,12 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    background-image: url(../3b05dcdf-b755-45db-8e5e-9e45f84e75c6.jpg);
+    background-size: cover;
+    
 }
 .container {
+    opacity: 0.75;
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -14,22 +18,43 @@ body {
     margin-top: 50px;
 }
 .header {
+    opacity: 1;
     text-align: center;
     margin-bottom: 30px;
 }
-.section {
+.section { opacity: 1;
     margin-bottom: 30px;
 }
-.section h2 {
+.section h2 { opacity: 1;
     font-size: 24px;
     margin-bottom: 10px;
 }
-.section p {
+.section p { opacity: 1;
     line-height: 1.6;
 }
-.footer {
+.footer { opacity: 1;
     text-align: center;
     margin-top: 30px;
     font-size: 14px;
     color: #666;
+}
+.picture 
+{   opacity: 1;
+     position: relative;
+    top:5px;
+    left:45%;
+    width:10%;
+    
+}
+.mainPage button{
+    opacity: 1;
+    position: relative;
+    left:5px;
+    top:10px;
+    font-size: 20px;
+   
+}
+.mainPage button:hover
+{
+    cursor: pointer;
 }
