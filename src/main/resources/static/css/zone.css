@@ -24,7 +24,7 @@ body{
     top:0;
     bottom: 0;
     left:0;
-    height: 90vh;
+    height: 70vh;
  
     display:flex;
     flex-direction: column;
@@ -142,4 +142,20 @@ body{
     height:100%;
     border-radius: 5px;
     border:3px solid white;
+}
+.myTemplates button
+{
+    opacity: 0.8;
+    background-color: #007bff; /* 设置背景颜色为蓝色 */
+    color: white; /* 设置字体颜色为白色 */
+    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
+    padding: 10px 20px; /* 设置内边距 */
+    font-size: 20px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    border-radius: 5px; /* 设置圆角 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+.myTemplates button:hover{
+    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
+    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }

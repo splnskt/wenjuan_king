@@ -1,3 +1,8 @@
+const returnMain = document.getElementById('returnMain');
+returnMain.addEventListener('click', function() {
+    window.location.href = '../pages/mainpage.html'; 
+});
+
 document.addEventListener("DOMContentLoaded", function (event) {
     var app = new Vue({
         el: '#app',
