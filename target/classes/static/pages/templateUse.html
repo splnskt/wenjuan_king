@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用模版</title>
+    <link rel="stylesheet" href="../css/surveyModify.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navItem" v-for="(Item, index) in navItems" :key="index" @click="Jump(index)">
+            {{ Item.text }}
+        </div>
+    </div>
+    <div class="rightnavbar">
+        <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" style="color: brown;">
+            Menu
+
+            <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index"
+                @mouseover="highlightOption(index)" @click="Jump(index)">
+                {{ option.text }}
+            </div>
+        </div>
+    </div>
+    <div id="app">
+        <div v-if="pid">
+            <h1>创建问卷</h1>
+
+            <!-- 问卷头部信息 -->
+            <div>
+                <label>问卷标题：</label>
+                <input type="text" v-model="title" placeholder="问卷标题" required>
+                <label>开始时间：</label>
+                <input type="date" v-model="startTime">
+                <label>结束时间：</label>
+                <input type="date" v-model="endTime">
+            </div>
+            <br><br>
+            <!-- 不断添加问题 -->
+            <div v-for="(question, index) in questions" :key="index">
+                <label>问题{{ index + 1 }}:</label>
+                <input type="text" v-model="question.questionTitle" required>
+                <!-- 问题类型 -->
+                <select v-model="question.questionType" @change="updateOptions(index)">
+                    <option value="1">单选</option>
+                    <option value="2">多选</option>
+                    <option value="3">填空</option>
+                </select>
+                <!-- 选择题添加选项 -->
+                <div v-if="question.questionType==1||question.questionType==2">
+                    <div v-for="(option, optionIndex) in question.questionOption" :key="optionIndex">
+                        <label>选项{{ optionIndex + 1 }}:</label>
+                        <input type="text" v-model="option.content" required>
+                        <button @click="removeOption(index, optionIndex)">删除选项</button>
+                    </div>
+                    <br>
+                    <button @click="addOption(index)">添加选项</button>
+                </div>
+                <br><br>
+                <button @click="removeQuestion(index)">删除问题</button>
+                <br><br>
+            </div>
+            <br>
+            <button @click="addQuestion">添加问题</button>
+            <button @click="submit">提交问卷</button>
+        </div>
+    </div>
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/templateUse.js"></script>
+
+</html>

@@ -46,7 +46,7 @@ public interface PaperService {
      * @param pageSize 每页问卷数量
      * @return 返回问卷列表的分页视图
      */
-    PaperPageView getPaperList(String name, Integer page, Integer pageSize);
+    PaperPageView getPaperList(String name, Integer page, Integer pageSize, Integer template);
 
     /**
      * 查询用户的问卷列表
@@ -55,7 +55,7 @@ public interface PaperService {
      * @param pageSize 每页问卷数量
      * @return 返回用户问卷列表的分页视图
      */
-    PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize);
+    PaperPageView myPaperList(Integer uid, Integer page, Integer pageSize, Integer template);
 
     /**
      * 由问卷id查询问题
@@ -63,5 +63,11 @@ public interface PaperService {
      * @return 返回用户问卷列表的分页视图
      */
     List<Question> getQuestionsByPid(Integer pid);
+
+    void insertTemplate(UpdateViewPaper paperUpdateInfo, Integer uid);
+
+    void updateTemplate(UpdateViewPaper paperUpdateInfo, Integer uid);
+
+    void like(Integer pid);
 }
 

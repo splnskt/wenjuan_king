@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded",function(event){
             options:[
                 {text:'问卷中心',link:'../pages/surveyList.html'},
                 {text:'创建问卷',link:'../pages/surveyCreate.html'},
-                {text:'数据统计',link:'../pages/DataAnalyze.html'},
+                {text:'模版中心',link:'../pages/templateList.html'},
                 {text:'个人中心',link:'../pages/Zone.html'},
 
                 ]

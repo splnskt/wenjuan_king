@@ -19,5 +19,8 @@ public interface UserService {
      *              2： 密码错误
      */
     int login(User user);
+
+    void updateImageUriByUid(String originalFilename, Integer uid);
+    String selectImageUriByUid(Integer uid);
 }
 
