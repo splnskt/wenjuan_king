@@ -1,0 +1,53 @@
+
+  h1{
+    font-size:50px;
+    background-color:#5db8a9;
+    text-align: center;
+    color:#fff;
+    padding:20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+   
+    width:25%;
+    height: auto;
+    margin:0;
+    transition: color 0.3s ease;
+ 
+  }
+  .title:hover{
+   
+    color: #35b45b;
+
+  }
+body{
+    background-color: #f0f8ff;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+
+}
+.features {
+    background-color:bisque;
+    text-align: center; /* 文字居中 */
+    margin: 0 auto; /* 居中容器 */
+    max-width: 100%; /* 设置容器的最大宽度 */
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 平均分配子元素的空间 */
+    padding:20px;
+  
+  }
+  .feature {
+    border-radius: 10px;
+    width: 23%; /* 设置每个功能块的宽度为容器的四分之一 */
+    font-size: 35px;
+    padding:5px;
+    background-color: #4682b4; /* 设置功能块的背景颜色 */
+    color: #fff; /* 设置文字颜色为白色 */
+    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    transition: background-color 0.3s ease; /* 添加背景颜色渐变效果 */
+    cursor:pointer;
+  }
+  .feature:hover {
+    background-color: #1cce39;
+  }
