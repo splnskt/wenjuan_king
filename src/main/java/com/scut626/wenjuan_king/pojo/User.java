@@ -15,4 +15,5 @@ public class User {
     private String password;
     private LocalDateTime createTime;
     private LocalDateTime lastLoginTime;
+    private String imageUri;
 }

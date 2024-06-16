@@ -11,8 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j // 自动生成日志记录器
 @RestController // 声明该类是一个 REST 控制器，返回 JSON 或 XML 响应
@@ -82,4 +87,35 @@ public class UserController {
         resp.sendRedirect("/pages/login.html");
         return Result.success();
     }
+    @RequestMapping("/user/upload-image")
+    public Result uploadImage(HttpServletRequest req, MultipartFile image) throws IOException {
+        log.info("正在上传头像");
+        String originalFilename = image.getOriginalFilename();
+        originalFilename = "\\user_image\\" + DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()) + originalFilename;
+
+        image.transferTo(new File("D:\\1\\WebProgram\\wenjuan_king\\src\\main\\resources\\static" + originalFilename));
+        // 获取当前会话
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // 获取用户ID
+        Integer uid = user.getUid();
+        //把路径中\改成/
+        originalFilename = originalFilename.replace("\\", "/");
+        userService.updateImageUriByUid(originalFilename, uid);
+
+        return Result.success();
+    }
+    @RequestMapping("/user/image")
+    public Result getImage(HttpServletRequest req, MultipartFile image) throws IOException {
+        log.info("正在获取头像");
+        // 获取当前会话
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // 获取用户ID
+        Integer uid = user.getUid();
+        String uri = userService.selectImageUriByUid(uid);
+        return Result.success(uri);
+    }
+
+
 }

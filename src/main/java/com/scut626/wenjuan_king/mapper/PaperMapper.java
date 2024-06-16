@@ -24,8 +24,8 @@ public interface PaperMapper {
      * @return 插入操作影响的行数。
      */
     @Options(useGeneratedKeys = true, keyProperty = "pid")
-    @Insert("insert into paper(uid, title, create_time, status, start_time, end_time) " +
-            "          VALUES (#{uid},#{title},#{createTime},#{status},#{startTime},#{endTime})")
+    @Insert("insert into paper(uid, title, create_time, status, start_time, end_time,template) " +
+            "          VALUES (#{uid},#{title},#{createTime},#{status},#{startTime},#{endTime},#{template})")
     public int insertPaper(Paper paper);
 
     /**
@@ -55,7 +55,7 @@ public interface PaperMapper {
      * @param uid 用户 ID。
      * @return 一个包含匹配条件的 Paper 对象列表。
      */
-    List<Paper> selectPaperList(String name, Integer page, Integer pageSize, Integer uid);
+    List<Paper> selectPaperList(String name, Integer page, Integer pageSize, Integer uid, Integer template);
 
     /**
      * 根据条件统计问卷数量。
@@ -66,7 +66,7 @@ public interface PaperMapper {
      * @param uid 用户 ID。
      * @return 匹配条件的问卷数量。
      */
-    Long paperCount(String name, Integer page, Integer pageSize, Integer uid);
+    Long paperCount(String name, Integer page, Integer pageSize, Integer uid, Integer template);
 
     /**
      * 根据指定的 pid 增加问卷的访问次数。
@@ -75,4 +75,7 @@ public interface PaperMapper {
      */
     @Update("update paper set access_count=access_count+1 where pid = #{pid}")
     void addPaperAccessCount(Integer pid);
+
+    @Update("update paper set `like`=`like`+1 where pid = #{pid}")
+    void likePaperByPid(Integer pid);
 }

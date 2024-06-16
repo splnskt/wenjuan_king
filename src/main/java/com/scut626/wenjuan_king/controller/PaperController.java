@@ -79,6 +79,19 @@ public class PaperController {
         paperService.insertPaper(paperUpdateInfo, uid);
         return Result.success();
     }
+    @PostMapping("/update-template")
+    public Result insertTemplate(@RequestBody UpdateViewPaper paperUpdateInfo, HttpServletRequest req) {
+        // 获取当前会话
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // 获取用户ID
+        Integer uid = user.getUid();
+        // 输出日志信息
+        log.info("正在增加问卷：" + paperUpdateInfo.getTitle());
+        // 调用服务层方法插入问卷
+        paperService.insertTemplate(paperUpdateInfo, uid);
+        return Result.success();
+    }
 
     /**
      * 更新问卷
@@ -99,6 +112,19 @@ public class PaperController {
         paperService.updatePaper(paperUpdateInfo, uid);
         return Result.success();
     }
+    @PutMapping("/update-template")
+    public Result updateTemplate(@RequestBody UpdateViewPaper paperUpdateInfo, HttpServletRequest req) {
+        // 获取当前会话
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // 获取用户ID
+        Integer uid = user.getUid();
+        // 输出日志信息
+        log.info("正在修改问卷：" + paperUpdateInfo.getTitle());
+        // 调用服务层方法更新问卷
+        paperService.updateTemplate(paperUpdateInfo, uid);
+        return Result.success();
+    }
 
     /**
      * 查看问卷（供修改使用）
@@ -107,6 +133,19 @@ public class PaperController {
      */
     @RequestMapping("/view-paper")
     public Result adminViewPaper(Integer pid) {
+        // 输出日志信息
+        log.info("正在获取问卷编号为：" + pid);
+        // 调用服务层方法获取问卷信息
+        UpdateViewPaper paperView = paperService.viewPaper(pid);
+        if (paperView == null) {
+            log.info("要查看的问卷不存在");
+            return Result.error("paperID not exist"); // 问卷不存在
+        } else {
+            return Result.success(paperView); // 返回问卷信息
+        }
+    }
+    @RequestMapping("/view-template")
+    public Result adminViewTemplate(Integer pid) {
         // 输出日志信息
         log.info("正在获取问卷编号为：" + pid);
         // 调用服务层方法获取问卷信息
@@ -130,7 +169,14 @@ public class PaperController {
     public Result viewPaperList(String name, Integer page, Integer pageSize) {
         log.info("查找问卷...");
         // 调用服务层方法获取问卷列表
-        PaperPageView paperPageView = paperService.getPaperList(name, page, pageSize);
+        PaperPageView paperPageView = paperService.getPaperList(name, page, pageSize, 0);
+        return Result.success(paperPageView);
+    }
+    @RequestMapping("/template-list")
+    public Result viewTemplateList(String name, Integer page, Integer pageSize) {
+        log.info("查找问卷...");
+        // 调用服务层方法获取问卷列表
+        PaperPageView paperPageView = paperService.getPaperList(name, page, pageSize, 1);
         return Result.success(paperPageView);
     }
 
@@ -152,10 +198,33 @@ public class PaperController {
         if (user != null) {
             uid = user.getUid();
             // 调用服务层方法获取用户的问卷列表
-            PaperPageView paperPageView = paperService.myPaperList(uid, page, pageSize);
+            PaperPageView paperPageView = paperService.myPaperList(uid, page, pageSize, 0);
             return Result.success(paperPageView);
         } else {
             return Result.error("no login"); // 用户未登录
         }
+    }
+    @RequestMapping("/my-template")
+    public Result myTemplateList(HttpServletRequest req, Integer page, Integer pageSize) {
+        log.info("查找我的模板...");
+        // 获取当前会话
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // 获取用户ID
+        Integer uid;
+        if (user != null) {
+            uid = user.getUid();
+            // 调用服务层方法获取用户的问卷列表
+            PaperPageView paperPageView = paperService.myPaperList(uid, page, pageSize, 1);
+            return Result.success(paperPageView);
+        } else {
+            return Result.error("no login"); // 用户未登录
+        }
+    }
+    @RequestMapping("/like")
+    public Result likePaper(Integer pid)
+    {
+        paperService.like(pid);
+        return Result.success();
     }
 }

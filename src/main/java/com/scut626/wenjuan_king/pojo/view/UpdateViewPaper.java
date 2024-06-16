@@ -25,7 +25,11 @@ public class UpdateViewPaper {
         this.endTime = paper.getEndTime();
         this.createTime = paper.getCreateTime();
         this.accessCount = paper.getAccessCount();
+        this.template = paper.getTemplate();
+        this.like = paper.getLike();
     }
+    private Integer like;
+    private Integer template;
     private Integer pid;
     private String title;
     private Integer status;
