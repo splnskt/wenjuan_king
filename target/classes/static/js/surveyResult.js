@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             surveyData: null,
             //id暂未获取
             pid: '',
-       
+
         },
         methods: {
             fetchData() {
@@ -16,15 +16,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.log(response.data);
                         this.surveyData = response.data;
                         this.surveyData.data.questions.forEach(question => {
-                            question.isShow = false; // 初始设置为未展开状态
+                            Vue.set(question, 'isShow', false); // 初始设置为未展开状态
                         });
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
                     });
             },
-            show(question) {
-                question.isShow = !question.isShow;
+            show(index) {
+                this.surveyData.data.questions[index].isShow=!this.surveyData.data.questions[index].isShow;
             },
         },
         mounted() {
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 console.error('未提供问卷ID');
             }
             this.fetchData();
+
         }
     })
 });
