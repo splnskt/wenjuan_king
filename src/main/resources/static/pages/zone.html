@@ -25,14 +25,12 @@
 
             </div>
             <div class="mySurveys">
-                <button @click="showPapers" >我的问卷</button>
+                <button @click="showPapers">我的问卷</button>
             </div>
             <div class="myTemplates">
                 <button @click="showTemplates">我的模版</button>
             </div>
-            <div class="dataAnalyze">
-                <button @click="showOthers">统计信息</button>
-            </div>
+
 
             <div class="personal">
                 <button>个人资料</button>
@@ -41,62 +39,58 @@
             <div class="finish">发布数:
 
             </div>
-            <div class="read">填写数:
-
-            </div>
-            <div class="waiting">待发布:
-
-            </div>
-
 
 
         </div>
+        <div class="visualPart">
+            <div class="pagename" v-if="currentComponent">
+                <h2>页面内容</h2>
+                <!-- 显示我的问卷列表 -->
+                <div class="content" v-if="currentComponent === 'myPapers'">
+                    <button @click="changeBatch">批量管理</button>
+                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <ul>
+                        <div v-for="paper in papers" :key="paper.pid">
+                            <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
+                            <!-- 可能显示别的信息,例如创建时间 -->
+                            <li>{{paper.title}}</li>
+                            <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
+                            <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
+                            <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看结果</button>
+                        </div>
+                    </ul>
+                    <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+                    <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+                </div>
 
-        <div class="pagename" v-if="currentComponent">
-            <h2>页面内容</h2>
-            <!-- 显示我的问卷列表 -->
-            <div class="content" v-if="currentComponent === 'myPapers'">
-                <button @click="changeBatch">批量管理</button>
-                <button @click="deletePapers" v-if="batchProcessing">删除</button>
-                <ul>
-                    <div v-for="paper in papers" :key="paper.pid">
-                        <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
-                        <!-- 可能显示别的信息,例如创建时间 -->
-                        <li>{{paper.title}}</li>
-                        <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
-                        <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
-                        <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看结果</button>
-                    </div>
-                </ul>
-                <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
-                <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
-            </div>
+                <!-- 显示我的模版列表 -->
+                <div class="content" v-if="currentComponent === 'myTemplates'">
+                    <button @click="changeBatch">批量管理</button>
+                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <ul>
+                        <div v-for="paper in papers" :key="paper.pid">
+                            <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
 
-            <!-- 显示我的模版列表 -->
-            <div class="content" v-if="currentComponent === 'myTemplates'">
-                <button @click="changeBatch">批量管理</button>
-                <button @click="deletePapers" v-if="batchProcessing">删除</button>
-                <ul>
-                    <div v-for="paper in papers" :key="paper.pid">
-                        <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
-                       
-                        <li>{{paper.title}}</li>
-                        <button @click="use(paper.pid)" v-if="!batchProcessing">使用</button>
-                        <button @click="modifyTemplate(paper.pid)" v-if="!batchProcessing">修改</button>
-                    </div>
-                </ul>
-                <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
-                <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
-            </div>
+                            <li>{{paper.title}}</li>
+                            <button @click="use(paper.pid)" v-if="!batchProcessing">使用</button>
+                            <button @click="modifyTemplate(paper.pid)" v-if="!batchProcessing">修改</button>
+                        </div>
+                    </ul>
+                    <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+                    <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+                </div>
 
-            <!-- 显示其他内容，后续其他功能 -->
-            <div class="content" v-else-if="currentComponent === 'others'">
-                <h1>其他内容</h1>
+                <!-- 显示其他内容，后续其他功能 -->
+                <div class="content" v-else-if="currentComponent === 'others'">
+                    <h1>其他内容</h1>
+                </div>
             </div>
         </div>
-        <div class="returnButton">返回按钮
+       
+    </div>
+    <div class="returnButton">
+        <button id="returnMain">返回主页</button>
 
-        </div>
     </div>
 
 </body>

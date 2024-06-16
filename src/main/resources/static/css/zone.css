@@ -24,7 +24,7 @@ body{
     top:0;
     bottom: 0;
     left:0;
-    height: 90vh;
+    height: 70vh;
  
     display:flex;
     flex-direction: column;
@@ -34,7 +34,8 @@ body{
     background: url(../cartoon_artwork-2247396.jpg!d);
     overflow: hidden;
     background-size: cover;
-
+    border-radius: 3px;
+    border: 3px solid black;
    
 
 }
@@ -115,22 +116,46 @@ body{
     
     text-align: left;
 }
+
 .pagename{
-    width: 5%;
-    height: 3%;
-    background-color: rgb(200, 200, 221);
-    position: absolute;
-    top:0;
-    left:15%;
-    text-align: center;
-    padding:5px;
+  opacity: 1;
 }
-.returnButton
+    
+.returnButton button
 {   position: absolute;
+    right:0;
     top:0;
-    right:1%;
-    background-color: azure;
-    border-radius: 5px;
     font-size: 25px;
-    opacity: 0.75;
+}
+.returnButton button:hover{
+    cursor: pointer;
+}
+   
+.visualPart
+{   opacity: 0.75;
+    width: 78%;
+    background-color: bisque;
+    position: absolute;
+    height: 60%;
+    left: 266px;
+    top:35px;
+    height:100%;
+    border-radius: 5px;
+    border:3px solid white;
+}
+.myTemplates button
+{
+    opacity: 0.8;
+    background-color: #007bff; /* 设置背景颜色为蓝色 */
+    color: white; /* 设置字体颜色为白色 */
+    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
+    padding: 10px 20px; /* 设置内边距 */
+    font-size: 20px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    border-radius: 5px; /* 设置圆角 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+.myTemplates button:hover{
+    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
+    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }
