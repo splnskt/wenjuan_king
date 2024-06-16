@@ -158,12 +158,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 window.open(this.userAvatarUrl, '_blank');
             },
             changeAvatar(event) {
-                const file = event.target.files[0]; // 获取用户选择的文件对象
+                const file = event.target.files[0];
 
                 // 创建一个 FormData 对象，用于将文件数据传输到后端
                 let formData = new FormData();
-                formData.append('avatar', file); // 将文件对象添加到 FormData 中，'avatar' 是表单字段名
-
+                formData.append('image', file);
 
                 // 发送文件到后端的示例 Axios 请求
                 axios.post('/user/upload-image', formData, {
