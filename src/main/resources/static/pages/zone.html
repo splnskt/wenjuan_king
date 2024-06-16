@@ -84,6 +84,21 @@
                 <!-- 显示个人资料 -->
                 <div class="content" v-if="currentComponent === 'user'">
                     <h2>个人资料</h2>
+                    <div id="user">
+                        <!-- 用户头像显示及放大查看 -->
+                        <div class="avatar-container">
+                            <img class="avatar" :src="userAvatarUrl" @click="showAvatarModal" alt="用户头像">
+                            <button @click="changeAvatar">更改头像</button>
+                        </div>
+
+                        <!-- 放大查看头像的模态框 -->
+                        <div class="modal" v-if="showModal">
+                            <div class="modal-content">
+                                <span class="close" @click="closeModal">&times;</span>
+                                <img class="modal-image" :src="userAvatarUrl" alt="放大查看头像">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

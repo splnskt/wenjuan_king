@@ -1,6 +1,6 @@
 const returnMain = document.getElementById('returnMain');
-returnMain.addEventListener('click', function() {
-    window.location.href = '../pages/mainpage.html'; 
+returnMain.addEventListener('click', function () {
+    window.location.href = '../pages/mainpage.html';
 });
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 this.batchProcessing = false;
             },
             // 显示个人资料
-            showUser(){
+            showUser() {
                 this.currentComponent = 'user';
             },
 
@@ -148,4 +148,68 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.showPapers();
         },
     })
-})
+});
+
+// 用户个人资料相关
+document.addEventListener("DOMContentLoaded", function (event) {
+    var user = new Vue({
+        el: '#user',
+        data: {
+            userAvatarUrl: '../default.jpg', // 默认头像路径
+            showModal: false
+        },
+        methods: {
+            showAvatarModal() {
+                this.showModal = true;
+            },
+            closeModal() {
+                this.showModal = false;
+            },
+            changeAvatar(event) {
+                const file = event.target.files[0];
+
+                // 创建一个 FormData 对象，用于将文件数据传输到后端
+                let formData = new FormData();
+                formData.append('avatar', file);
+
+                // 发送文件到后端的示例 Axios 请求
+                axios.post('/user/upload-image', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(response => {
+
+                        // 关闭模态框
+                        this.showModal = false;
+                        if (response.data.code == 0) {
+                            // 提示用户头像更新成功或其他操作
+                            alert('头像更新成功！');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('头像上传失败:', error);
+                        alert('头像上传失败，请稍后再试。');
+                    });
+
+                this.getAvatar();
+            },
+            getAvatar() {
+                axios.post('user/image')
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.data.data != null) {
+                            // 假设后端返回新头像的路径，更新前端显示
+                            this.userAvatarUrl = response.data.data;
+                        } else;
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
+            },
+        },
+        mounted() {
+            this.getAvatar();
+        }
+    })
+});
