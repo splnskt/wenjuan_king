@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             removeOption(questionIndex, optionIndex) {
                 this.questions[questionIndex].questionOption.splice(optionIndex, 1);
             },
+            // 提交问卷
             submit: function () {
 
                 // 遍历问题数组，提取每个问题对象的 questionOptions 属性的 content 值，并存储到新的字符串数组中
@@ -97,6 +98,53 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 // 发送 PUT 请求
                 axios.put('/paper/update-paper', formData)
+                    .then(response => {
+                        // 处理后端返回的响应
+                        var getData = response.data;
+                        console.log('code:', getData.code);
+                        console.log('msg:', getData.msg);
+                        console.log('data:', getData.data);
+
+                        //成功后跳转，首页
+                        if (getData.data === 0) {
+                            alert("修改成功！");
+                            window.location.href = '../pages/mainpage.html';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            },
+
+            // 提交模版
+            submitT: function () {
+
+                // 遍历问题数组，提取每个问题对象的 questionOptions 属性的 content 值，并存储到新的字符串数组中
+                this.questions.forEach(question => {
+                    var newQuestionOptions = [];
+                    question.questionOption.forEach(option => {
+                        newQuestionOptions.push(option.content);
+                    });
+                    question.questionOption = newQuestionOptions;
+                });
+
+                var formData = {
+                    pid: this.pid,
+                    title: this.title,
+                    startTime: this.startTime,
+                    endTime: this.endTime,
+                    status: this.status,
+                    questions: this.questions
+                };
+
+                console.log('问卷标题:', this.title);
+                console.log('开始时间:', this.startTime);
+                console.log('结束时间:', this.endTime);
+                console.log('状态:', this.status);
+                console.log('问卷内容:', this.questions);
+
+                // 发送 PUT 请求
+                axios.put('/paper/update-template', formData)
                     .then(response => {
                         // 处理后端返回的响应
                         var getData = response.data;

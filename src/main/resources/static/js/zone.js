@@ -32,11 +32,40 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     console.error('Error fetching data:', error);
                 }
             },
+            // 请求我的模版列表
+            async fetchMyTemplates(page) {
+                //修改页面大小
+                this.pageSize = 5;
+                try {
+                    const response = await axios.get('/paper/my-template', {
+                        params: {
+                            page: page,
+                            pageSize: this.pageSize
+                        }
+                    });
+                    var listData = response.data;
+                    this.papers = listData.data.papers;
+                    this.totalPages = listData.data.paperCount / this.pageSize;
+                    if (listData.data.paperCount % this.pageSize != 0) {
+                        this.totalPages = this.totalPages + 1;
+                    }
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            },
             // 显示我的问卷列表
             showPapers() {
                 this.currentPage = 1;
                 this.fetchMyPapers(this.currentPage);
                 this.currentComponent = 'myPapers';
+                this.batchProcessing = false;
+            },
+            // 显示我的模版列表
+            showTemplates() {
+                this.currentPage = 1;
+                this.fetchMyTemplates(this.currentPage);
+                this.currentComponent = 'myTemplates';
+                this.batchProcessing = false;
             },
             prevPage() {
                 if (this.currentPage > 1) {
@@ -55,9 +84,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 // 跳转到填写问卷页面，并传递问卷ID
                 window.location.href = '../pages/surveyFill.html?pid=' + pid;
             },
+            // 使用模版
+            use(pid) {
+                window.location.href = '../pages/useTemplate.html?pid=' + pid;
+            },
             // 修改问卷
             modifyPaper(pid) {
                 window.location.href = '../pages/surveyModify.html?pid=' + pid;
+            },
+            // 修改模版
+            modifyTemplate(pid) {
+                window.location.href = '../pages/templateModify.html?pid=' + pid;
             },
             // 批量管理
             changeBatch() {
@@ -88,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     });
             },
             //显示结果
-            viewResult(pid){
+            viewResult(pid) {
                 window.location.href = '../pages/surveyResult.html?pid=' + pid;
             },
             // 其他选项，待编辑
