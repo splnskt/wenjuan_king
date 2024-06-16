@@ -45,14 +45,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
             removeOption(questionIndex, optionIndex) {
                 this.questions[questionIndex].questionOption.splice(optionIndex, 1);
             },
+
+            // 提交问卷方法
             submit: function () {
 
                 // 遍历问题数组，提取每个问题对象的 questionOptions 属性的 content 值，并存储到新的字符串数组中
                 this.questions.forEach(question => {
-                        var newQuestionOptions = [];
-                        question.questionOption.forEach(option => {
-                            newQuestionOptions.push(option.content);
-                        });
+                    var newQuestionOptions = [];
+                    question.questionOption.forEach(option => {
+                        newQuestionOptions.push(option.content);
+                    });
                     question.questionOption = newQuestionOptions;
                 });
 
@@ -80,36 +82,81 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.log('data:', getData.data);
 
                         //成功后跳转，首页
-                        if(getData.data===0){
+                        if (getData.data === 0) {
                             alert("创建成功！");
-                        window.location.href = '../pages/mainpage.html';
+                            window.location.href = '../pages/mainpage.html';
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
                     });
-            }
+            },
+
+            // 提交模版方法
+            submitT: function () {
+
+                // 遍历问题数组，提取每个问题对象的 questionOptions 属性的 content 值，并存储到新的字符串数组中
+                this.questions.forEach(question => {
+                    var newQuestionOptions = [];
+                    question.questionOption.forEach(option => {
+                        newQuestionOptions.push(option.content);
+                    });
+                    question.questionOption = newQuestionOptions;
+                });
+
+                var formData = {
+                    title: this.title,
+                    startTime: this.startTime,
+                    endTime: this.endTime,
+                    status: this.status,
+                    questions: this.questions
+                };
+
+                console.log('问卷标题:', this.title);
+                console.log('开始时间:', this.startTime);
+                console.log('结束时间:', this.endTime);
+                console.log('状态:', this.status);
+                console.log('问卷内容:', this.questions);
+
+                // 发送 POST 请求
+                axios.post('/paper/update-template', formData)
+                    .then(response => {
+                        // 处理后端返回的响应
+                        var getData = response.data;
+                        console.log('code:', getData.code);
+                        console.log('msg:', getData.msg);
+                        console.log('data:', getData.data);
+
+                        //成功后跳转，首页
+                        if (getData.data === 0) {
+                            alert("创建成功！");
+                            window.location.href = '../pages/mainpage.html';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            },
         }
     });
 
 });
-document.addEventListener("DOMContentLoaded",function(event){
+document.addEventListener("DOMContentLoaded", function (event) {
     var Items = new Vue({
-        el:'.navbar',
-        data:{
-            navItems:[
-                {id:1,text:'主页',link:'../pages/mainpage.html'},
-                {id:2,text:'联系我们',link:'../pages/contact.html'},
-                {id:3,text:'使用说明',link:'../pages/help.html'},
-                ]
+        el: '.navbar',
+        data: {
+            navItems: [
+                { id: 1, text: '主页', link: '../pages/mainpage.html' },
+                { id: 2, text: '联系我们', link: '../pages/contact.html' },
+                { id: 3, text: '使用说明', link: '../pages/help.html' },
+            ]
 
         },
         methods:
         {
-         Jump(index)
-         {
-            window.location.href=this.navItems[index].link;
-         }
+            Jump(index) {
+                window.location.href = this.navItems[index].link;
+            }
 
 
 
@@ -117,18 +164,18 @@ document.addEventListener("DOMContentLoaded",function(event){
 
     });
 })
-document.addEventListener("DOMContentLoaded",function(event){
+document.addEventListener("DOMContentLoaded", function (event) {
     var options = new Vue({
-        el:'.personalZone',
-        data:{
-            showOptions:false,
-            options:[
-                {text:'我的问卷',link:'../pages/Mysurveys.html'},
-               
-                {text:'数据统计',link:'../pages/DataAnalyze.html'},
-                {text:'个人中心',link:'../pages/Zone.html'},
+        el: '.personalZone',
+        data: {
+            showOptions: false,
+            options: [
+                { text: '我的问卷', link: '../pages/Mysurveys.html' },
 
-                ]
+                { text: '数据统计', link: '../pages/DataAnalyze.html' },
+                { text: '个人中心', link: '../pages/Zone.html' },
+
+            ]
 
         },
         methods:
@@ -136,15 +183,14 @@ document.addEventListener("DOMContentLoaded",function(event){
             highlightOption(index) {
                 // 处理选项悬停时的特效
                 // 这里可以添加处理选项悬停时的特效的代码
-              },
+            },
             hideOptions() {
                 this.showOptions = false;
-              },
-        
-                Jump(index)
-            {
-              window.location.href=this.options[index].link;
-              event.stopPropagation();
+            },
+
+            Jump(index) {
+                window.location.href = this.options[index].link;
+                event.stopPropagation();
             }
         }
 
