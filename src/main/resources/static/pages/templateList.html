@@ -30,7 +30,7 @@
         <!-- 模版列表 -->
         <ul>
             <div v-for="paper in papers" :key="paper.pid">
-                <li>{{paper.title}}</li>
+                <li>{{paper.title}} 点赞数:{{paper.like}}</li>
                 <button @click="viewPaper(paper.pid)">查看</button>
             </div>
         </ul>

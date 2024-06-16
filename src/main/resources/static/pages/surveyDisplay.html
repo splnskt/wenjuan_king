@@ -23,7 +23,7 @@
     </header>
     <div id="app">
         <div v-if="surveyData">
-            <h1>{{ surveyData.data.title }}</h1>
+            <h1>{{ surveyData.data.title }}<span>点赞数:{{surveyData.data.like}}</span></h1>
             <h4><span>修改时间：</span>{{surveyData.data.createTime}}</h4>
             <h4><span>开始时间：</span>{{surveyData.data.startTime}}</h4>
             <h4><span>结束时间：</span>{{surveyData.data.endTime}}</h4>
