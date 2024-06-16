@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         methods: {
             async fetchData() {
                 try {
-                    const response = await axios.get('/paper/view-paper', {
+                    const response = await axios.get('/paper/view-template', {
                         params: {
                             pid: this.pid,
                         }
@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 console.log('状态:', this.status);
                 console.log('问卷内容:', this.questions);
 
-                // 发送 PUT 请求
-                axios.put('/paper/update-paper', formData)
+                // 发送 POST 请求
+                axios.post('/paper/update-paper', formData)
                     .then(response => {
                         // 处理后端返回的响应
                         var getData = response.data;
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         },
         mounted() {
-            // 点击修改问卷
+            // 点击使用模版后
             const urlParams = new URLSearchParams(window.location.search);
             this.pid = urlParams.get('pid');
             if (!this.pid) {

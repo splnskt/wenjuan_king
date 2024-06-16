@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             // 使用模版
             use(pid) {
-                window.location.href = '../pages/surveyModify.html?pid=' + pid;
+                window.location.href = '../pages/useTemplate.html?pid=' + pid;
             },
             // 点赞
             like() {
