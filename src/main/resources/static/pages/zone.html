@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人中心</title>
-    <link rel="stylesheet" href="../css/test.css">
+    <link rel="stylesheet" href="../css/zone.css">
 </head>
 
 <body>
@@ -25,17 +25,17 @@
 
             </div>
             <div class="mySurveys">
-                <button @click="showPapers">我的问卷</button>
+                <button @click="showPapers" >我的问卷</button>
             </div>
             <!-- <div class="myTemplates">
                 <button @click="showTemplates">我的模版</button>
             </div> -->
-            <div class="dataAnalyze">统计信息
-                <button @click="showOthers">其他选项</button>
+            <div class="dataAnalyze">
+                <button @click="showOthers">统计信息</button>
             </div>
 
-            <div class="personal">个人资料
-
+            <div class="personal">
+                <button>个人资料</button>
             </div>
 
             <div class="finish">发布数:
@@ -94,6 +94,9 @@
             <div class="content" v-else-if="currentComponent === 'others'">
                 <h1>其他内容</h1>
             </div>
+        </div>
+        <div class="returnButton">返回按钮
+
         </div>
     </div>
 
