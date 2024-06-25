@@ -96,6 +96,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     };
                 }
             },
+            // 分享问卷
+            sharePaper(pid) {
+                var shareUrl = '../pages/surveyFill.html?pid=' + pid;
+                // 弹窗显示分享路径
+                alert('分享链接：' + shareUrl + '\n请复制链接进行分享。');
+            },
             // 填写问卷
             fillPaper(pid) {
                 // 跳转到填写问卷页面，并传递问卷ID
