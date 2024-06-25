@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       // 登出
       logoutButton() {
-        axios.post('/logout')
+        axios.post('/user/logout')
           .then(response => {
             console.log(response.data);
             if (response.data.code == 0) {
