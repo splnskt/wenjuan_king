@@ -32,31 +32,104 @@ h1 {
 label {
     display: block;
     margin-bottom: 10px;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 20px;
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 80%;
     padding: 8px;
-    font-size: 16px;
+    font-size: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 10px;
 }
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
+input[type="title"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+button.addOptionButton
+{  
+  padding: 10px 20px;
+    font-size: 16zzpx;
+    background-color: #36d428;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: #000000 2px solid;
+    
 }
-
-button:hover {
-    background-color: #0056b3;
+button.deleteOptionButton
+{  
+    padding: 10px 12px;
+    font-size: 12px;
+    background-color: #e3610b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: #000000 2px solid;
+}
+button.deleteQuestionButton
+{  margin-left: 650px;
+   padding: 10px 10px;
+    font-size: 13px;
+    background-color: #f40a0a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: #000000 2px solid;
+    
+}
+button.addQuestionButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0650b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 20%;
+    border: #000000 2px solid;
+}
+button.submitSurvey {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ad17ed;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 20%;
+  border: #000000 2px solid;
+}
+button.addOptionButton:hover{
+  background-color: rgb(5, 59, 10);
+}
+button.addQuestionButton:hover{
+  background-color: #004080;
+}
+button.submitSurvey:hover{
+  background-color: #420639;
+}
+button.deleteQuestionButton:hover{
+  background-color: rgb(153, 13, 13);
+}
+button.deleteOptionButton:hover{
+  background-color: rgb(134, 33, 8);
 }
 
 button:active {

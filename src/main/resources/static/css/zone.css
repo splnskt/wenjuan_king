@@ -9,11 +9,19 @@ body{
 
     
 }
+.headPhoto
+{   
+    max-width: 100%;
+    max-height: 100%;
+}
 .user
-{  background-color: brown;
+{  
+    background-color: brown;
    display: flex;
    margin:10px;
    justify-content: space-around;
+   max-width: 260px;
+   max-height: 20%;
 
 
 }
@@ -43,20 +51,22 @@ body{
     /* 间距大小 */
     flex: 0 0 auto; /* 确保每个子块都占据一行 */
     padding:20px; /* 文字与块的间距 */
-    border:5px solid silver;
+    border:5px solid white;
     transition: 0.3s ease-in-out;
+    margin-top: 10px;
 }
 .menu > *:hover {
     /* 间距大小 */
     font-size:30px ;
 }
 .mySurveys button {
+    position: relative;
     opacity: 0.8;
     background-color: #007bff; /* 设置背景颜色为蓝色 */
     color: white; /* 设置字体颜色为白色 */
     border: 1px solid #007bff; /* 设置边框为蓝色实线 */
     padding: 10px 20px; /* 设置内边距 */
-    font-size: 20px; /* 设置字体大小 */
+    font-size: 25px; /* 设置字体大小 */
     cursor: pointer; /* 鼠标悬停时显示手型光标 */
     border-radius: 5px; /* 设置圆角 */
     transition: background-color 0.3s ease; /* 添加过渡效果 */
@@ -66,19 +76,19 @@ body{
     background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
     border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }
-.dataAnalyze button{
+.myTemplates button{
     opacity: 0.8;
     background-color: #007bff; /* 设置背景颜色为蓝色 */
     color: white; /* 设置字体颜色为白色 */
     border: 1px solid #007bff; /* 设置边框为蓝色实线 */
     padding: 10px 20px; /* 设置内边距 */
-    font-size: 20px; /* 设置字体大小 */
+    font-size: 25px; /* 设置字体大小 */
     cursor: pointer; /* 鼠标悬停时显示手型光标 */
     border-radius: 5px; /* 设置圆角 */
     transition: background-color 0.3s ease; /* 添加过渡效果 */
 
 }
-.dataAnalyze button:hover{
+.myTemplates button:hover{
     background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
     border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }
@@ -88,7 +98,7 @@ body{
     color: white; /* 设置字体颜色为白色 */
     border: 1px solid #007bff; /* 设置边框为蓝色实线 */
     padding: 10px 20px; /* 设置内边距 */
-    font-size: 20px; /* 设置字体大小 */
+    font-size: 25px; /* 设置字体大小 */
     cursor: pointer; /* 鼠标悬停时显示手型光标 */
     border-radius: 5px; /* 设置圆角 */
     transition: background-color 0.3s ease; /* 添加过渡效果 */
@@ -118,6 +128,7 @@ body{
 }
 
 .pagename{
+    margin-left:10px;
   opacity: 1;
 }
     
@@ -136,29 +147,14 @@ body{
     width: 78%;
     background-color: bisque;
     position: absolute;
-    height: 60%;
+    height: 125%;
     left: 266px;
     top:35px;
-    height:100%;
+ 
     border-radius: 5px;
     border:3px solid white;
 }
-.myTemplates button
-{
-    opacity: 0.8;
-    background-color: #007bff; /* 设置背景颜色为蓝色 */
-    color: white; /* 设置字体颜色为白色 */
-    border: 1px solid #007bff; /* 设置边框为蓝色实线 */
-    padding: 10px 20px; /* 设置内边距 */
-    font-size: 20px; /* 设置字体大小 */
-    cursor: pointer; /* 鼠标悬停时显示手型光标 */
-    border-radius: 5px; /* 设置圆角 */
-    transition: background-color 0.3s ease; /* 添加过渡效果 */
-}
-.myTemplates button:hover{
-    background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
-    border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
-}
+
 
 .avatar {
     width: 100px; /* 调整头像的宽度 */
@@ -167,6 +163,19 @@ body{
     cursor: pointer;
     border: 2px solid #ccc;
     transition: transform 0.2s ease;
+}
+.mutiManage
+{
+    background-color:greenyellow;
+    font-size: 20px;
+    cursor: pointer;
+}
+.delete
+{
+    background-color:red;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 

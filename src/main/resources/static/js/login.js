@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data: {
             username: '', // 用户名
             password: '', // 密码
-            errorMessage: '' // 错误消息
+           // errorMessage: '' // 错误消息
         },
         methods: {
 
@@ -40,12 +40,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         // 根据后端返回的结果处理登录逻辑
                         if (response.data.msg === 'ok') {
                             // 登录成功，可以进行跳转或其他操作
-                            alert("welcome!");
+                            
                             if (response.data.data == 'admin') {
                                 window.location.href = '../pages/managerPage.html';
                             } else {
                                 window.location.href = '../pages/mainpage.html'; // 示例：跳转到首页
                             }
+                            alert("welcome!");
                         } else {
                             if (response.data.msg === 'user banned') {
                                 alert("该用户在黑名单中！");
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     })
                     .catch(error => {
                         console.error('Error logging in:', error);
-                        this.errorMessage = '登录出错！';
+                       // this.errorMessage = '登录出错！';
                     });
 
 

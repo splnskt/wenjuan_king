@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>使用模版</title>
-    <link rel="stylesheet" href="../css/surveyModify.css">
+    <link rel="stylesheet" href="../css/surveyCreate.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 
@@ -32,7 +32,7 @@
             <!-- 问卷头部信息 -->
             <div>
                 <label>问卷标题：</label>
-                <input type="text" v-model="title" placeholder="问卷标题" required>
+                <input type="title" v-model="title" placeholder="问卷标题" required>
                 <label>开始时间：</label>
                 <input type="date" v-model="startTime">
                 <label>结束时间：</label>
@@ -54,18 +54,18 @@
                     <div v-for="(option, optionIndex) in question.questionOption" :key="optionIndex">
                         <label>选项{{ optionIndex + 1 }}:</label>
                         <input type="text" v-model="option.content" required>
-                        <button @click="removeOption(index, optionIndex)">删除选项</button>
+                        <button class="deleteOptionButton"  @click="removeOption(index, optionIndex)">删除选项</button>
                     </div>
                     <br>
-                    <button @click="addOption(index)">添加选项</button>
+                    <button class="addOptionButton" @click="addOption(index)">添加选项</button>
                 </div>
                 <br><br>
-                <button @click="removeQuestion(index)">删除问题</button>
+                <button class="deleteQuestionButton" @click="removeQuestion(index)">删除问题</button>
                 <br><br>
             </div>
             <br>
-            <button @click="addQuestion">添加问题</button>
-            <button @click="submit">提交问卷</button>
+            <button class="addQuestionButton" @click="addQuestion">添加问题</button>
+            <button class="submit"  @click="submit">提交问卷</button>
         </div>
     </div>
 
