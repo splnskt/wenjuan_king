@@ -43,4 +43,6 @@ public interface UserMapper {
 
     @Select("select image_uri from user where uid = #{uid}")
     List<String> selectImageUriByUid(Integer uid);
+
+    List<User> selectUsersByName(String name, Integer page, Integer pageSize);
 }

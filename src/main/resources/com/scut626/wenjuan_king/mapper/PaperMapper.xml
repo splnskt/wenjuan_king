@@ -15,8 +15,8 @@
         <if test="template != null">
             and template = #{template}
         </if>
-#         根据填写次数排序
-        order by access_count desc
+#         根据点赞数排序
+        order by `like` desc
         <if test="page != null and pageSize != null">
             limit #{page}, #{pageSize}
         </if>

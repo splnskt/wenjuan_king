@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             window.location.href = '../pages/mainpage.html'; // 示例：跳转到首页
                         } else {
                             // 登录失败，显示错误消息
+                            alert("账户或密码错误！");
                             this.errorMessage = response.data.message;
                         }
                     })

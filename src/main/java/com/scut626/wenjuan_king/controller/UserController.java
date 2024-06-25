@@ -3,6 +3,7 @@ package com.scut626.wenjuan_king.controller;
 // 引入必要的类
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.pojo.User;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Slf4j // 自动生成日志记录器
 @RestController // 声明该类是一个 REST 控制器，返回 JSON 或 XML 响应
@@ -99,6 +101,8 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         // 获取用户ID
         Integer uid = user.getUid();
+        if(uid == null)
+            return Result.nologin();
         //把路径中\改成/
         originalFilename = originalFilename.replace("\\", "/");
         userService.updateImageUriByUid(originalFilename, uid);
@@ -112,10 +116,17 @@ public class UserController {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         // 获取用户ID
+        if(user == null)
+            return Result.nologin();
         Integer uid = user.getUid();
         String uri = userService.selectImageUriByUid(uid);
         return Result.success(uri);
     }
-
-
+    @RequestMapping("/user/all-user")
+    public Result viewUserList(String name, Integer page, Integer pageSize) {
+        log.info("查找用户列表...");
+        // 调用服务层方法获取问卷列表
+        List<User> userList = userService.userList(name, page, pageSize);
+        return Result.success(userList);
+    }
 }

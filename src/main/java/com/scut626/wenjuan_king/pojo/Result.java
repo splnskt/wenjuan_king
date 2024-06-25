@@ -21,6 +21,10 @@ public class Result {
     {
         return new Result(1, msg, null);
     }
+    public static Result nologin()
+    {
+        return new Result(-1, "no login", null);
+    }
 
     private Integer code;
     private String msg;

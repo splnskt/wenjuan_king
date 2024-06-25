@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .catch(error => {
                         console.error('Error deleting papers:', error);
                     });
+                this.fetchData();
             },
         },
         mounted() {

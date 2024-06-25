@@ -15,9 +15,9 @@
         <nav>
             <ul>
                 <li><a href="mainpage.html">首页</a></li>
-                <!-- 关于 和 联系我们 暂时未做页面 -->
-                <li><a href="#">关于</a></li>
-                <li><a href="#">联系我们</a></li>
+         
+          
+                <li><a href="aboutUs.HTML">联系我们</a></li>
                 <li><a href="templateCreate.html">创建模版</a></li>
             </ul>
         </nav>
@@ -30,7 +30,7 @@
         <!-- 模版列表 -->
         <ul>
             <div v-for="paper in papers" :key="paper.pid">
-                <li>{{paper.title}}</li>
+                <li>{{paper.title}} 点赞数:{{paper.like}}</li>
                 <button @click="viewPaper(paper.pid)">查看</button>
             </div>
         </ul>

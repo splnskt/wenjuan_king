@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded",function(event){
         data:{
             navItems:[
                 {id:1,text:'主页',link:'../pages/mainpage.html'},
-                {id:2,text:'联系我们',link:'../pages/contact.html'},
+                {id:2,text:'联系我们',link:'../pages/aboutUs.html'},
                 {id:3,text:'使用说明',link:'../pages/help.html'},
                 ]
 

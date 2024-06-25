@@ -75,4 +75,13 @@ public class UserServiceImpl implements UserService {
             return  uri.get(0);
         }
     }
+
+    @Override
+    public List<User> userList(String name, Integer page, Integer pageSize) {
+        if (page != null) {
+            page = (page - 1) * pageSize;
+        }
+        List<User> list = userMapper.selectUsersByName(name, page, pageSize);
+        return  list;
+    }
 }

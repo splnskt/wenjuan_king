@@ -10,11 +10,15 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     line-height: 1.6;
+    background-image: url(../starry_sky_clouds_sunset_120716_1280x720.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* Header styles */
 header {
-    background-color: #333;
+    opacity: 0.75;
+    background-color: #0f154f;
     color: #fff;
     padding: 1rem;
     text-align: center;
@@ -35,6 +39,7 @@ nav ul li {
 }
 
 nav ul li a {
+    font-size: 25px;
     color: #fff;
     text-decoration: none;
 }
@@ -45,7 +50,8 @@ nav ul li a:hover {
 
 /* Main content styles */
 #app {
-    max-width: 800px;
+    opacity: 0.89;
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
     background-color: #fff;
