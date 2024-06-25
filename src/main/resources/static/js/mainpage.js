@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var a = new Vue({
     el: '#userLog',
     data: {
-      isLogin: true,
+      isLogin: false,
     },
     methods: {
       fetchIsLogin() {
@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
           .then(response => {
             console.log(response.data);
             if (response.data.code == -1) {
-              // 假设后端返回新头像的路径，更新前端显示
               this.isLogin = false;
             }
             else {
