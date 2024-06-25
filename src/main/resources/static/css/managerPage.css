@@ -1,0 +1,155 @@
+.top {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* 可选：添加内边距以调整布局 */
+    background-color: #e2e2d1; /* 可选：设置背景色 */
+    right: 0px;
+    left:0px;
+    opacity: 0.95;
+  }
+  
+  .logo {
+    width: 200px; /* 设置 logo 宽度 */
+    height: 150px; /* 设置 logo 高度 */
+    background-image: url('../footer.png'); /* 设置背景图片路径 */
+    background-size: contain; /* 保持背景图片比例 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-position: center; /* 居中显示背景图片 */
+  }
+  
+  .title {
+    flex: 1; /* 占据剩余空间 */
+    margin-left: 500px;
+    font-size: 60px;
+  }
+  
+  .logout-btn {
+    padding: 8px 16px; /* 按钮内边距 */
+    background-color: #007bff; /* 按钮背景色 */
+    color: #fff; /* 按钮文字颜色 */
+    border: none; /* 去除按钮边框 */
+    cursor: pointer; /* 鼠标悬停指针样式 */
+    transition: background-color 0.3s ease; /* 按钮背景色过渡效果 */
+    font-size: 25px;
+    margin-right: 30px;
+    border-radius: 5px;
+  }
+  
+  .logout-btn:hover {
+    background-color: #0056b3; /* 鼠标悬停时的背景色 */
+  }
+  .bottom-left {
+    opacity: 0.9;
+     /* 固定在页面左下角 */
+    left: 0px; /* 距离左侧20px */
+    height:30%;
+    background-color: #c4b6c8; /* 背景色，可选 */
+    padding: 10px; /* 内边距，可选 */
+    width: 15%;
+    top:178px;
+    position: absolute;
+  }
+  
+  .menu {
+   
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+  }
+  
+  .menu > div {
+    margin-top: 5px;
+    margin-bottom: 12px; /* 设置菜单项之间的下边距 */
+  }
+  
+  .menu button {
+    width: 100%; /* 按钮宽度填满父元素 */
+    padding: 8px; /* 按钮内边距 */
+    border: none; /* 去除按钮边框 */
+    background-color: #1cbc11; /* 按钮背景色 */
+    color: #fff; /* 按钮文字颜色 */
+    cursor: pointer; /* 鼠标悬停指针样式 */
+    transition: background-color 0.3s ease; /* 按钮背景色过渡效果 */
+    font-size: 30px;
+    border-radius: 5px;
+    border: gold solid 3px;
+  }
+  
+  .menu button:hover {
+    background-color: #06440f; /* 鼠标悬停时的背景色 */
+  }
+  
+  .visualPart
+  { 
+    opacity: 0.9;
+    position: absolute;
+    left: 16.2%;
+    top: 178px;
+    background-color:grey;
+    right:10%;
+    border: black solid  2px;
+    height:70%;
+  }
+  body{
+    background-image: url(../0168da61bd6cdb11013f01cd51d131.jpg@1280w_1l_2o_100sh.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  h2{
+    margin-left: 20px;
+    font-size: 35px;
+  }
+  button.mutiManage
+  {
+    margin-left: 25px;
+    font-size: 18px;
+    background-color: rgb(235, 241, 50);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button.mutiManage:hover
+  {
+       background-color: yellowgreen;
+  }
+  button.delete
+  {
+    margin-left: 150px;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button.delete:hover
+{
+    background-color: red;
+}
+button.former
+{  position: absolute;
+    margin-left:500px;
+    bottom: 2%;
+    font-size: 15px;
+    
+}
+button.next
+{   font-size: 15px;
+    position: absolute;
+    margin-left:600px;
+    bottom: 2%;
+}
+button.ban
+{
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3;
+  background-color: red;
+}
+button.unban
+{
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3;
+    background-color:green;
+}
