@@ -1,15 +1,15 @@
 const returnMain = document.getElementById('returnMain');
 returnMain.addEventListener('click', function () {
     axios.post('/user/logout')
-          .then(response => {
+        .then(response => {
             console.log(response.data);
             if (response.data.code == 0) {
-              this.isLogin = false;
+                this.isLogin = false;
             }
-          })
-          .catch(error => {
+        })
+        .catch(error => {
             console.error('Error deleting papers:', error);
-          });
+        });
     window.location.href = '../pages/mainpage.html';
 });
 
@@ -200,7 +200,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
             //显示结果
             viewResult(pid) {
-                window.location.href = '../pages/surveyResult.html?pid=' + pid;
+                var url = '../pages/surveyResult.html?pid=' + pid;
+                window.open(url, '_blank'); 
+                // '_blank'参数告诉浏览器在新窗口或标签页中打开链接
             },
             // 其他选项，待编辑
             showOthers() {
