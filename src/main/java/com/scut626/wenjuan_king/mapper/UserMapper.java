@@ -1,10 +1,7 @@
 package com.scut626.wenjuan_king.mapper;
 
 import com.scut626.wenjuan_king.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,4 +40,15 @@ public interface UserMapper {
 
     @Select("select image_uri from user where uid = #{uid}")
     List<String> selectImageUriByUid(Integer uid);
+
+    List<User> selectUsersByName(String name, Integer page, Integer pageSize);
+
+    @Delete("delete from user where uid = #{uid}")
+    void deleteUser(Integer uid);
+
+    @Update("update user set ban = #{i} where uid = #{uid}")
+    void setUserBanned(Integer uid, int i);
+
+
+    Long userCount(String name);
 }

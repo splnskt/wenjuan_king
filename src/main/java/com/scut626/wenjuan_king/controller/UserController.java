@@ -3,12 +3,14 @@ package com.scut626.wenjuan_king.controller;
 // 引入必要的类
 import com.scut626.wenjuan_king.pojo.Result;
 import com.scut626.wenjuan_king.pojo.User;
+import com.scut626.wenjuan_king.pojo.view.PaperPageView;
 import com.scut626.wenjuan_king.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j // 自动生成日志记录器
 @RestController // 声明该类是一个 REST 控制器，返回 JSON 或 XML 响应
@@ -75,6 +80,20 @@ public class UserController {
         } else if (rst == 2) {
             // 密码错误
             return Result.error("password error");
+        } else if (rst == 3) {
+            //用户被封禁
+            return Result.error("user banned");
+        } else if (rst == 4) {
+            //用户是管理员
+            // 登录成功
+            log.info("管理员" + user + "登录成功");
+
+            // 将用户信息存入 session
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+
+            // 返回成功结果
+            return Result.success("admin");
         }
 
         // 其他未知错误
@@ -99,6 +118,8 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         // 获取用户ID
         Integer uid = user.getUid();
+        if(uid == null)
+            return Result.nologin();
         //把路径中\改成/
         originalFilename = originalFilename.replace("\\", "/");
         userService.updateImageUriByUid(originalFilename, uid);
@@ -112,10 +133,46 @@ public class UserController {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         // 获取用户ID
+        if(user == null)
+            return Result.nologin();
         Integer uid = user.getUid();
         String uri = userService.selectImageUriByUid(uid);
         return Result.success(uri);
     }
-
-
+    @RequestMapping("/user/all-user")
+    public Result viewUserList(String name, Integer page, Integer pageSize) {
+        log.info("查找用户列表...");
+        // 调用服务层方法获取问卷列表
+        List<User> userList = userService.userList(name, page, pageSize);
+        //获取用户数量
+        Long userCount = userService.getUserCount(name);
+        //包装两个数据
+        Map<String, Object> map = new HashMap<>();
+        map.put("userCount", userCount);
+        map.put("users", userList);
+        return Result.success(map);
+    }
+    @RequestMapping("/user/delete-user")
+    public Result deleteUser(@RequestBody List<Integer> uidList) {
+        log.info("删除用户...");
+        // 调用服务层方法获取问卷列表
+        for (Integer i : uidList) {
+            userService.deleteUser(i);
+        }
+        return Result.success();
+    }
+    @RequestMapping("/user/ban-user")
+    public Result banUser(Integer uid) {
+        log.info("封禁用户" + uid + "...");
+        // 调用服务层方法获取问卷列表
+        userService.setUserBanned(uid, 1);
+        return Result.success();
+    }
+    @RequestMapping("/user/unban-user")
+    public Result unbanUser(Integer uid) {
+        log.info("解除封禁用户" + uid + "...");
+        // 调用服务层方法获取问卷列表
+        userService.setUserBanned(uid, 0);
+        return Result.success();
+    }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut626.wenjuan_king.mapper.UserMapper">
+    <select id="selectUsersByName" resultType="com.scut626.wenjuan_king.pojo.User">
+        SELECT * from user
+        WHERE true
+        <if test="name != null">
+            and username like concat('%',#{name},'%')
+        </if>
+#         根据创建时间排序
+        order by create_time desc
+        <if test="page != null and pageSize != null">
+            limit #{page}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="userCount" resultType="java.lang.Long">
+        SELECT count(1) from user
+        WHERE true
+        <if test="name != null">
+            and user.username like concat('%',#{name},'%')
+        </if>
+        order by create_time desc
+    </select>
+</mapper>

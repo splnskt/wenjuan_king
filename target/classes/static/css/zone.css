@@ -159,3 +159,14 @@ body{
     background-color: #0056b3; /* 悬停时背景颜色变为深蓝色 */
     border-color: #0056b3; /* 悬停时边框颜色变为深蓝色 */
 }
+
+.avatar {
+    width: 100px; /* 调整头像的宽度 */
+    height: 100px; /* 调整头像的高度 */
+    border-radius: 50%; /* 使头像呈圆形 */
+    cursor: pointer;
+    border: 2px solid #ccc;
+    transition: transform 0.2s ease;
+}
+
+

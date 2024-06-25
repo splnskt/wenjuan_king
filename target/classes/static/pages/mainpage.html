@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -10,51 +11,63 @@
 </head>
 
 <body>
-  
-   
+
+
   <div class="container">
     <div class="carousel-container">
       <h1 class="title">看看大家在问什么？</h1>
-      <div class="swiper-container"@click="GotoRecomandation"><!-- 需要获取填写最多的三个问卷的标题-->
-        <div class="swiper-wrapper" >
-          <div class="swiper-slide"><img src="../wallhaven-1p18w3.jpg" alt="Slide 1"></div>
-          <div class="swiper-slide"><img src="../wallhaven-xlp3zz.jpg" alt="Slide 2"></div>
-          <div class="swiper-slide"><img src="../mengong.png" alt="Slide 3"></div>
-     
+      <div class="swiper-container" @click="GotoRecomandation"><!-- 需要获取填写最多的三个问卷的标题-->
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="../887.jpg" alt="Slide 1"></div>
+          <div class="swiper-slide"><img src="../u=1800496580,2523509424&fm=253&fmt=auto&app=120&f=JPEG.webp"
+              alt="Slide 2"></div>
+          <div class="swiper-slide"><img src="../b690dde4946d41ffa53fb2c84e8502fb.webp" alt="Slide 3"></div>
+
         </div>
       </div>
     </div>
     <div class="swiper-pagination"></div> <!-- 指示器 -->
-  
-   
-     
-  
-  
+
+
+
+
+
     <div class="navbar">
       <div class="navItem" v-for="(Item, index) in navItems" :key="index" @click="Jump(index)">
         {{ Item.text }}
       </div>
     </div>
-    <div class="buttons">
-      <button class="Login" ><a href="../pages/login.html">登录 </a></button>
-      <button class="register" ><a href="../pages/register.html">注册</a></button>
+
+    <!-- 处理登录的区别 -->
+    <div class="buttons" id="userLog">
+      <div v-if="!isLogin">
+        <button class="Login"><a href="../pages/login.html">登录 </a></button>
+        <button class="register"><a href="../pages/register.html">注册</a></button>
+      </div>
+      <div v-if="isLogin">
+        <button class='Logout' @click="logoutButton">登出</button>
+      </div>
     </div>
+
     <div class="rightnavbar">
       <div class="personalZone" @mouseover="showOptions = true" @mouseleave="hideOptions" style="color: brown;">
         Menu
-        
-        <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index" @mouseover="highlightOption(index)" @click="Jump(index)">
+
+        <div class="option" v-if="showOptions" v-for="(option, index) in options" :key="index"
+          @mouseover="highlightOption(index)" @click="Jump(index)">
           {{ option.text }}
         </div>
       </div>
     </div>
   </div>
-  <img src="../logo.png" class="logo" >
-  
-      
-  
+  <img src="../logo.png" class="logo">
+
+
+
 </body>
 <script src="../js/mainpage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </html>

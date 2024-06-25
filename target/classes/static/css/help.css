@@ -1,0 +1,38 @@
+body
+{
+    background-image: url(../wallhaven-ex3z9l.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    text-align: center;
+}
+.stateMent1
+{  position: absolute;
+
+    top:25%;
+    font-family:Arial;
+    font-size: 3.5em;
+    left:35%;
+    color:rgb(0, 0, 0);
+}
+.stateMent2
+{  position: absolute;
+
+    top:32%;
+    font-family:Arial;
+    font-size: 3.5em;
+   left:50%;
+    color:rgb(0, 0, 0);
+}
+.mainPage button{
+    opacity: 1;
+    position:absolute;
+    left:5px;
+    top:10px;
+    font-size: 20px;
+   
+}
+.mainPage button:hover
+{
+    cursor: pointer;
+}
