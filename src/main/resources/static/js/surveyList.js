@@ -49,9 +49,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 window.location.href = '../pages/surveyFill.html?pid=' + pid;
             },
             sharePaper(pid) {
-                var shareUrl = '../pages/surveyFill.html?pid=' + pid;
-                // 弹窗显示分享路径
-                alert('分享链接：' + shareUrl + '\n请复制链接进行分享。');
+                var shareUrl = 'localhost8080:/pages/surveyFill.html?pid=' + pid;
+                navigator.clipboard.writeText(shareUrl)
+                    .then(() => {
+                        alert('分享链接已复制到剪贴板:\n' + shareUrl);
+                    })
+                    .catch(err => {
+                        console.error('复制失败:', err);
+                        // 在这里可以提供一个备选方案，例如通过提示用户手动复制链接
+                        alert('复制失败，请手动复制链接:\n' + shareUrl);
+                    });
             },
         },
         mounted() {
