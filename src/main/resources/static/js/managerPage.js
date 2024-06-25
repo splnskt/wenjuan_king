@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
         },
         mounted() {
-            this.showPapers();
+            this.showUsers();
             this.getAvatar();
         },
     })

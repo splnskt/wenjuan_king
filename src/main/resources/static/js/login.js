@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         if (response.data.msg === 'ok') {
                             // 登录成功，可以进行跳转或其他操作
                             alert("welcome!");
-                            if (response.data.data === 'admin') {
+                            if (response.data.data == 'admin') {
                                 window.location.href = '../pages/managerPage.html';
                             } else {
                                 window.location.href = '../pages/mainpage.html'; // 示例：跳转到首页
