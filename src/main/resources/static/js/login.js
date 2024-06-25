@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         data: {
             username: '', // 用户名
             password: '', // 密码
-            errorMessage: '' // 错误消息
+           // errorMessage: '' // 错误消息
         },
         methods: {
            
@@ -40,17 +40,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         // 根据后端返回的结果处理登录逻辑
                         if (response.data.msg==='ok') {
                             // 登录成功，可以进行跳转或其他操作
-                            alert("welcome!");
+                            
                             window.location.href = '../pages/mainpage.html'; // 示例：跳转到首页
+                            alert("welcome!");
                         } else {
                             // 登录失败，显示错误消息
                             alert("账户或密码错误！");
-                            this.errorMessage = response.data.message;
+                           // this.errorMessage = response.data.message;
                         }
                     })
                     .catch(error => {
                         console.error('Error logging in:', error);
-                        this.errorMessage = '登录出错！';
+                       // this.errorMessage = '登录出错！';
                     });
                     
                     

@@ -12,13 +12,11 @@
     <div id="app">
         <div class="menu">
             <div class="user">
-                <div class="nickname">昵称
-
-                </div>
-                <div class="head">头像
+                
+                <img :src="userAvatarUrl" alt="用户头像" class="headPhoto">
 
 
-                </div>
+              
 
 
 
@@ -45,8 +43,8 @@
                 <!-- 显示我的问卷列表 -->
                 <div class="content" v-if="currentComponent === 'myPapers'">
                     <h2>我的问卷</h2>
-                    <button @click="changeBatch">批量管理</button>
-                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <button class="mutiManage" @click="changeBatch">批量管理</button>
+                    <button class="delete"  @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
                         <div v-for="paper in papers" :key="paper.pid">
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
@@ -64,8 +62,8 @@
                 <!-- 显示我的模版列表 -->
                 <div class="content" v-if="currentComponent === 'myTemplates'">
                     <h2>我的模版</h2>
-                    <button @click="changeBatch">批量管理</button>
-                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <button class="mutiManage" @click="changeBatch">批量管理</button>
+                    <button class="delete"   @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
                         <div v-for="paper in papers" :key="paper.pid">
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
