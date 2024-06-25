@@ -104,7 +104,7 @@ button.addQuestionButton {
     margin-left: 20%;
     border: #000000 2px solid;
 }
-button.submit {
+button.submitSurvey {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #ad17ed;
@@ -122,7 +122,7 @@ button.addOptionButton:hover{
 button.addQuestionButton:hover{
   background-color: #004080;
 }
-button.submit:hover{
+button.submitSurvey:hover{
   background-color: #420639;
 }
 button.deleteQuestionButton:hover{
