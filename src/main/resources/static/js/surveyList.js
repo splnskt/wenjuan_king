@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 window.location.href = '../pages/surveyFill.html?pid=' + pid;
             },
             sharePaper(pid) {
-                var shareUrl = 'localhost8080:/pages/surveyFill.html?pid=' + pid;
+                var shareUrl = 'localhost:8080/pages/surveyFill.html?pid=' + pid;
                 navigator.clipboard.writeText(shareUrl)
                     .then(() => {
                         alert('分享链接已复制到剪贴板:\n' + shareUrl);
