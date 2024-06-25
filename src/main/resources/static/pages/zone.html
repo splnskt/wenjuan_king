@@ -50,6 +50,7 @@
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
                             <!-- 可能显示别的信息,例如创建时间 -->
                             <li>{{paper.title}}</li>
+                            <button @click="sharePaper(paper.pid)" v-if="!batchProcessing">分享</button>
                             <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
                             <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
                             <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看结果</button>

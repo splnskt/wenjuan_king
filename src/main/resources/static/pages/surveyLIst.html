@@ -31,6 +31,7 @@
             <div v-for="paper in papers" :key="paper.pid">
                 <li>{{paper.title}}</li>
                 <button @click="fillPaper(paper.pid)">填写</button>
+                <button @click="sharePaper(paper.pid)">分享</button>
             </div>
         </ul>
         <button @click="prevPage" :disabled="currentPage === 1">上一页</button>

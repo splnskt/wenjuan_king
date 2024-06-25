@@ -23,9 +23,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     var listData = response.data;
                     this.papers = listData.data.papers;
                     this.totalPages = listData.data.paperCount / this.pageSize;
-                    if (listData.data.paperCount % this.pageSize != 0) {
-                        this.totalPages = this.totalPages + 1;
-                    }
+                    this.totalPages = Math.ceil(this.totalPages);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
@@ -49,7 +47,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             fillPaper(pid) {
                 // 跳转到填写问卷页面，并传递问卷ID
                 window.location.href = '../pages/surveyFill.html?pid=' + pid;
-              }
+            },
+            sharePaper(pid) {
+                var shareUrl = '../pages/surveyFill.html?pid=' + pid;
+                // 弹窗显示分享路径
+                alert('分享链接：' + shareUrl + '\n请复制链接进行分享。');
+            },
         },
         mounted() {
             this.fetchData(this.currentPage);
