@@ -45,7 +45,7 @@
         <button class="register"><a href="../pages/register.html">注册</a></button>
       </div>
       <div v-if="isLogin">
-        <img class="avatar":src="userAvatarUrl">
+        <img class="avatar":src="userAvatarUrl" @click="zone">
         <button class='Logout' @click="logoutButton">登出</button>
       </div>
     </div>

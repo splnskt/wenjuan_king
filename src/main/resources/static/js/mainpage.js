@@ -127,7 +127,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.error('Error deleting papers:', error);
           });
       },
-
+      zone() { 
+        window.location.href = '../pages/zone.html';
+      },
       // 登出
       logoutButton() {
         axios.post('/user/logout')
@@ -145,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     },
     mounted() {
       this.fetchIsLogin();
-      if(this.isLogin){
+      if (this.isLogin) {
         this.getAvatar();
       }
     },
