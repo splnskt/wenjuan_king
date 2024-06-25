@@ -89,12 +89,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 })
 
+
+// 处理登录事件
 document.addEventListener("DOMContentLoaded", function (event) {
   var a = new Vue({
     el: '#userLog',
     data: {
-      isLogin: false,
-
+      isLogin: true,
     },
     methods: {
       fetchIsLogin() {
@@ -113,18 +114,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.error('Error deleting papers:', error);
           });
       },
-      
+
       // 登出
-      logout() {
-        // 登出弹窗
-        alert('即将登出');
+      logoutButton() {
         axios.post('/logout')
           .then(response => {
             console.log(response.data);
+            if (response.data.code == 0) {
+              this.isLogin = false;
+            }
           })
           .catch(error => {
             console.error('Error deleting papers:', error);
           });
+        this.fetchIsLogin();
       },
     },
     mounted() {

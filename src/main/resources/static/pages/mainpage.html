@@ -44,8 +44,8 @@
         <button class="Login"><a href="../pages/login.html">登录 </a></button>
         <button class="register"><a href="../pages/register.html">注册</a></button>
       </div>
-      <div v-else-if="isLogin">
-        <button @click="logout">登出</button>
+      <div v-if="isLogin">
+        <button class='Logout' @click="logoutButton">登出</button>
       </div>
     </div>
 
@@ -67,6 +67,7 @@
 </body>
 <script src="../js/mainpage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 </html>
