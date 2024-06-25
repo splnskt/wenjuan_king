@@ -27,26 +27,24 @@
             <div class="mySurveys">
                 <button @click="showPapers">我的问卷</button>
             </div>
+
             <div class="myTemplates">
                 <button @click="showTemplates">我的模版</button>
             </div>
 
-
             <div class="personal">
-                <button>个人资料</button>
+                <button @click="showUser">个人资料</button>
             </div>
 
-            <div class="finish">发布数:
-
-            </div>
+       
 
 
         </div>
         <div class="visualPart">
             <div class="pagename" v-if="currentComponent">
-                <h2>页面内容</h2>
                 <!-- 显示我的问卷列表 -->
                 <div class="content" v-if="currentComponent === 'myPapers'">
+                    <h2>我的问卷</h2>
                     <button @click="changeBatch">批量管理</button>
                     <button @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
@@ -65,13 +63,14 @@
 
                 <!-- 显示我的模版列表 -->
                 <div class="content" v-if="currentComponent === 'myTemplates'">
+                    <h2>我的模版</h2>
                     <button @click="changeBatch">批量管理</button>
                     <button @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
                         <div v-for="paper in papers" :key="paper.pid">
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
 
-                            <li>{{paper.title}}</li>
+                            <li>{{paper.title}} 点赞数:{{paper.like}}</li>
                             <button @click="use(paper.pid)" v-if="!batchProcessing">使用</button>
                             <button @click="modifyTemplate(paper.pid)" v-if="!batchProcessing">修改</button>
                         </div>
@@ -80,13 +79,19 @@
                     <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
                 </div>
 
-                <!-- 显示其他内容，后续其他功能 -->
-                <div class="content" v-else-if="currentComponent === 'others'">
-                    <h1>其他内容</h1>
+                <!-- 显示个人资料 -->
+                <div class="content" v-if="currentComponent === 'user'">
+                    <h2>个人资料</h2>
+
+                    <div class="avatar-container">
+                        <img class="avatar" :src="userAvatarUrl" @click="openImageInNewTab" alt="用户头像">
+                        <input type="file" @change="changeAvatar" required>
+                    </div>
+
                 </div>
             </div>
         </div>
-       
+
     </div>
     <div class="returnButton">
         <button id="returnMain">返回主页</button>

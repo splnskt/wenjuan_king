@@ -16,4 +16,5 @@ public class User {
     private LocalDateTime createTime;
     private LocalDateTime lastLoginTime;
     private String imageUri;
+    private Integer ban;
 }
