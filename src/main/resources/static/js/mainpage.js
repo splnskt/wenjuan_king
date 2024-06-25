@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.error('Error deleting papers:', error);
           });
       },
+      // 点击头像跳转至个人中心
       zone() { 
         window.location.href = '../pages/zone.html';
       },

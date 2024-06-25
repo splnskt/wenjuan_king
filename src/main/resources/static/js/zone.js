@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var app = new Vue({
         el: '#app',
         data: {
+            username: '',
             currentComponent: '', //当前选择的模块,未设置默认界面
+            paperCount: 0,
             papers: [],
             currentPage: 1,
             totalPages: 1,
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     });
                     var listData = response.data;
                     this.papers = listData.data.papers;
+                    this.paperCount = listData.data.paperCount;
                     this.totalPages = listData.data.paperCount / this.pageSize;
                     this.totalPages = Math.ceil(this.totalPages);
                 } catch (error) {
@@ -201,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 this.getAvatar();
             },
-            
+
             getAvatar() {
                 axios.post('/user/image')
                     .then(response => {
@@ -212,13 +215,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         } else;
                     })
                     .catch(error => {
-                        console.error('Error deleting papers:', error);
+                        console.error('Error:', error);
+                    });
+            },
+            getUsername() {
+                axios.post('/user/user-info')
+                    .then(response => {
+                        console.log(response.data);
+                        this.username = response.data.data.username;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
                     });
             },
         },
         mounted() {
             this.showPapers();
             this.getAvatar();
+            this.getUsername();
         },
     })
 });
