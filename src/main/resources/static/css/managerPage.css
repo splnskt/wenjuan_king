@@ -153,3 +153,23 @@ button.unban
     transition: 0.3;
     background-color:green;
 }
+/*问卷标题*/
+li{
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+}
+.tag
+{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+}
+.view
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 23px;
+}
+.username
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}

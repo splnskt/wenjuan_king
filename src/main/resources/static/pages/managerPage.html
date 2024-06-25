@@ -47,7 +47,7 @@
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
                             <!-- 可能显示别的信息,例如创建时间 -->
                             <li>{{paper.title}}</li>
-                            <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看问卷及结果</button>
+                            <button id="view" @click="viewResult(paper.pid)" v-if="!batchProcessing">查看问卷及结果</button>
                         </div>
                     </ul>
                     <button class="former" @click="prevPage" :disabled="currentPage === 1">上一页</button>
@@ -63,7 +63,7 @@
                         <div v-for="user in users" :key="user.uid">
                             <input type="checkbox" v-model="uidList" :value="user.uid" v-if="batchProcessing">
 
-                            <li>
+                            <li id="username">
                                 {{user.username}}
                                 <!-- 可以用颜色区分 -->
                                 <div class="tag" v-if="user.ban==0">
