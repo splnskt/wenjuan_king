@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             batchProcessing: false, // 是否处于批量处理状态
             pidList: [],
             userAvatarUrl: '../default.jpg', // 默认头像路径
-            showModal: false,
+            //showModal: false,
         },
         methods: {
             //请求我的问卷列表
@@ -147,12 +147,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
 
             // 个人资料
-            showAvatarModal() {
-                this.showModal = true;
-            },
-            closeModal() {
-                this.showModal = false;
-            },
+            // showAvatarModal() {
+            //     this.showModal = true;
+            // },
+            // closeModal() {
+            //     this.showModal = false;
+            // },
             openImageInNewTab() {
                 // 打开新窗口显示放大的图片
                 window.open(this.userAvatarUrl, '_blank');
