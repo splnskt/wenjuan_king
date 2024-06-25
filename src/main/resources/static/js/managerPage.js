@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         console.log(response.data);
                         // 重新显示问卷列表
-                        this.showUsers();
+                        this.fetchUsers(this.currentPage);
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         console.log(response.data);
                         // 重新显示问卷列表
-                        this.showUsers();
+                        this.fetchUsers(this.currentPage);
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
