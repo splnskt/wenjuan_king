@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -152,10 +153,12 @@ public class UserController {
         return Result.success(map);
     }
     @RequestMapping("/user/delete-user")
-    public Result deleteUser(Integer uid) {
+    public Result deleteUser(@RequestBody List<Integer> uidList) {
         log.info("删除用户...");
         // 调用服务层方法获取问卷列表
-        userService.deleteUser(uid);
+        for (Integer i : uidList) {
+            userService.deleteUser(i);
+        }
         return Result.success();
     }
     @RequestMapping("/user/ban-user")
