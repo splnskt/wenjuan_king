@@ -46,9 +46,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     var listData = response.data;
                     this.papers = listData.data.papers;
                     this.totalPages = listData.data.paperCount / this.pageSize;
-                    if (listData.data.paperCount % this.pageSize != 0) {
-                        this.totalPages = this.totalPages + 1;
-                    }
+                    this.totalPages = Math.ceil(this.totalPages);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
@@ -67,9 +65,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     var listData = response.data;
                     this.users = listData.data.users;
                     this.totalPages = listData.data.userCount / this.pageSize;
-                    if (listData.data.paperCount % this.pageSize != 0) {
-                        this.totalPages = this.totalPages + 1;
-                    }
+                    this.totalPages = Math.ceil(this.totalPages);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
