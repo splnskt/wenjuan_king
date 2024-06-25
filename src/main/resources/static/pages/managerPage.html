@@ -10,10 +10,14 @@
 
 <body>
     <div id="app">
+        <div class="top">
+            <div class="logo" > </div>
+            <div class="title">管理中心</div>
+            <button class="logout-btn" id="returnMain" >登出</button>
+        </div>
+        <div class="bottom-left">
         <div class="menu">
-            <div class="user">
-                <h2>管理中心</h2>
-            </div>
+          
             <div class="userList">
                 <button @click="showUsers">用户列表</button>
             </div>
@@ -25,6 +29,7 @@
             <div class="personal">
                 <button @click="showUser">个人资料</button>
             </div>
+        </div>
 
 
 
@@ -35,8 +40,8 @@
                 <!-- 显示所有问卷列表 -->
                 <div class="content" v-if="currentComponent === 'paperList'">
                     <h2>问卷列表</h2>
-                    <button @click="changeBatch">批量管理</button>
-                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <button class="mutiManage" @click="changeBatch">批量管理</button>
+                    <button class="delete" @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
                         <div v-for="paper in papers" :key="paper.pid">
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
@@ -45,15 +50,15 @@
                             <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看问卷及结果</button>
                         </div>
                     </ul>
-                    <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
-                    <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+                    <button class="former" @click="prevPage" :disabled="currentPage === 1">上一页</button>
+                    <button class="next" @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
                 </div>
 
                 <!-- 显示所有用户列表 -->
                 <div class="content" v-if="currentComponent === 'userList'">
                     <h2>用户列表</h2>
-                    <button @click="changeBatch">批量管理</button>
-                    <button @click="deleteUsers" v-if="batchProcessing">删除</button>
+                    <button class="mutiManage" @click="changeBatch">批量管理</button>
+                    <button class="delete" @click="deleteUsers" v-if="batchProcessing">删除</button>
                     <ul>
                         <div v-for="user in users" :key="user.uid">
                             <input type="checkbox" v-model="uidList" :value="user.uid" v-if="batchProcessing">
@@ -61,19 +66,19 @@
                             <li>
                                 {{user.username}}
                                 <!-- 可以用颜色区分 -->
-                                <div v-if="user.ban==0">
+                                <div class="tag" v-if="user.ban==0">
                                     普通用户
                                 </div>
-                                <div v-if="user.ban==1">
+                                <div class="tag" v-if="user.ban==1">
                                     黑名单用户
                                 </div>
                             </li>
-                            <button @click="black(user.uid)" v-if="!batchProcessing&&user.ban==0">拉入黑名单</button>
-                            <button @click="cancel(user.uid)" v-if="!batchProcessing&&user.ban==1">解除黑名单</button>
+                            <button class="ban" @click="black(user.uid)" v-if="!batchProcessing&&user.ban==0">拉入黑名单</button>
+                            <button class="unban" @click="cancel(user.uid)" v-if="!batchProcessing&&user.ban==1">解除黑名单</button>
                         </div>
                     </ul>
-                    <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
-                    <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+                    <button class="former" @click="prevPage" :disabled="currentPage === 1">上一页</button>
+                    <button class="next" @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
                 </div>
 
                 <!-- 显示个人资料 -->
@@ -87,10 +92,7 @@
     </div>
 
     <!-- 登出 -->
-    <div class="returnButton">
-        <button id="returnMain">登出</button>
-
-    </div>
+  
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
