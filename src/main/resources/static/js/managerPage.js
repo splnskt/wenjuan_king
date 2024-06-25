@@ -1,5 +1,15 @@
 const returnMain = document.getElementById('returnMain');
 returnMain.addEventListener('click', function () {
+    axios.post('/user/logout')
+          .then(response => {
+            console.log(response.data);
+            if (response.data.code == 0) {
+              this.isLogin = false;
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting papers:', error);
+          });
     window.location.href = '../pages/mainpage.html';
 });
 
@@ -8,23 +18,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
         el: '#app',
         data: {
             currentComponent: '', //当前选择的模块,未设置默认界面
+            name: null,
             papers: [],
+            users: [],
             currentPage: 1,
             totalPages: 1,
             pageSize: 1,
             batchProcessing: false, // 是否处于批量处理状态
             pidList: [],
+            uidList: [],
             userAvatarUrl: '../default.jpg', // 默认头像路径
             //showModal: false,
         },
         methods: {
-            //请求我的问卷列表
-            async fetchMyPapers(page) {
+            //请求问卷列表
+            async fetchPapers(page) {
                 //修改页面大小
                 this.pageSize = 5;
                 try {
-                    const response = await axios.get('/paper/my-papers', {
+                    const response = await axios.get('/paper/paper-lists', {
                         params: {
+                            name: this.name,
                             page: page,
                             pageSize: this.pageSize
                         }
@@ -39,20 +53,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     console.error('Error fetching data:', error);
                 }
             },
-            // 请求我的模版列表
-            async fetchMyTemplates(page) {
+            // 请求用户列表
+            async fetchUsers(page) {
                 //修改页面大小
                 this.pageSize = 5;
                 try {
-                    const response = await axios.get('/paper/my-template', {
+                    const response = await axios.get('/user/all-user', {
                         params: {
                             page: page,
                             pageSize: this.pageSize
                         }
                     });
                     var listData = response.data;
-                    this.papers = listData.data.papers;
-                    this.totalPages = listData.data.paperCount / this.pageSize;
+                    this.users = listData.data.users;
+                    this.totalPages = listData.data.userCount / this.pageSize;
                     if (listData.data.paperCount % this.pageSize != 0) {
                         this.totalPages = this.totalPages + 1;
                     }
@@ -60,19 +74,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     console.error('Error fetching data:', error);
                 }
             },
-            // 显示我的问卷列表
+            // 显示问卷列表
             showPapers() {
                 this.currentPage = 1;
-                this.fetchMyPapers(this.currentPage);
-                this.currentComponent = 'myPapers';
+                this.fetchPapers(this.currentPage);
+                this.currentComponent = 'paperList';
                 this.batchProcessing = false;
+                this.uidList = [];
+                this.pidList = [];
             },
-            // 显示我的模版列表
-            showTemplates() {
+            // 显示用户列表
+            showUsers() {
                 this.currentPage = 1;
-                this.fetchMyTemplates(this.currentPage);
-                this.currentComponent = 'myTemplates';
+                this.fetchUsers(this.currentPage);
+                this.currentComponent = 'userList';
                 this.batchProcessing = false;
+                this.uidList = [];
+                this.pidList = [];
             },
             // 显示个人资料
             showUser() {
@@ -83,43 +101,78 @@ document.addEventListener("DOMContentLoaded", function (event) {
             prevPage() {
                 if (this.currentPage > 1) {
                     this.currentPage--;
-                    if (this.currentComponent === 'myPapers') {
-                        this.fetchMyPapers(this.currentPage);
-                    } else if (this.currentComponent === 'myTemplates') {
-                        this.fetchMyTemplates(this.currentPage);
+                    if (this.currentComponent === 'paperList') {
+                        this.fetchPapers(this.currentPage);
+                    } else if (this.currentComponent === 'userList') {
+                        this.fetchUsers(this.currentPage);
                     };
                 }
             },
             nextPage() {
                 if (this.currentPage < this.totalPages) {
                     this.currentPage++;
-                    if (this.currentComponent === 'myPapers') {
-                        this.fetchMyPapers(this.currentPage);
-                    } else if (this.currentComponent === 'myTemplates') {
-                        this.fetchMyTemplates(this.currentPage);
+                    if (this.currentComponent === 'paperList') {
+                        this.fetchPapers(this.currentPage);
+                    } else if (this.currentComponent === 'userList') {
+                        this.fetchUsers(this.currentPage);
                     };
                 }
-            },
-            // 填写问卷
-            fillPaper(pid) {
-                // 跳转到填写问卷页面，并传递问卷ID
-                window.location.href = '../pages/surveyFill.html?pid=' + pid;
-            },
-            // 使用模版
-            use(pid) {
-                window.location.href = '../pages/templateUse.html?pid=' + pid;
-            },
-            // 修改问卷
-            modifyPaper(pid) {
-                window.location.href = '../pages/surveyModify.html?pid=' + pid;
-            },
-            // 修改模版
-            modifyTemplate(pid) {
-                window.location.href = '../pages/templateModify.html?pid=' + pid;
             },
             // 批量管理
             changeBatch() {
                 this.batchProcessing = !this.batchProcessing;
+            },
+            // 加入黑名单
+            black(uid) {
+                var formData = new FormData();
+                formData.append('uid', uid);
+                axios.post('/user/ban-user', formData)
+                    .then(response => {
+                        console.log(response.data);
+                        // 重新显示问卷列表
+                        this.showUsers();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
+            },
+            // 解除黑名单
+            cancel(uid) {
+                var formData = new FormData();
+                formData.append('uid', uid);
+                axios.post('/user/unban-user', formData)
+                    .then(response => {
+                        console.log(response.data);
+                        // 重新显示问卷列表
+                        this.showUsers();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
+            },
+            //删除用户
+            deleteUsers() {
+                if (this.uidList.length === 0) {
+                    alert('请选择要删除的用户！');
+                    return;
+                };
+                var formData = this.uidList;
+                axios.post('/user/delete-user', formData)
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.data.code === 0) {
+                            alert('删除成功！');
+                            // 清空选中的问卷数组
+                            this.uidList = [];
+                            //恢复批量选择
+                            this.batchProcessing = false;
+                            // 重新显示问卷列表
+                            this.showUsers();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
             },
             // 删除问卷
             deletePapers() {
@@ -192,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 this.getAvatar();
             },
-            
+
             getAvatar() {
                 axios.post('/user/image')
                     .then(response => {

@@ -4,47 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人中心</title>
-    <link rel="stylesheet" href="../css/zone.css">
+    <title>管理中心</title>
+    <link rel="stylesheet" href="../css/managerPage.css">
 </head>
 
 <body>
     <div id="app">
         <div class="menu">
             <div class="user">
-                <div class="nickname">昵称
-
-                </div>
-                <div class="head">头像
-
-
-                </div>
-
-
-
-
+                <h2>管理中心</h2>
             </div>
-            <div class="mySurveys">
-                <button @click="showPapers">我的问卷</button>
+            <div class="userList">
+                <button @click="showUsers">用户列表</button>
             </div>
 
-            <div class="myTemplates">
-                <button @click="showTemplates">我的模版</button>
+            <div class="paperList">
+                <button @click="showPapers">问卷列表</button>
             </div>
 
             <div class="personal">
                 <button @click="showUser">个人资料</button>
             </div>
 
-       
+
 
 
         </div>
         <div class="visualPart">
             <div class="pagename" v-if="currentComponent">
-                <!-- 显示我的问卷列表 -->
-                <div class="content" v-if="currentComponent === 'myPapers'">
-                    <h2>我的问卷</h2>
+                <!-- 显示所有问卷列表 -->
+                <div class="content" v-if="currentComponent === 'paperList'">
+                    <h2>问卷列表</h2>
                     <button @click="changeBatch">批量管理</button>
                     <button @click="deletePapers" v-if="batchProcessing">删除</button>
                     <ul>
@@ -52,27 +42,34 @@
                             <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
                             <!-- 可能显示别的信息,例如创建时间 -->
                             <li>{{paper.title}}</li>
-                            <button @click="fillPaper(paper.pid)" v-if="!batchProcessing">填写</button>
-                            <button @click="modifyPaper(paper.pid)" v-if="!batchProcessing">修改</button>
-                            <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看结果</button>
+                            <button @click="viewResult(paper.pid)" v-if="!batchProcessing">查看问卷及结果</button>
                         </div>
                     </ul>
                     <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
                     <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
                 </div>
 
-                <!-- 显示我的模版列表 -->
-                <div class="content" v-if="currentComponent === 'myTemplates'">
-                    <h2>我的模版</h2>
+                <!-- 显示所有用户列表 -->
+                <div class="content" v-if="currentComponent === 'userList'">
+                    <h2>用户列表</h2>
                     <button @click="changeBatch">批量管理</button>
-                    <button @click="deletePapers" v-if="batchProcessing">删除</button>
+                    <button @click="deleteUsers" v-if="batchProcessing">删除</button>
                     <ul>
-                        <div v-for="paper in papers" :key="paper.pid">
-                            <input type="checkbox" v-model="pidList" :value="paper.pid" v-if="batchProcessing">
+                        <div v-for="user in users" :key="user.uid">
+                            <input type="checkbox" v-model="uidList" :value="user.uid" v-if="batchProcessing">
 
-                            <li>{{paper.title}} 点赞数:{{paper.like}}</li>
-                            <button @click="use(paper.pid)" v-if="!batchProcessing">使用</button>
-                            <button @click="modifyTemplate(paper.pid)" v-if="!batchProcessing">修改</button>
+                            <li>
+                                {{user.username}}
+                                <!-- 可以用颜色区分 -->
+                                <div v-if="user.ban==0">
+                                    普通用户
+                                </div>
+                                <div v-if="user.ban==1">
+                                    黑名单用户
+                                </div>
+                            </li>
+                            <button @click="black(user.uid)" v-if="!batchProcessing&&user.ban==0">拉入黑名单</button>
+                            <button @click="cancel(user.uid)" v-if="!batchProcessing&&user.ban==1">解除黑名单</button>
                         </div>
                     </ul>
                     <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
@@ -83,24 +80,21 @@
                 <div class="content" v-if="currentComponent === 'user'">
                     <h2>个人资料</h2>
 
-                    <div class="avatar-container">
-                        <img class="avatar" :src="userAvatarUrl" @click="openImageInNewTab" alt="用户头像">
-                        <input type="file" @change="changeAvatar" required>
-                    </div>
 
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- 登出 -->
     <div class="returnButton">
-        <button id="returnMain">返回主页</button>
+        <button id="returnMain">登出</button>
 
     </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../js/zone.js"></script>
+<script src="../js/managerPage.js"></script>
 
 </html>
