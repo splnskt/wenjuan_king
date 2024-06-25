@@ -47,26 +47,41 @@ HTTP POST
 {
     "code": 0,
     "msg": "ok",
-    "data": [
-        {
-            "uid": 34,
-            "username": "qwert",
-            "password": "e10adc3949ba59abbe56e057f20f883e",
-            "createTime": "2024-06-16T18:49:23",
-            "lastLoginTime": "2024-06-16T18:49:23",
-            "imageUri": null,
-            "ban": 0
-        },
-        {
-            "uid": 33,
-            "username": "tttt",
-            "password": "93a9e5bb1d598a453606e890f72bd393",
-            "createTime": "2024-06-02T23:45:07",
-            "lastLoginTime": "2024-06-02T23:45:07",
-            "imageUri": null,
-            "ban": 0
-        }
-    ]
+    "data": {
+        "userCount": 15,
+        "users": [
+            {
+                "uid": 35,
+                "username": "root",
+                "password": "63a9f0ea7bb98050796b649e85481845",
+                "createTime": "2024-06-25T19:42:59",
+                "lastLoginTime": "2024-06-25T19:42:59",
+                "imageUri": null,
+                "ban": 0,
+                "admin": 1
+            },
+            {
+                "uid": 34,
+                "username": "qwert",
+                "password": "e10adc3949ba59abbe56e057f20f883e",
+                "createTime": "2024-06-16T18:49:23",
+                "lastLoginTime": "2024-06-16T18:49:23",
+                "imageUri": null,
+                "ban": 0,
+                "admin": 0
+            },
+            {
+                "uid": 33,
+                "username": "tttt",
+                "password": "93a9e5bb1d598a453606e890f72bd393",
+                "createTime": "2024-06-02T23:45:07",
+                "lastLoginTime": "2024-06-02T23:45:07",
+                "imageUri": null,
+                "ban": 0,
+                "admin": 0
+            }
+        ]
+    }
 }
 ```
 ### 4.2删除用户
@@ -432,7 +447,7 @@ HTTP POST
 #### 接口地址
 
 ```
-/logout
+/user/logout
 ```
 
 #### 请求方式

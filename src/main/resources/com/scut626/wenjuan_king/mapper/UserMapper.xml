@@ -7,12 +7,21 @@
         SELECT * from user
         WHERE true
         <if test="name != null">
-            and user.username like concat('%',#{name},'%')
+            and username like concat('%',#{name},'%')
         </if>
 #         根据创建时间排序
         order by create_time desc
         <if test="page != null and pageSize != null">
             limit #{page}, #{pageSize}
         </if>
+    </select>
+
+    <select id="userCount" resultType="java.lang.Long">
+        SELECT count(1) from user
+        WHERE true
+        <if test="name != null">
+            and user.username like concat('%',#{name},'%')
+        </if>
+        order by create_time desc
     </select>
 </mapper>

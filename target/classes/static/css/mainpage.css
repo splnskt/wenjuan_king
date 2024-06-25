@@ -149,7 +149,7 @@ flex:0 0 auto;
 .swiper-pagination-bullet-active {
   background-color: #f00; /* 当前轮播图片对应的指示器颜色 */
 }
-.Login:hover,.register:hover{
+.Login:hover,.register:hover,.Logout:hover{
   background-color: rgb(39, 220, 205);
   width:60px;
   height: 30px;
@@ -175,6 +175,16 @@ flex:0 0 auto;
   margin-top: 0px;
   border-radius:5px ;
 }
+
+.Logout{
+  background-color:#ffffff; 
+  position: absolute;
+  margin-left: 1460px; 
+  width:50px;
+  margin-top: 0px;
+  border-radius:5px ;
+}
+
 .buttons{
   position: absolute;
 }

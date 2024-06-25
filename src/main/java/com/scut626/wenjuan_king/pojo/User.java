@@ -17,4 +17,5 @@ public class User {
     private LocalDateTime lastLoginTime;
     private String imageUri;
     private Integer ban;
+    private Integer admin;
 }
