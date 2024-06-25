@@ -96,8 +96,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
     el: '#userLog',
     data: {
       isLogin: false,
+      userAvatarUrl: '../default.jpg',
     },
     methods: {
+      getAvatar() {
+        axios.post('/user/image')
+          .then(response => {
+            console.log(response.data);
+            if (response.data.data != null) {
+              // 假设后端返回新头像的路径，更新前端显示
+              this.userAvatarUrl = response.data.data;
+            } else;
+          })
+          .catch(error => {
+            console.error('Error deleting papers:', error);
+          });
+      },
       fetchIsLogin() {
         axios.post('/user/image')
           .then(response => {
@@ -131,6 +145,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     },
     mounted() {
       this.fetchIsLogin();
+      if(this.isLogin){
+        this.getAvatar();
+      }
     },
   });
 });
