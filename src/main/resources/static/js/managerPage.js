@@ -1,17 +1,17 @@
-const returnMain = document.getElementById('returnMain');
-returnMain.addEventListener('click', function () {
-    axios.post('/user/logout')
-        .then(response => {
-            console.log(response.data);
-            if (response.data.code == 0) {
-                this.isLogin = false;
-            }
-        })
-        .catch(error => {
-            console.error('Error deleting papers:', error);
-        });
-    window.location.href = '../pages/mainpage.html';
-});
+// const returnMain = document.getElementById('returnMain');
+// returnMain.addEventListener('click', function () {
+//     axios.post('/user/logout')
+//         .then(response => {
+//             console.log(response.data);
+//             if (response.data.code == 0) {
+//                 this.isLogin = false;
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error deleting papers:', error);
+//         });
+//     window.location.href = '../pages/mainpage.html';
+// });
 
 document.addEventListener("DOMContentLoaded", function (event) {
     var app = new Vue({
@@ -50,6 +50,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
+            },
+            // 登出
+            logoutButton() {
+                axios.post('/user/logout')
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.data.code == 0) {
+                            this.isLogin = false;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error deleting papers:', error);
+                    });
+                window.location.href = '../pages/mainpage.html';
             },
             // 请求用户列表
             async fetchUsers(page) {
@@ -126,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         console.log(response.data);
                         // 重新显示问卷列表
-                        this.showUsers();
+                        this.fetchUsers(this.currentPage);
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
@@ -140,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     .then(response => {
                         console.log(response.data);
                         // 重新显示问卷列表
-                        this.showUsers();
+                        this.fetchUsers(this.currentPage);
                     })
                     .catch(error => {
                         console.error('Error deleting papers:', error);
@@ -197,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //显示结果
             viewResult(pid) {
                 var url = '../pages/surveyResult.html?pid=' + pid;
-                window.open(url, '_blank'); 
+                window.open(url, '_blank');
                 // '_blank'参数告诉浏览器在新窗口或标签页中打开链接
             },
             // 其他选项，待编辑
