@@ -157,6 +157,9 @@ button.unban
 li{
 font-family: 'Times New Roman', Times, serif;
 font-size: 20px;
+background-color: #007bff;
+cursor: pointer;
+transition: 0.2s;
 }
 .tag
 {
@@ -173,3 +176,9 @@ font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
 }
+li:hover
+{
+ background-color: #0056b3;
+}
+
+
