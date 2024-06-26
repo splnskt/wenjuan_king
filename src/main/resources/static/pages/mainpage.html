@@ -47,7 +47,7 @@
       <div v-if="isLogin">
         
         <div>
-          <img class="avatar" :src="userAvatarUrl">
+          <img class="avatar" :src="userAvatarUrl" @click="zone">
         </div>
 
         <button class='Logout' @click="logoutButton">登出</button>
